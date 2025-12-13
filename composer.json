@@ -1,0 +1,20 @@
+{
+    "name": "mrrashidpour/aitehran",
+    "description": "ai tehran theme",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "TAI\\App\\": "App/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mohammadreza Rashidpour",
+            "email": "rashidpour1995@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "8.1.*",        
+        "phpoffice/phpspreadsheet": "^3.8"
+    }
+}

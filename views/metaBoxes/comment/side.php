@@ -1,0 +1,1 @@
+<input name="comment[side]" class="regular-text" value="<?php echo $side ?? '' ?>">
