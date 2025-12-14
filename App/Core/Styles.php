@@ -5,7 +5,7 @@ namespace TAI\App\Core;
 
 class Styles {
 
-    private $style_dep      = array(  );
+    private $style_dep      = array();
     private $javascript_dep = array( 'jquery' );
 
     public function __construct() {
@@ -42,10 +42,10 @@ class Styles {
             'tai_admin',
             'tai_js',
             array(
-                'ajaxurl'  => admin_url( 'admin-ajax.php' ),
-                'nonce'    => wp_create_nonce( 'ajax-nonce' ),
-                'socials'  => config( 'app.socials', array(  ) ),
-             )
+                'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                'nonce'   => wp_create_nonce( 'ajax-nonce' ),
+                'socials' => config( 'app.socials', array() ),
+            )
         );
 
     }
@@ -53,10 +53,10 @@ class Styles {
     public function public_style() {
 
         $this->bootstrap();
+        $this->swiper();
         // $this->select2();
         // $this->lightbox();
         // $this->jalalidatepicker();
-        // $this->swiper();
         // $this->clipboard();
 
         wp_enqueue_style(
@@ -87,7 +87,7 @@ class Styles {
             array(
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),
                 'nonce'   => wp_create_nonce( 'ajax-nonce' . tai_cookie() ),
-             )
+            )
         );
 
     }
@@ -100,7 +100,7 @@ class Styles {
         wp_register_style(
             'bootstrap.rtl',
             TAI_VENDOR . 'bootstrap/bootstrap.rtl.min.css',
-            array(  ),
+            array(),
             '5.3.7'
         );
         wp_register_style(
@@ -112,7 +112,7 @@ class Styles {
         wp_register_script(
             'bootstrap',
             TAI_VENDOR . 'bootstrap/bootstrap.min.js',
-            array(  ),
+            array(),
             '5.3.7',
             true
         );
@@ -126,13 +126,13 @@ class Styles {
         wp_register_style(
             'select2',
             TAI_VENDOR . 'select2/select2.min.css',
-            array(  ),
+            array(),
             '4.1.0-rc.0'
         );
         wp_register_script(
             'select2',
             TAI_VENDOR . 'select2/select2.min.js',
-            array(  ),
+            array(),
             '4.1.0-rc.0',
             true
         );
@@ -146,13 +146,13 @@ class Styles {
         wp_register_style(
             'jalalidatepicker',
             TAI_VENDOR . 'jalalidatepicker/jalalidatepicker.min.css',
-            array(  ),
+            array(),
             '0.9.6'
         );
         wp_register_script(
             'jalalidatepicker',
             TAI_VENDOR . 'jalalidatepicker/jalalidatepicker.min.js',
-            array(  ),
+            array(),
             '0.9.6',
             true
         );
@@ -165,15 +165,15 @@ class Styles {
         wp_register_style(
             'swiper',
             TAI_VENDOR . 'swiper/swiper-bundle.min.css',
-            array(  ),
-            '11.2.2',
+            array(),
+            '12.0.3',
         );
 
         wp_register_script(
             'swiper',
             TAI_VENDOR . 'swiper/swiper-bundle.min.js',
-            array(  ),
-            '11.2.2',
+            array(),
+            '12.0.3',
 
         );
 
@@ -185,14 +185,14 @@ class Styles {
         wp_register_style(
             'lightbox',
             TAI_VENDOR . 'lightbox/lightbox.min.css',
-            array(  ),
+            array(),
             '2.11.3',
         );
 
         wp_register_script(
             'lightbox',
             TAI_VENDOR . 'lightbox/lightbox.min.js',
-            array(  ),
+            array(),
             '2.11.3',
 
         );
@@ -205,7 +205,7 @@ class Styles {
         wp_register_script(
             'clipboard',
             TAI_VENDOR . 'clipboard/clipboard.min.js',
-            array(  ),
+            array(),
             '2.0.11',
         );
 
@@ -217,7 +217,7 @@ class Styles {
         wp_register_style(
             'custom',
             TAI_VENDOR . 'custom/custom.css',
-            array(  ),
+            array(),
             '1.0.0',
         );
 

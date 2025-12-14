@@ -10,7 +10,7 @@ use TAI\App\Modules\Remotes\TVRemotes;
 (defined('ABSPATH')) || exit;
 date_default_timezone_set('Asia/Tehran');
 
-define('TAI_VERSION', '2.1.73');
+define('TAI_VERSION', '0.0.1');
 
 define('TAI_PATH', get_template_directory() . "/");
 define('TAI_INCLUDES', TAI_PATH . 'includes/');

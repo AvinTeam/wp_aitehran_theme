@@ -89,7 +89,7 @@ class Accesses
 
     public function get_the_date($the_date)
     {
-        return $this->date($the_date);
+        return $this->date($the_date , 'm');
     }
 
 }

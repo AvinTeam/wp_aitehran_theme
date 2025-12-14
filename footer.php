@@ -7,10 +7,10 @@
     // dd($general);
 ?>
 
-<footer class="container-fluid d-flex flex-column align-items-center justify-content-center mt-2 pb-100">
+<footer class="container-fluid d-flex flex-column align-items-center justify-content-center pb-100">
 
     <span id="contact_us"
-        class="py-12 px-64 border border-1 border-white text-white fw-bold f-20 my-40 rounded-circle">ارتباط با
+        class="py-12 w-280 text-center border border-1 border-white text-white fw-bold f-20 my-40 rounded-circle">ارتباط با
         ما</span>
 
     <div class="container">
@@ -111,7 +111,7 @@
 
 <?php
 
-    components( 'modals/share' );
+    // components( 'modals/share' );
 
 ?>
 

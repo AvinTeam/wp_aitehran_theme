@@ -1,25 +1,37 @@
 <?php
 
-use TAI\App\Controllers\Home\HomeController;
+    use TAI\App\Controllers\Home\HomeController;
 
-get_header();
+    get_header();
 
-$homeController = new HomeController;
+    $homeController = new HomeController();
 
-// $homeController->heroSection();
-$homeController->format();
-// $homeController->works();
-// $homeController->banners();
-// $homeController->gifts();
-// $homeController->winners();
-// $homeController->media();
-// $homeController->news();
-// $homeController->faq();
-// $homeController->poster();
-// $homeController->supporters();
+    // $homeController->heroSection();
+    // $homeController->format();
+    $homeController->news(
+        "اخبار",
+        "var(--bs-warning)",
+        "news"
+    );
+
+    $homeController->news(
+        "اخبار هوش مصنوعی",
+        "#D3D3D3",
+        "ai_news"
+    );
+
+    // $homeController->works();
+    // $homeController->banners();
+    // $homeController->gifts();
+    // $homeController->winners();
+    // $homeController->media();
+    // $homeController->news();
+    // $homeController->faq();
+    // $homeController->poster();
+    // $homeController->supporters();
 ?>
 
 <?php
- get_footer();
+    get_footer();
 ?>
 

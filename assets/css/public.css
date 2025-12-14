@@ -108,9 +108,11 @@
 
 
   --swiper-pagination-bullet-inactive-color: #D6DAEF;
-  --swiper-pagination-color: var(--primary-color);
+  --swiper-pagination-color: var(--secondary-color);
   --swiper-pagination-bullet-inactive-opacity: 1;
 
+
+  --swiper-navigation-sides-offset: auto;
 
 }
 
