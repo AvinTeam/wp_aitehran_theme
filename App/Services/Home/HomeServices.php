@@ -68,11 +68,11 @@ class HomeServices extends Service {
         return $allPost ?? array();
     }
 
-    public function gallery() {
+    public function videos() {
         $args = array(
             'post_type'      => 'post',
-            'category_name'  => "gallery",
-            'posts_per_page' => 10,
+            'category_name'  => "videos",
+            'posts_per_page' => 1,
             'post_status'    => 'publish',
 
         );
@@ -83,10 +83,10 @@ class HomeServices extends Service {
 
             while ( $query->have_posts() ): $query->the_post();
                 $allPost[  ] = array(
-                    "title" => get_the_title(),
-                    "image" => post_image_url(),
-                    "link"  => get_permalink(),
-                    "date"  => get_the_date(),
+                    "title"   => get_the_title(),
+                    "image"   => post_image_url(),
+                    "link"    => get_permalink(),
+                    "content" => get_the_content( null, false, get_the_ID() ),
                 );
             endwhile;
 

@@ -43,5 +43,12 @@ class HomeController extends Controller {
         );
 
     }
+    public function videos() {
+        view( 'home/videos', array(
+            "items" => $this->services->videos(),
+        )
+        );
+
+    }
 
 }

@@ -128,6 +128,39 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+    new Swiper(".videoSwiper", {
+        spaceBetween: 10,
+        freeMode: false,
+        loopFillGroupWithBlank: false,
+        grabCursor: true,
+        slidesPerView: 1, 
+        loop: true, 
+        autoplay: {
+            delay: 5000, // اختیاری
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        breakpoints: {
+            0: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                slidesPerGroup: 1,
+            },
+            768: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                slidesPerGroup: 1,
+            },
+            1280: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                slidesPerGroup: 1,
+            }
+        }
+    });
 
 });
 
