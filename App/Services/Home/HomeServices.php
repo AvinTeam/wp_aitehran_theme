@@ -27,4 +27,14 @@ class HomeServices extends Service {
         );
     }
 
+    public function format() {
+
+        $formats = array_map( "basename", glob( TAI_PATH . 'assets/image/formats/*' ) );
+
+        return array(
+
+            "formats" => $formats,
+
+         );
+    }
 }

@@ -25,82 +25,12 @@ class HomeController extends Controller
         );
 
     }
-
-    public function banners()
+    public function format()
     {
-        view('home/banners',
-            $this->services->banners()
-        );
-
-    }
-    
-    public function statistics()
-    {
-        view('home/statistics',
-            $this->services->statistics()
-        );
+        view('home/format',
+            $this->services->format());
 
     }
 
-    public function works()
-    {
-        view('home/works',
-            $this->services->works()
-        );
-
-    }
-
-    public function gifts()
-    {
-        view('home/gifts',
-            $this->services->gifts()
-        );
-    }
-
-    public function winners()
-    {
-        view('home/winners',
-            $this->services->winners()
-        );
-    }
-
-    public function media()
-    {
-        view('home/media',
-            $this->services->media()
-        );
-
-    }
-
-    public function news()
-    {
-        view('home/news',
-            $this->services->news()
-        );
-    }
-
-    public function faq()
-    {
-        view('home/faq',
-            $this->services->faq()
-        );
-
-    }
-
-    public function poster()
-    {
-        view('home/poster',
-            $this->services->poster()
-        );
-
-    }
-
-    public function supporters()
-    {
-        view('home/supporters',
-            $this->services->supporters()
-        );
-
-    }
 
 }
