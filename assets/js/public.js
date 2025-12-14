@@ -64,10 +64,10 @@ document.addEventListener("DOMContentLoaded", function () {
     new Swiper(".newsSwiper", {
         spaceBetween: 10,
         grabCursor: true,
-        slidesPerView: 1, // مقدار پیش‌فرض
-        loop: true, // اگر می‌خواهید لوپ شود
+        slidesPerView: 1, 
+        loop: true, 
         autoplay: {
-            delay: 5000, // اختیاری
+            delay: 5000, 
             disableOnInteraction: false,
         },
         pagination: {
@@ -89,6 +89,42 @@ document.addEventListener("DOMContentLoaded", function () {
                 slidesPerView: 2,
                 spaceBetween: 10,
                 slidesPerGroup: 2,
+            }
+        }
+    });
+
+
+
+    new Swiper(".gallerySwiper", {
+        spaceBetween: 10,
+        freeMode: false,
+        loopFillGroupWithBlank: false,
+        grabCursor: true,
+        slidesPerView: 1, 
+        loop: true, 
+        autoplay: {
+            delay: 5000, // اختیاری
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        breakpoints: {
+            0: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                slidesPerGroup: 1,
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+                slidesPerGroup: 2,
+            },
+            1280: {
+                slidesPerView: 3,
+                spaceBetween: 10,
+                slidesPerGroup: 3,
             }
         }
     });

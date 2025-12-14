@@ -39,18 +39,44 @@ class HomeServices extends Service {
         );
     }
 
-    public function news( $category ) {
+    public function tai_get_posts_by_category( $category ) {
 
-         $args = array(
-            'post_type'     => 'post',
-            'category_name' => $category,
-            'posts_per_page' => -1, 
-                'post_status'    => 'publish',
-
+        $args = array(
+            'post_type'      => 'post',
+            'category_name'  => $category,
+            'posts_per_page' => 10,
+            'post_status'    => 'publish',
 
         );
 
-        
+        $query = new WP_Query( $args );
+
+        if ( $query->have_posts() ):
+
+            while ( $query->have_posts() ): $query->the_post();
+                $allPost[  ] = array(
+                    "title" => get_the_title(),
+                    "image" => post_image_url(),
+                    "link"  => get_permalink(),
+                    "date"  => get_the_date(),
+                );
+            endwhile;
+
+            wp_reset_postdata();
+        endif;
+
+        return $allPost ?? array();
+    }
+
+    public function gallery() {
+        $args = array(
+            'post_type'      => 'post',
+            'category_name'  => "gallery",
+            'posts_per_page' => 10,
+            'post_status'    => 'publish',
+
+        );
+
         $query = new WP_Query( $args );
 
         if ( $query->have_posts() ):

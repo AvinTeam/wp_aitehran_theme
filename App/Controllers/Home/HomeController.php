@@ -31,7 +31,14 @@ class HomeController extends Controller {
         view( 'home/news', array(
             "title" => $title,
             "color" => $color,
-            "items" => $this->services->news( $category ),
+            "items" => $this->services->tai_get_posts_by_category( $category ),
+        )
+        );
+
+    }
+    public function gallery() {
+        view( 'home/gallery', array(
+            "items" => $this->services->tai_get_posts_by_category("gallery"),
         )
         );
 
