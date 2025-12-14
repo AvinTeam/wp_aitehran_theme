@@ -107,8 +107,8 @@
   --bs-warning-rgb: 255, 194, 15;
 
 
-  --swiper-pagination-bullet-inactive-color: #D6DAEF;
-  --swiper-pagination-color: var(--secondary-color);
+  --swiper-pagination-bullet-inactive-color: var(--secondary-color);
+  --swiper-pagination-color: var(--bs-warning);
   --swiper-pagination-bullet-inactive-opacity: 1;
 
 
@@ -494,6 +494,12 @@ a.btn-outline-light:hover {
   padding-bottom: 70px;
 }
 
+.sliderSwiper .swiper-pagination-bullets.swiper-pagination-horizontal {
+  left: 50px;
+  width: auto;
+  bottom: 35px;
+}
+
 .swiper-pagination-bullet {
   width: 20px;
   height: 20px;
@@ -522,6 +528,10 @@ a.btn-outline-light:hover {
 
 .rounded-40 {
   border-radius: 40px !important;
+}
+
+.rounded-65 {
+  border-radius: 65px !important;
 }
 
 .rounded-70 {
@@ -1205,6 +1215,7 @@ a.btn-outline-light:hover {
 .h-190 {
   height: 190px !important;
 }
+
 .h-255 {
   height: 255px !important;
 }

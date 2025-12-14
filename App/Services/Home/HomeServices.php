@@ -1,7 +1,6 @@
 <?php
 namespace TAI\App\Services\Home;
 
-use TAI\App\Options\GeneralSetting;
 use TAI\App\Services\Service;
 use WP_Query;
 
@@ -9,27 +8,43 @@ use WP_Query;
 
 class HomeServices extends Service {
 
-    private $setting  = array();
-    private $sections = array();
-
     public function __construct() {
-        $this->setting  = GeneralSetting::get();
-        $this->sections = get_option( 'tai_sections', array() );
     }
 
     public function heroSection() {
 
-        $title = preg_replace( '/##(.+?)##/', '<span class="text-gold-gradient">$1</span>', ( $this->setting[ 'heroTitle' ] ?? '' ) );
+        $args = array(
+            'post_type'      => 'post',
+            'category_name'  => "sliders",
+            'posts_per_page' => 5,
+            'post_status'    => 'publish',
+
+        );
+
+        $query = new WP_Query( $args );
+
+        if ( $query->have_posts() ):
+
+            while ( $query->have_posts() ): $query->the_post();
+                $allPost[  ] = array(
+                    "title" => get_the_title(),
+                    "image" => post_image_url(),
+                    "link"  => get_permalink(),
+                );
+            endwhile;
+
+            wp_reset_postdata();
+        endif;
 
         return array(
-            'title'       => $title,
-            'description' => $this->setting[ 'heroDescription' ] ?? '',
+            'items'  => $allPost ?? array(),
+            'panel'   => home_url( "/panel" ),
+            'academy' => home_url( "/academy" ),
 
         );
     }
 
     public function format() {
-
         $formats = array_map( "basename", glob( TAI_PATH . 'assets/image/formats/*' ) );
 
         return array(
