@@ -9,11 +9,11 @@ class Renders {
 
     public function __construct() {
 
+        $this->render( "Menus" );
         $this->render( "Rewrites" );
         $this->render( "PostTypes" );
         $this->render( "Taxonomies" );
         $this->render( "MetaBoxes" );
-
     }
 
     public function render( $moduleName ) {

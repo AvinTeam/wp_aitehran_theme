@@ -1,28 +1,16 @@
 <?php
-(defined('ABSPATH')) || exit;
+( defined( 'ABSPATH' ) ) || exit;
 
-return [
+return array(
 
-    'key'      => 'tai_',
+    'key' => 'tai_',
 
-    'socials'  => [
-        'eitaa'    => 'ایتا',
-        'bale'     => 'بله',
-        'aparat'   => 'آپارات',
-        'rubika'   => 'روبیکا',
-        'splus'    => 'سروش',
-        'shad'     => 'شاد',
-        'youtube'  => 'یوتیوب',
-        'telegram' => 'تلگرام',
+    'socials' => array(
+        'aparat'    => 'آپارات',
+        'youtube'   => 'یوتیوب',
+        'instagram' => 'اینستاگرام',
+        'eitaa'     => 'ایتا',
+        'bale'      => 'بله',
+    ),
 
-     ],
-
-    'appLinks' => [
-        'url'        => 'مستقیم',
-        'pwa'        => 'وب اپلیکیشن',
-        'cafebazaar' => 'کافه بازار',
-        'myket'      => 'مایکت',
-        'iapps'      => 'آی‌اپس',
-     ],
-
- ];
+);

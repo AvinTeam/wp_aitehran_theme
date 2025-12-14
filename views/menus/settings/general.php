@@ -1,5 +1,5 @@
 <?php
-    defined('ABSPATH') || exit;
+    defined( 'ABSPATH' ) || exit;
     global $title;
 
 ?>
@@ -7,25 +7,11 @@
     <h1><?php echo $title ?></h1>
 
     <form method="post" action="" novalidate="novalidate">
-        <?php wp_nonce_field(config('app.key') . '_setting_' . get_current_user_id()); ?>
+        <?php wp_nonce_field( config( 'app.key' ) . '_setting_' . get_current_user_id() ); ?>
         <table class="form-table" role="presentation">
 
             <tbody>
-                <tr>
-                    <th scope="row"><label for="heroTitle">عنوان هیروسکشن</label></th>
-                    <td><input name="setting[heroTitle]" type="text" id="heroTitle" value="<?php echo $heroTitle ?? '' ?>"
-                            class="regular-text">
-                            <p>برای رنگی شدن در متن از علامت ## در ابتدا وانتهای قسمت مورد نظر استفاده کنید</p>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="heroDescription">توضیحات هیروسکشن</label></th>
 
-                    <td>
-                        <textarea rows="5" name="setting[heroDescription]" id="heroDescription"
-                            class="regular-text"><?php echo $heroDescription ?? '' ?></textarea>
-                    </td>
-                </tr>
                 <tr>
                     <th scope="row"><label for="address">آدرس</label></th>
                     <td><input name="setting[address]" type="text" id="address" value="<?php echo $address ?? '' ?>"
@@ -45,7 +31,7 @@
                 </tr>
 
                 <tr>
-                    <th scope="row"><label for="footerText">توضیحات فوتر</label></th>
+                    <th scope="row"><label for="googleMap">نقشه گوگل</label></th>
 
                     <td>
                         <textarea rows="5" name="setting[footerText]" id="footerText"
@@ -88,7 +74,6 @@
                         </div>
                     </td>
                 </tr>
-
 
             </tbody>
         </table>

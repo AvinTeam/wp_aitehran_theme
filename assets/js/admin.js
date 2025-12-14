@@ -67,6 +67,33 @@ jQuery(document).ready(function ($) {
         mediaUploader.open();
     });
 
+    let nextItems = 0;
+    $('.select-input button.add-item').click(function (e) {
+        e.preventDefault();
+
+        if (nextItems == 0) {
+            nextItems = Number($(this).attr('data-nextItem'));
+        }
+
+        let itemType = $(this).attr('data-type');
+
+        const options = Object.entries(tai_js[itemType]).map(([key, name]) => {
+            return `<option value="${key}">${name}</option>`;
+        });
+
+        const optionsString = options.join('\n');
+
+        $('#link-list').append(`
+            <li>
+                <select name="setting[${itemType}][${nextItems}][type]">
+                    ${optionsString}
+                </select>
+                <input name="setting[${itemType}][${nextItems}][link]" type="url" class="regular-text">
+                <button type="button" onclick="this.closest('li').remove()" class="button button-error">حذف</button>
+            </li>
+        `);
+        nextItems++;
+    });
 
 
 
