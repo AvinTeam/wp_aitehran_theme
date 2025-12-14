@@ -25,7 +25,7 @@
 
         <div class="container d-flex justify-content-between align-items-center align-items-lg-start gap-3 gap-lg-1">
             <div class="d-flex flex-column justify-content-center align-items-start my-4 w-100">
-                <div>
+                <div class="logo">
                     <img class="w-100" src="<?php echo get_the_image_url( 'logo.png' ) ?>"
                         alt="<?php echo bloginfo( 'name' ) ?>">
 
@@ -48,9 +48,9 @@
 
             <div class="d-none d-lg-flex flex-row justify-content-end gap-2">
 
-                <div class="d-flex flex-column justify-content-center align-items-end row-gap-2">
+                <div class="d-flex flex-column justify-content-end align-items-center row-gap-2">
                     <div
-                        class="socials d-flex justify-content-start align-items-center align-content-center gap-12 align-self-stretch flex-wrap">
+                        class="socials d-flex justify-content-start align-items-center align-content-center gap-12 align-self-stretch flex-nowrap">
                         <?php
 
                         foreach ( typeLinkArray( ( $general[ 'socials' ] ?? array() ) ) as $key => $value ): ?>
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="bg-secondary h-120  px-4 pb-3 d-flex align-items-end">
-                    <a class="btn btn-link fw-bold f-20" href="/contact_us">ارتباط با ما</a>
+                    <a class="btn btn-link fw-bold f-20 text-nowrap" href="#contact_us">ارتباط با ما</a>
                 </div>
 
             </div>

@@ -8,7 +8,7 @@ function sanitize_no_item($item)
         if (is_array($value) || is_object($value)) {
             $notEmptyItem = 0;
             foreach (array_values($value) as $valueItem) {
-                if (!empty(trim($valueItem))) {
+                if (is_string($valueItem) && !empty(trim($valueItem))) {
                     $notEmptyItem++;
                 }
             }

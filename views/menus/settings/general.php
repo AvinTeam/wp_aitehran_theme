@@ -34,34 +34,36 @@
                     <th scope="row"><label for="googleMap">نقشه گوگل</label></th>
 
                     <td>
-                        <textarea rows="5" name="setting[footerText]" id="footerText"
-                            class="regular-text"><?php echo $footerText ?? '' ?></textarea>
+                        <textarea rows="5" name="setting[googleMap]" id="googleMap"
+                            class="w-100 d-ltr"><?php echo wp_unslash( ( $googleMap ?? '' ) ) ?></textarea>
                     </td>
                 </tr>
 
                 <tr>
-                    <th scope="row"><label for="footerText">شبکه های اجنماعی</label></th>
+                    <th scope="row"><label for="socials">شبکه های اجنماعی</label></th>
 
                     <td>
                         <div class="select-input">
                             <ul id="link-list">
                                 <?php
                                     $m = 1;
-                                foreach (typeLinkArray(($socials ?? [  ])) as $type => $social): ?>
+
+                                foreach ( typeLinkArray( ( $socials ?? array(  ) ) ) as $type => $social ): ?>
                                 <li>
                                     <select name="setting[socials][<?php echo $m ?>][type]">
-                                        <?php foreach (config('app.socials', [  ]) as $key => $name): ?>
-                                        <option<?php selected($key, $type)?> value="<?php echo $key ?>">
+                                        <?php
+                                        foreach ( config( 'app.socials', array(  ) ) as $key => $name ): ?>
+                                        <option<?php selected( $key, $type )?> value="<?php echo $key ?>">
                                             <?php echo $name ?></option>
                                             <?php endforeach; ?>
                                     </select>
                                     <input name="setting[socials][<?php echo $m ?>][link]" type="url"
-                                        class="regular-text" value="<?php echo esc_url($social) ?>">
+                                        class="regular-text" value="<?php echo esc_url( $social ) ?>">
                                     <button id="remove-link-item" onclick="this.closest('li').remove()" type="button"
                                         class="button button-error">حذف</button>
                                 </li>
                                 <?php
-                                    $m++;
+                                    ++$m;
                                 endforeach; ?>
 
                             </ul>

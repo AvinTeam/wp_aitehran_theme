@@ -3,23 +3,24 @@ namespace TAI\App\Options;
 
 use TAI\App\Core\Options;
 
-(defined('ABSPATH')) || exit;
+( defined( 'ABSPATH' ) ) || exit;
 
-class GeneralSetting extends Options
-{
+class GeneralSetting extends Options {
 
-    public static function get()
-    {
+    public static function get() {
         return self::getter();
     }
 
-    public static function set(array $input)
-    {
+    public static function set( array $input ) {
 
-        if (! isset($input[ 'socials' ])) {
-            $input[ 'socials' ] = [  ];
+        if ( ! isset( $input[ 'socials' ] ) ) {
+            $input[ 'socials' ] = array();
         }
 
-        return self::setter($input);
+        if ( ! isset( $input[ 'googleMap' ] ) ) {
+            $input[ 'googleMap' ] = sanitize_textarea_field( wp_unslash( $input[ 'googleMap' ] ) );
+        }
+
+        return self::setter( $input );
     }
 }

@@ -28,7 +28,7 @@ class MainNavWalker extends Walker_Nav_Menu {
         $atts[ 'target' ] = ! empty( $item->target ) ? $item->target : '';
         $atts[ 'rel' ]    = ! empty( $item->xfn ) ? $item->xfn : '';
         $atts[ 'href' ]   = ! empty( $item->url ) ? $item->url : '';
-        $atts[ 'class' ]  = 'nav-link rounded me-1 fw-bold f-20 px-1';
+        $atts[ 'class' ]  = 'nav-link rounded me-2 fw-bold px-2';
 
         if ( in_array( 'current-menu-item', $classes ) ) {
             $atts[ 'class' ] .= ' active';
