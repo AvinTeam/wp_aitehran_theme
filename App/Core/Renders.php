@@ -14,6 +14,7 @@ class Renders {
         $this->render( "PostTypes" );
         $this->render( "Taxonomies" );
         $this->render( "MetaBoxes" );
+        $this->render( "AJAX" );
     }
 
     public function render( $moduleName ) {

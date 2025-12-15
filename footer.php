@@ -10,7 +10,8 @@
 <footer class="container-fluid d-flex flex-column align-items-center justify-content-center pb-100">
 
     <span id="contact_us"
-        class="py-12 w-280 text-center border border-1 border-white text-white fw-bold f-20 my-40 rounded-circle">ارتباط با
+        class="py-12 w-280 text-center border border-1 border-white text-white fw-bold f-20 my-40 rounded-circle">ارتباط
+        با
         ما</span>
 
     <div class="container">
@@ -19,39 +20,44 @@
 
             <div class="col-12 col-lg-6 d-flex flex-column ">
                 <div>
-                    <form action="" method="post" class="">
+                    <form id="contact_us_form" action="" method="POST" class="">
+
+
+                        <?php wp_nonce_field( config( 'app.key' ) . '_contact_us' ); ?>
 
                         <div class="row mb-32">
                             <div class="col">
-                                <input type="text" name="first_name" class="form-control form-control-lg bg-black" placeholder="نام">
+                                <input type="text" name="first_name"
+                                    class="form-control form-control-lg bg-black text-white" placeholder="نام" required>
                             </div>
+
                             <div class="col">
-                                <input type="text" name="last_name" class="form-control form-control-lg bg-black"
-                                    placeholder="نام خانوادگی">
+                                <input type="text" name="last_name"
+                                    class="form-control form-control-lg bg-black text-white" placeholder="نام خانوادگی">
                             </div>
                         </div>
                         <div class="row mb-32">
                             <div class="col">
-                                <input type="text" name="mobile" class="form-control form-control-lg bg-black"
-                                    placeholder="تلفن تماس">
+                                <input type="text" name="mobile"
+                                    class="form-control form-control-lg bg-black text-white" placeholder="تلفن تماس" required>
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control form-control-lg bg-black"
-                                    placeholder="کد امنیتی">
+                                <input type="text" name="captcha" class="form-control form-control-lg bg-black text-white"
+                                    placeholder="کد امنیتی" required>
                             </div>
                         </div>
 
                         <div class="row mb-32">
                             <div class="col">
-                                <textarea class="form-control form-control-lg bg-black" name="description" placeholder="متن پیام"
-                                    rows="5"></textarea>
+                                <textarea class="form-control form-control-lg bg-black text-white border-0" name="description"
+                                    placeholder="متن پیام" rows="5" required></textarea>
                             </div>
                         </div>
 
 
                         <div class="row mb-32">
                             <div class="col">
-                                <button type="submit" name="" value=""
+                                <button type="submit" name="actionForm" value="contactForm"
                                     class="btn btn-warning btn-lg mb-3 w-100">ارسال</button>
                             </div>
                         </div>
@@ -59,11 +65,8 @@
 
                         <div class="row mb-32">
                             <div class="col">
-                                <div class="alert alert-success" role="alert">
+                                <div id="alert" class="alert alert-success d-none" role="alert">
                                     پیام شما با موفقت ثبت شد
-                                </div>
-                                <div class="alert alert-danger" role="alert">
-                                   شماره تلفن تماس الزامی می باشد
                                 </div>
                             </div>
                         </div>

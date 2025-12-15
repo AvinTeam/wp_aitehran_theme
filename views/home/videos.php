@@ -12,7 +12,7 @@
 
                 foreach ( $items as $item ): ?>
                 <div class="swiper-slide">
-                       <div class="d-flex flex-column flex-row justify-content-center p-24"
+                       <div class="d-flex flex-column flex-lg-row justify-content-center p-24"
                         style="background-color:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <?php echo $color; ?>;">
                         <a href="<?php echo $item[ "link" ] ?>"
                             class="p-lg-2 col-12 col-lg-8 d-flex justify-content-center align-items-center position-relative">
