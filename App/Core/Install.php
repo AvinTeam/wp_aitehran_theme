@@ -25,6 +25,7 @@ class Install {
         flush_rewrite_rules();
 
         $this->add_role();
+        $this->add_category();
     }
 
     private function prefix( $name ) {
@@ -53,7 +54,7 @@ class Install {
                 array(
                     'read' => true,
 
-                 )
+                )
             );
         }
 
@@ -71,24 +72,9 @@ class Install {
                     'mat_alf'                => true,
                     'mat_leader'             => true,
 
-                 )
+                )
             );
         }
-
-        // if ( get_role( 'mat_referee' ) == null ) {
-        //     add_role(
-        //         'mat_referee',
-        //         'داور جشنواره',
-        //         array(
-        //             'read'         => true,
-        //             'read_matart'  => true,
-        //             'edit_matarts' => true,
-        //             //'edit_others_matarts' => true,
-        //             'mat_alf'      => true,
-        //             'mat_referee'  => true,
-        //          )
-        //     );
-        // }
 
         if ( get_role( 'mat_admin' ) == null ) {
             add_role(
@@ -100,7 +86,7 @@ class Install {
                     'create_users' => true,
                     'mat_admin'    => true,
 
-                 )
+                )
             );
         }
 
@@ -125,6 +111,28 @@ class Install {
             $admin_role->add_cap( 'read_private_matarts' );
             $admin_role->add_cap( 'delete_published_matarts' );
             $admin_role->add_cap( 'delete_private_matarts' );
+        }
+    }
+
+    private function add_category() {
+
+        $main_categories = array(
+            'news'    => 'اخبار',
+            'ai_news' => 'اخبار هوش مصنوعی',
+            'sliders' => 'اسلایدر',
+            'gallery' => 'گالری تصاویر',
+            'videos'  => 'ویدئو آموزشی',
+        );
+
+        foreach ( $main_categories as $slug => $name ) {
+            $term = term_exists( $slug, 'category' );
+
+            if ( ! $term ) {
+                wp_insert_term( $name, 'category', array(
+                    'slug'        => $slug,
+                    'description' => $name,
+                ) );
+            }
         }
     }
 }

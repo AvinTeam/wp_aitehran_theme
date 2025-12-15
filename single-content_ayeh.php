@@ -62,18 +62,6 @@
     </section>
 </div>
 
-<button type="button"
-    class="d-block d-lg-none btn bg-body rounded-circle px-8 py-2 f-14 text-nowrap position-fixed z-3 shareLink"
-    data-shareLink="<?php echo get_the_permalink() ?>" style="right: 20px; bottom: 33px;">
-    <img src="<?php echo get_the_image_url( 'share.png' ) ?>" class="w-32 h-32 object-fit-cover" alt="share">
-</button>
-
-<button type="button"
-    class=" d-block d-lg-none btn bg-body rounded-circle px-8 py-2 f-14 text-nowrap position-fixed z-3 go-to-top"
-    style="left: 20px; bottom: 33px;">
-    <img src="<?php echo get_the_image_url( 'arrow-up.png' ) ?>" class="w-32 h-32 object-fit-cover" alt="go to top">
-</button>
-
 
 <script>
 document.querySelectorAll('.block-list button ').forEach(item => {

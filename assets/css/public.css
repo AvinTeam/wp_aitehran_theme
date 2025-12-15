@@ -120,7 +120,8 @@ a {
   text-decoration: none;
 }
 
-.text-justify {
+.text-justify,
+.text-justify p {
   text-align: justify;
 }
 
@@ -426,12 +427,8 @@ a.btn-outline-light:hover {
   background: linear-gradient(79deg, #8C5E2C -37.58%, #E0AD70 94.92%);
 }
 
-.bg-media {
-  background-color: #F5F5F8;
-}
-
 .bg-gray {
-  background-color: #CECEDC !important;
+  background-color: #DDDDDD !important;
 }
 
 .text-gold-gradient {
@@ -488,6 +485,10 @@ a.btn-outline-light:hover {
 
 .f-32 {
   font-size: 32px !important;
+}
+
+.f-52 {
+  font-size: 52px !important;
 }
 
 .swiper-wrapper {

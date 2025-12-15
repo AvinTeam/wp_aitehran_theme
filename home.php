@@ -23,15 +23,7 @@
 
     $homeController->videos();
 
-    // $homeController->banners();
-    // $homeController->gifts();
-    // $homeController->winners();
-    // $homeController->media();
-    // $homeController->news();
-    // $homeController->faq();
-    // $homeController->poster();
-    // $homeController->supporters();
-?>
+  ?>
 
 <?php
     get_footer();
