@@ -26,5 +26,16 @@ class AcademyController extends Controller {
         view( 'academy/single/sidebar' );
 
     }
+    public function sidebar_archive() {
+
+        view( 'academy/archive/sidebar',
+            $this->services->sidebar() );
+
+    }
+    public function archive() {
+        view( 'academy/archive/content',
+            array( "items" => $this->services->archive() ) );
+
+    }
 
 }

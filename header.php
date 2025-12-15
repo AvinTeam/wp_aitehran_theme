@@ -25,11 +25,11 @@
 
         <div class="container d-flex justify-content-between align-items-center align-items-lg-start gap-3 gap-lg-1">
             <div class="d-flex flex-column justify-content-center align-items-start my-4 w-100">
-                <div class="logo">
+                <a href="<?php echo home_url( "/" )?>" class="logo">
                     <img class="w-100" src="<?php echo get_the_image_url( 'logo.png' ) ?>"
                         alt="<?php echo bloginfo( 'name' ) ?>">
 
-                </div>
+                </a>
                 <nav class="navbar navbar-expand-lg d-none d-lg-block">
                     <?php
                         wp_nav_menu( array(
@@ -68,7 +68,7 @@
 
                     <form id="search-header" class="w-100 position-relative">
                         <input type="text" name="search" id="search-header-input"
-                            class="form-control w-100 rounded-circle bg-primary border border-1 border-secondary"
+                            class="form-control w-100 rounded-circle bg-primary border border-1 border-secondary text-white"
                             aria-label="Search" value="" placeholder="جستجو">
                         <i class="bi bi-search text-secondary position-absolute" style="left: 12px; top: 25%;"></i>
                     </form>
@@ -84,11 +84,9 @@
                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
                 <i class="bi bi-list f-24 p-0 m-0 d-block w-30 h-30"></i>
             </button>
-
         </div>
 
     </header>
-
 
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar">
@@ -103,7 +101,7 @@
         <div class="offcanvas-body d-flex flex-column row-gap-3 justify-content-start align-items-center">
             <form id="search-header" class="w-100 position-relative">
                 <input type="text" name="search" id="search-header-input"
-                    class="form-control w-100 rounded-circle bg-primary border border-1 border-secondary"
+                    class="form-control w-100 rounded-circle bg-primary border border-1 border-secondary text-white"
                     aria-label="Search" value="" placeholder="جستجو">
                 <i class="bi bi-search text-secondary position-absolute" style="left: 12px; top: 25%;"></i>
             </form>
@@ -112,16 +110,16 @@
 
             <nav class="navbar navbar-expand-lg w-100">
                 <?php
-                        wp_nav_menu( array(
-                            'theme_location' => 'main-menu',
-                            'container'      => false,
-                            'menu_class'     => 'navbar-nav me-auto mb-2 mb-lg-0 row-gap-2 w-100',
-                            'fallback_cb'    => '__return_false',
-                            'items_wrap'     => '<ul class="%2$s">%3$s</ul>',
-                            'depth'          => 2,
-                            'walker'         => new MainNavWalker(),
-                        ) );
-                    ?>
+                    wp_nav_menu( array(
+                        'theme_location' => 'main-menu',
+                        'container'      => false,
+                        'menu_class'     => 'navbar-nav me-auto mb-2 mb-lg-0 row-gap-2 w-100',
+                        'fallback_cb'    => '__return_false',
+                        'items_wrap'     => '<ul class="%2$s">%3$s</ul>',
+                        'depth'          => 2,
+                        'walker'         => new MainNavWalker(),
+                    ) );
+                ?>
             </nav>
 
 

@@ -1,15 +1,24 @@
-
 <div id="video_list">
     <div class="zba-row-meta-box w-100  parent-row">
         <div class="w-100 d-flex flex-row justify-content-between align-items-center">
 
 
             <div class="w-100 zba-row-meta-box d-flex flex-row justify-content-start align-items-center gap-2">
-                <span>لینک</span>
-                <input name="academy[video]" value="<?php echo $video ?>" id="link" class="regular-text d-ltr"
-                    placeholder="لینک">
+                <div class="d-flex flex-column">
+                    <span>لینک</span>
+                    <input name="academy[video]" value="<?php echo $video ?>" id="link" class="regular-text d-ltr"
+                        placeholder="لینک">
+
+                    <span>زمان ویدئو</span>
+                    <input name="academy[time]" value="<?php echo $time ?>" class="regular-text d-ltr"
+                        placeholder="لینک">
+                </div>
+
                 <button type="button" class="button add_video">آپلود ویدئو</button>
+
             </div>
+
+
 
             <section class="d-flex align-items-center gap-3">
                 <div>

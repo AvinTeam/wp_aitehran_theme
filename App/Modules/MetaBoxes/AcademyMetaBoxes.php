@@ -28,16 +28,16 @@ class AcademyMetaBoxes extends MetaBoxes {
 
         $video = get_post_meta( $post->ID, '_academy_video', true );
 
-        $image = absint($video[ 'image' ] ?? 0);
+        $image = absint( $video[ 'image' ] ?? 0 );
 
         $imageUrl = $image ? esc_url( wp_get_attachment_image_url( $image, 'full' ) ) : '';
-
 
         view( 'metaBoxes/academy/video',
             array(
                 'video'    => $video[ 'video' ] ?? "",
                 'image'    => $image,
                 'imageUrl' => $imageUrl,
+                'time'     => $video[ 'time' ] ?? "00:00",
             ) );
     }
 
