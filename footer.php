@@ -23,16 +23,16 @@
 
                         <div class="row mb-32">
                             <div class="col">
-                                <input type="text" class="form-control form-control-lg bg-black" placeholder="نام">
+                                <input type="text" name="first_name" class="form-control form-control-lg bg-black" placeholder="نام">
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control form-control-lg bg-black"
+                                <input type="text" name="last_name" class="form-control form-control-lg bg-black"
                                     placeholder="نام خانوادگی">
                             </div>
                         </div>
                         <div class="row mb-32">
                             <div class="col">
-                                <input type="text" class="form-control form-control-lg bg-black"
+                                <input type="text" name="mobile" class="form-control form-control-lg bg-black"
                                     placeholder="تلفن تماس">
                             </div>
                             <div class="col">
@@ -43,7 +43,7 @@
 
                         <div class="row mb-32">
                             <div class="col">
-                                <textarea class="form-control form-control-lg bg-black" placeholder="متن پیام"
+                                <textarea class="form-control form-control-lg bg-black" name="description" placeholder="متن پیام"
                                     rows="5"></textarea>
                             </div>
                         </div>

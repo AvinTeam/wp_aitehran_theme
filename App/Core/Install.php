@@ -8,17 +8,20 @@ use TAI\App\Modules\Rewrites\UserPanelRewrites;
 class Install {
     private $wpdb;
     private string $db_name_key;
-
+    private string $collate;
     public function __construct() {
         $this->db_name_key = config( 'app.key' );
         global $wpdb;
-        $this->wpdb = $wpdb;
+        $this->wpdb    = $wpdb;
+        $this->collate = $this->wpdb->collate;
+
         add_action( 'after_switch_theme', array( $this, 'install' ) );
     }
 
     public function install() {
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
         dbDelta( $this->db_log() );
+        dbDelta( $this->db_contact() );
 
         ( new UserPanelRewrites() )->add_rewrite();
 
@@ -33,16 +36,31 @@ class Install {
     }
 
     private function db_log() {
-        $table_name    = $this->prefix( 'tai_logs' );
-        $table_collate = $this->wpdb->collate;
+        $table_name = $this->prefix( 'logs' );
 
         return " CREATE TABLE IF NOT EXISTS `$table_name` (
                     `ID` bigint unsigned NOT NULL AUTO_INCREMENT,
                     `user_mobile` varchar(11) NOT NULL,
-                    `log_type` varchar(20) COLLATE $table_collate NOT NULL,
+                    `log_type` varchar(20) COLLATE {$this->collate} NOT NULL,
                     `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                     PRIMARY KEY (`ID`)
-                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=$table_collate";
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE={$this->collate}";
+    }
+
+    private function db_contact() {
+        $table_name = $this->prefix( 'contact' );
+
+        return " CREATE TABLE IF NOT EXISTS `$table_name` (
+                    `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+                    `first_name` varchar(255) NOT NULL,
+                    `last_name` varchar(255) NOT NULL,
+                    `mobile` varchar(11) NOT NULL,
+                    `description` longtext NOT NULL,
+                    `status` enum('0','1') NOT NULL DEFAULT '0',
+                    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                    PRIMARY KEY (`id`)
+                    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE={$this->collate}";
     }
 
     private function add_role() {
