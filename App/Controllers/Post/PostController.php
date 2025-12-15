@@ -14,18 +14,6 @@ class PostController extends Controller {
         $this->services = new PostServices();
     }
 
-    public function header() {
-        view( 'post/single/header',
-            $this->services->header()
-        );
-    }
-
-    public function hero() {
-        view( 'post/single/hero',
-            $this->services->hero()
-        );
-    }
-
     public function content() {
         view( 'post/single/content' );
     }

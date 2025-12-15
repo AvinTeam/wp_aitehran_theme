@@ -1,17 +1,14 @@
 <?php
-namespace TAI\App\Services\Post;
+namespace TAI\App\Services\Academy;
 
 use TAI\App\Services\Service;
 use WP_Query;
 
 ( defined( 'ABSPATH' ) ) || exit;
 
-class PostServices extends Service {
-
-    private $sections = array();
+class AcademyServices extends Service {
 
     public function __construct() {
-        $this->sections = get_option( 'tai_sections', array() );
     }
 
     public function sidebar() {
@@ -62,4 +59,20 @@ class PostServices extends Service {
         );
     }
 
+    public function get_video() {
+        $video = get_post_meta( get_the_ID(), '_academy_video', true );
+
+        $image = absint( $video[ 'image' ] ?? 0 );
+
+        $imageUrl = $image ? esc_url( wp_get_attachment_image_url( $image, 'full' ) ) : '';
+
+        if ( $video[ 'video' ] ) {
+            $array = array(
+                'link'   => $video[ 'video' ],
+                'poster' => $imageUrl,
+            );
+        }
+
+        return $array ?? null;
+    }
 }
