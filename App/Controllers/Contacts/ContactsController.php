@@ -15,11 +15,12 @@ class ContactsController extends Controller {
     }
 
     public function create( $request ) {
-
         return $this->services->create( $request );
+    }
+    public function count( $request ) {
 
-
-
+        return 0;
+        // return $this->services->count( $request );
     }
 
 }

@@ -16,7 +16,7 @@
 
     <div class="container">
 
-        <div class="d-flex flex-column-reverse flex-lg-row gap-3 justify-content-center gap-5">
+        <div class="d-flex flex-column-reverse flex-lg-row gap-3 justify-content-center gap-5 text{#000}">
 
             <div class="col-12 col-lg-6 d-flex flex-column ">
                 <div>

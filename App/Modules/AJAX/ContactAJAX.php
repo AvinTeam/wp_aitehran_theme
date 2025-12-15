@@ -26,13 +26,12 @@ class ContactAJAX extends AJAX {
 
         $contactsController = new ContactsController();
 
-        $test = $contactsController->create( $_POST );
+        $create = $contactsController->create( $_POST );
 
-        if ( $test[ 'success' ] ) {
-            wp_send_json_success( $test[ 'massage' ] );
+        if ( $create[ 'success' ] ) {
+            wp_send_json_success( $create[ 'massage' ] );
         }
 
-        wp_send_json_error( $test[ 'massage' ] );
-
+        wp_send_json_error( $create[ 'massage' ] );
     }
 }

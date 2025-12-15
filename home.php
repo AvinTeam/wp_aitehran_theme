@@ -6,22 +6,22 @@
 
     $homeController = new HomeController();
 
-    // $homeController->heroSection();
-    // $homeController->format();
-    // $homeController->news(
-    //     "اخبار",
-    //     "var(--bs-warning)",
-    //     "news"
-    // );
-    // $homeController->gallery();
+    $homeController->heroSection();
+    $homeController->format();
+    $homeController->news(
+        "اخبار",
+        "var(--bs-warning)",
+        "news"
+    );
+    $homeController->gallery();
 
-    // $homeController->news(
-    //     "اخبار هوش مصنوعی",
-    //     "#D3D3D3",
-    //     "ai_news"
-    // );
+    $homeController->news(
+        "اخبار هوش مصنوعی",
+        "#D3D3D3",
+        "ai_news"
+    );
 
-    // $homeController->videos();
+    $homeController->videos();
 
   ?>
 

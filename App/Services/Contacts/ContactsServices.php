@@ -27,10 +27,15 @@ class ContactsServices extends Service {
 
         );
 
-        // dd( $request );
-        // view( 'home/heroSection',
-        //     $this->services->heroSection()
-        // );
+    }
+
+    public function count( $request ) {
+
+        $allContact = Contact::all();
+
+        
+
+        return $allContact->count();
 
     }
 

@@ -39,6 +39,7 @@ class Renders {
                     throw new Exception( "Class {$fullClassName} not found" );
                 }
 
+                
                 new $fullClassName();
             } catch ( Exception $e ) {
                 continue;

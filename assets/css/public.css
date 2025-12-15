@@ -506,10 +506,10 @@ a.btn-outline-light:hover {
   height: 20px;
 }
 
-.swiper-pagination-bullet.swiper-pagination-bullet-active {
+/* .swiper-pagination-bullet.swiper-pagination-bullet-active {
   width: 50px;
   border-radius: 10630px;
-}
+} */
 
 .rounded-12 {
   border-radius: 16px !important;
@@ -554,9 +554,7 @@ a.btn-outline-light:hover {
 
 .rounded-dome {
   border-radius: 250px 250px 10px 10px !important;
-
 }
-
 
 
 /* padding 8 */
@@ -1300,6 +1298,7 @@ footer h3.title::before {
 }
 
 
+
 footer h3.title.socials::before {
   left: auto;
   right: 0;
@@ -1311,7 +1310,6 @@ footer h3.title.socials::before {
   width: 20%;
   height: 1px;
 }
-
 
 .text-footer {
   color: var(--primary-400-color);

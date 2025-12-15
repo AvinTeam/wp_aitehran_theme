@@ -102,3 +102,7 @@
   align-items: center;
   gap: 10px;
 }
+
+.f-32 {
+  font-size: 32px !important;
+}

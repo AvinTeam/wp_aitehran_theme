@@ -52,15 +52,15 @@ class Install {
 
         return " CREATE TABLE IF NOT EXISTS `$table_name` (
                     `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-                    `first_name` varchar(255) NOT NULL,
-                    `last_name` varchar(255) NOT NULL,
-                    `mobile` varchar(11) NOT NULL,
-                    `description` longtext NOT NULL,
-                    `status` enum('0','1') NOT NULL DEFAULT '0',
+                    `first_name` varchar(255) COLLATE {$this->collate} NOT NULL,
+                    `last_name` varchar(255) COLLATE {$this->collate} NOT NULL,
+                    `mobile` varchar(11) COLLATE {$this->collate} NOT NULL,
+                    `description` longtext COLLATE {$this->collate} NOT NULL,
+                    `status` enum('noRead','read') CHARACTER SET utf8mb4 COLLATE {$this->collate} NOT NULL DEFAULT 'noRead',
                     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                    `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                    `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                     PRIMARY KEY (`id`)
-                    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE={$this->collate}";
+                    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE={$this->collate} ";
     }
 
     private function add_role() {
