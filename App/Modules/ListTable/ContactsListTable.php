@@ -71,20 +71,11 @@ class ContactsListTable extends WP_List_Table {
     }
 
     public function column_created_at( $item ) {
-        return $this->date( $item[ 'created_at' ] );
+        return to_persian( $this->date( $item[ 'created_at' ] ) );
     }
 
     public function column_updated_at( $item ) {
-        return $this->date( $item[ 'updated_at' ] );
-    }
-
-    public function get_bulk_actions() {
-
-        if ( current_user_can( 'manage_options' ) ) {
-            $action[ 'delete' ] = esc_html__( 'delete', 'mraparat' );
-        }
-
-        //return $action;
+        return to_persian( $this->date( $item[ 'updated_at' ] ) );
     }
 
     public function column_row( $item ) {

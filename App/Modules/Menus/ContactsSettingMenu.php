@@ -47,11 +47,14 @@ class ContactsSettingMenu extends Menu {
 
             if ( $massage ) {
                 $showList = false;
+                $massage  = $massage->toArray();
 
-                $massage = $massage->toArray();
+                $massage[ 'date' ] = $this->date( $massage[ 'created_at' ], 'date' );
+                $massage[ 'time' ] = to_persian( $this->date( $massage[ 'created_at' ], 'time' ) );
 
-                $massage['date']= $this->date($massage['created_at'], 'date');
-                $massage['time']= to_persian($this->date($massage['created_at'], 'time'));
+                if ( "noRead" == $massage[ 'status' ] ) {
+                    Contact::find( absint( $_GET[ 'id' ] ) )->update( array( 'status' => 'read' ) );
+                }
 
                 view( 'menus/contacts/massage', $massage );
             }
