@@ -195,7 +195,40 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+function national_code(code) {
+    // بررسی طول کد
+    if (!code || code.length !== 10) {
+        return false;
+    }
 
+    // بررسی اینکه فقط رقم باشد
+    if (!/^\d+$/.test(code)) {
+        return false;
+    }
+
+    // بررسی اینکه همه ارقام یکسان نباشند
+    const firstChar = code.charAt(0);
+    if (code === firstChar.repeat(10)) {
+        return false;
+    }
+
+    // محاسبه مجموع وزنی
+    let sum = 0;
+    for (let i = 0; i < 9; i++) {
+        sum += (10 - i) * parseInt(code.charAt(i), 10);
+    }
+
+    // محاسبه باقیمانده
+    const remainder = sum % 11;
+    const lastDigit = parseInt(code.charAt(9), 10);
+
+    // بررسی صحت کد ملی
+    if (remainder < 2) {
+        return remainder === lastDigit;
+    } else {
+        return (11 - remainder) === lastDigit;
+    }
+}
 
 
 
@@ -334,8 +367,139 @@ jQuery(document).ready(function ($) {
     });
 
 
+    function setToastDanger(massage) {
+
+        $("#taiToast .toast-body").html("");
+        $("#taiToast .toast-body").html(massage);
+
+        const toastLiveExample = document.getElementById('taiToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        toastBootstrap.show()
+
+    }
 
 
+    $("button#nextLevel").click(function (e) {
+        e.preventDefault();
+
+
+
+        $formDiv = "section#dashboardForm";
+
+        let is_true = true;
+
+        const groupName = $($formDiv + " input#groupName").val();
+
+        if (!groupName && is_true) {
+            is_true = false;
+            setToastDanger("نام گروه را وارد کنید");
+        }
+
+        const groupResponsible = $($formDiv + " input#groupResponsible").val();
+
+        if (!groupResponsible && is_true) {
+            is_true = false;
+            setToastDanger("نام خانوادگی مسئول گروه را وارد کنید");
+        }
+
+
+        const groupResponsibleParent = $($formDiv + " input#groupResponsibleParent").val();
+
+        if (!groupResponsibleParent && is_true) {
+            is_true = false;
+            setToastDanger("نام پدرِ مسئول گروه را وارد کنید");
+        }
+
+
+
+        const groupResponsibleNationalCode = $($formDiv + " input#groupResponsibleNationalCode").val();
+
+        if (!groupResponsibleNationalCode && is_true) {
+            is_true = false;
+            setToastDanger("شماره شناسنامه مسئول گروه را وارد کنید");
+        }
+
+
+        const groupResponsibleBirthday = $($formDiv + " input#groupResponsibleBirthday").val();
+
+        if (!groupResponsibleBirthday && is_true) {
+            is_true = false;
+            setToastDanger("تاریخ تولد مسئول گروه را وارد کنید");
+        }
+
+
+        const groupResponsibleEdu = $($formDiv + " input#groupResponsibleEdu").val();
+
+        if (!groupResponsibleEdu && is_true) {
+            is_true = false;
+            setToastDanger("مدرک تحصیلی مسئول گروه را وارد کنید");
+        }
+
+        const groupResponsibleAddress = $($formDiv + " input#groupResponsibleAddress").val();
+
+        if (!groupResponsibleAddress && is_true) {
+            is_true = false;
+            setToastDanger("محل سکونت مسئول گروه را وارد کنید");
+        }
+
+        const groupResponsibleAddressPost = $($formDiv + " input#groupResponsibleAddressPost").val();
+
+        if (!groupResponsibleAddressPost && is_true) {
+            is_true = false;
+            setToastDanger("آدرس پستی را وارد کنید");
+        }
+
+
+        if (is_true) {
+
+            startLoading();
+
+            const data = {
+                action: 'tai_dashboard',
+                wpnonce: $($formDiv + " input#_wpnonce").val(),
+                groupName: groupName,
+                groupResponsible: groupResponsible,
+                groupResponsibleParent: groupResponsibleParent,
+                groupResponsibleNationalCode: groupResponsibleNationalCode,
+                groupResponsibleBirthday: groupResponsibleBirthday,
+                groupResponsibleEdu: groupResponsibleEdu,
+                groupResponsibleAddress: groupResponsibleAddress,
+                groupResponsibleAddressPost: groupResponsibleAddressPost,
+            }
+
+            $.ajax({
+                url: tai_js.ajaxurl,
+                method: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (result) {
+                    console.log(result);
+
+                    if (result.success) {
+
+                    } else {
+                        setToastDanger(result.data);
+
+                    }
+
+                    endLoading();
+
+                },
+                error: function () {
+                    setToastDanger("ثبت اطلاعات شما به خطا خورده است دوباره تلاش  کنید");
+
+                    console.error("به خطا خورده");
+
+                    endLoading();
+
+
+                }
+            });
+
+
+        }
+
+    });
 
 
 

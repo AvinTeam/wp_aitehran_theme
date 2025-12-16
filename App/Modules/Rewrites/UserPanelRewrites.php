@@ -2,7 +2,6 @@
 namespace TAI\App\Modules\Rewrites;
 
 use TAI\App\Core\Rewrites;
-use TAI\App\Enums\SectionsEnums;
 
 ( defined( 'ABSPATH' ) ) || exit;
 
@@ -55,16 +54,19 @@ class UserPanelRewrites extends Rewrites {
 
         if ( ! $panel ) {return;}
 
-        $GLOBALS[ "sazoSellerPath" ] = $panel;
-        return TAI_PATH . 'route.php';
+        $GLOBALS[ "tai_route" ] = $panel;
 
         add_filter( 'wp_title', function ( $title ) {
 
-            $title = SectionsEnums::news . " | " . get_bloginfo( 'name' );
+            $pageTitle = "ثبت نام / ورود";
 
-            return $title;
+            if ( is_user_logged_in() ) {
+                $pageTitle = " ارسال اثر ";
+            }
+
+            return $pageTitle . " | " . get_bloginfo( 'name' );
         }, 11 );
 
-        return TAI_PATH . 'blog.php';
+        return TAI_PATH . 'route.php';
     }
 }

@@ -15,10 +15,10 @@ class ContactsServices extends Service {
     public function create( $request ) {
 
         $contact = Contact::create( array(
-            "first_name"  => $request[ 'firstName' ],
-            "last_name"   => $request[ 'lastName' ],
-            "mobile"      => $request[ 'mobile' ],
-            "description" => $request[ 'description' ],
+            "first_name"  => sanitize_text_field( $request[ 'firstName' ] ),
+            "last_name"   => sanitize_text_field( $request[ 'lastName' ] ),
+            "mobile"      => sanitize_phone( $request[ 'mobile' ] ),
+            "description" => sanitize_textarea_field( $request[ 'description' ] ),
         ) );
 
         return array(
@@ -32,8 +32,6 @@ class ContactsServices extends Service {
     public function count( $request ) {
 
         $allContact = Contact::all();
-
-        
 
         return $allContact->count();
 

@@ -120,6 +120,11 @@ a {
   text-decoration: none;
 }
 
+.d-ltr {
+  direction: ltr !important;
+}
+
+
 .text-justify,
 .text-justify p {
   text-align: justify;
@@ -243,8 +248,8 @@ a.btn-outline-primary:hover {
 }
 
 .btn-outline-primary-subtle {
-  color: #898BC4;
-  border: 1px solid #898BC4;
+  color: var(--primary-500-color);
+  border: 1px solid var(--primary-500-color);
 }
 
 .btn-outline-primary-subtle:hover {
@@ -257,7 +262,7 @@ a.btn-outline-primary:hover {
   --bs-btn-bg: var(--secondary-color);
   --bs-btn-border-color: var(--secondary-color);
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: var(--secondary-300-color);
+  --bs-btn-hover-bg: var(--secondary-600-color);
   --bs-btn-hover-border-color: var(--secondary-300-color);
   --bs-btn-focus-shadow-rgb: 130, 138, 145;
   --bs-btn-active-color: #fff;
@@ -289,7 +294,7 @@ a.btn-outline-primary:hover {
 
 
 .btn-warning {
-  --bs-btn-color: #000;
+  --bs-btn-color: var(--primary-color);
   --bs-btn-bg: var(--bs-warning);
   --bs-btn-border-color: var(--bs-warning);
   --bs-btn-hover-color: #000;
