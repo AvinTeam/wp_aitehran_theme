@@ -21,10 +21,18 @@ document.getElementById('fileInput').addEventListener('change', function (event)
             event.target.value = '';
             return;
         }
+
+        const toastBody = document.getElementById('preview_art');
+
+        toastBody.innerHTML = "";
+        toastBody.innerHTML = `        
+                <div class="text-nowrap p-2 fw-bold f-20 text-primary w-100">
+                    <span class="text-secondary me-2">فایل : </span>
+                    <span>${fileName}</span>
+                </div>`;
     }
 
 
-    // console.log(object);
 
 });
 

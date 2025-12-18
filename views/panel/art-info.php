@@ -152,7 +152,6 @@
                             </select>
                         </div>
 
-
                         <!--'teems' -->
                         <div
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
@@ -219,7 +218,6 @@
 
                         </div>
 
-
                         <!--'documentation' -->
                         <div
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
@@ -269,7 +267,6 @@
                             </button>
                         </div>
 
-
                         <!--'art_file' -->
                         <div
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
@@ -288,11 +285,6 @@
                                     دانلود فایل
                                 </a>
                                 <?php endif; ?>
-
-                                <!-- <div class="text-nowrap p-2 fw-bold f-20 text-primary w-100"><span
-                                        class="text-secondary me-2">فایل : </span>
-                                    art-info.zip
-                                </div> -->
 
                             </div>
 

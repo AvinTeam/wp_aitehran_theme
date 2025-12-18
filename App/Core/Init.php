@@ -36,9 +36,7 @@ class Init {
                     }
                 }
 
-                if ( ! $result->result ) {
                     setAlert( $result->success, $result->massage );
-                }
 
                 wp_redirect( home_url( $redirect ) );
                 exit;

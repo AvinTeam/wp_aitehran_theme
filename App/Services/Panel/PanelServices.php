@@ -27,6 +27,25 @@ class PanelServices extends Service {
         );
     }
 
+    public function update( $request ) {
+
+        update_user_meta( get_current_user_id(), "groupName", sanitize_text_field( $request[ 'groupName' ] ) );
+        update_user_meta( get_current_user_id(), "groupResponsible", sanitize_text_field( $request[ 'groupResponsible' ] ) );
+        update_user_meta( get_current_user_id(), "groupResponsibleParent", sanitize_text_field( $request[ 'groupResponsibleParent' ] ) );
+        update_user_meta( get_current_user_id(), "groupResponsibleNationalCode", sanitize_text_field( $request[ 'groupResponsibleNationalCode' ] ) );
+        update_user_meta( get_current_user_id(), "groupResponsibleBirthday", sanitize_text_field( $request[ 'groupResponsibleBirthday' ] ) );
+        update_user_meta( get_current_user_id(), "groupResponsibleEdu", sanitize_text_field( $request[ 'groupResponsibleEdu' ] ) );
+        update_user_meta( get_current_user_id(), "groupResponsibleAddress", sanitize_text_field( $request[ 'groupResponsibleAddress' ] ) );
+        update_user_meta( get_current_user_id(), "groupResponsibleAddressPost", sanitize_text_field( $request[ 'groupResponsibleAddressPost' ] ) );
+
+        return array(
+            "massage" => "پیام شما با موفقیت ثبت شد",
+            "success" => true,
+
+        );
+    }
+
+    
     public function sidebar() {
 
         $args = array(
@@ -107,23 +126,6 @@ class PanelServices extends Service {
         );
     }
 
-    public function update( $request ) {
-
-        update_user_meta( get_current_user_id(), "groupName", sanitize_text_field( $request[ 'groupName' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsible", sanitize_text_field( $request[ 'groupResponsible' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsibleParent", sanitize_text_field( $request[ 'groupResponsibleParent' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsibleNationalCode", sanitize_text_field( $request[ 'groupResponsibleNationalCode' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsibleBirthday", sanitize_text_field( $request[ 'groupResponsibleBirthday' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsibleEdu", sanitize_text_field( $request[ 'groupResponsibleEdu' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsibleAddress", sanitize_text_field( $request[ 'groupResponsibleAddress' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsibleAddressPost", sanitize_text_field( $request[ 'groupResponsibleAddressPost' ] ) );
-
-        return array(
-            "massage" => "پیام شما با موفقیت ثبت شد",
-            "success" => true,
-
-        );
-    }
 
     public function artInfo() {
 
@@ -146,7 +148,15 @@ class PanelServices extends Service {
         if ( isset( $_GET[ 'tracking_code' ] ) && ! empty( $_GET[ 'tracking_code' ] ) ) {
             $art_id = absint( substr( $_GET[ 'tracking_code' ], 8 ) );
 
-            if ( ! $art_id || ! get_post( $art_id ) ) {
+
+
+            $tracking_code = get_post_meta( $art_id, "_tracking_code", true );
+
+            if ( 
+                ! $art_id || 
+                ! get_post( $art_id ) ||
+                get_post_meta( $art_id, "_tracking_code", true ) != $_GET[ 'tracking_code' ]                
+                ) {
                 wp_redirect( home_url( "/panel/artList/" ) );
                 exit;
             }
