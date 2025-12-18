@@ -23,6 +23,9 @@ document.getElementById('fileInput').addEventListener('change', function (event)
         }
     }
 
+
+    // console.log(object);
+
 });
 
 jQuery(document).ready(function ($) {
@@ -30,46 +33,92 @@ jQuery(document).ready(function ($) {
 
 
 
-    // $("form#art_info").submit(function (e) {
-    //     e.preventDefault();
+    $("form#art_info").submit(function (e) {
+        e.preventDefault();
+
+        $formDiv = "form#art_info";
 
 
-    //     $formDiv = "form#art_info";
+        const format_art = $($formDiv + " select[name=format_art]").val();
+        if (!Number(format_art)) {
+            setToastDanger("قالب اثر را وارد کنید");
+            return;
 
-    //     let is_true = true;
+        }
+        const art_title = $($formDiv + " input[name=art_title]").val();
+        if (art_title == "") {
+            setToastDanger("عنوان اثر را وارد کنید");
+            return;
+
+        }
+
+        const subject_art = $($formDiv + " select[name=subject_art]").val();
+        if (!Number(subject_art)) {
+            setToastDanger("موضوع اثر را وارد کنید");
+            return;
+
+        }
+
+        const year = $($formDiv + " select[name=year]").val();
+
+        if (!Number(year)) {
+            setToastDanger("سال تولید اثر را وارد کنید");
+            return;
+
+        }
+
+        const inputs = $('#teem-list input[name="teem[]"]');
+
+        if (inputs.length < 1) {
+            setToastDanger('حداقل یک عامل تولید باید وارد شود.');
+            return;
+
+        }
+
+        let hasEmpty = false;
+
+        inputs.each(function () {
+            if ($.trim($(this).val()) === '') {
+                hasEmpty = true;
+            }
+        });
+
+        if (hasEmpty) {
+            setToastDanger('نام و نام خانوادگی تمام عوامل تولید باید تکمیل شود.');
+            return;
+
+        }
+
+        const ownership = $($formDiv + " input[name=ownership]:checked").val();
+
+        if (ownership == "legal") {
+            const ownership_name = $($formDiv + " input[name=ownership_name]").val();
+            if (ownership_name == "") {
+                setToastDanger("نام شرکت یا نهاد حقوقی صاحب اثر را وارد کنید");
+                return;
+
+            }
+        }
 
 
 
-    //     const format_art = $($formDiv + " input[name=format_art]:checked").val();
-    //     if (!format_art && !Number(format_art) && is_true) {
-    //         is_true = false
-    //         setToastDanger("قالب اثر را وارد کنید");
 
-    //     }
+        const fileInput = $('#fileInput')[0];
 
-    //     const art_title = $($formDiv + " input[name=art_title]").val();
+        if ((!fileInput.files || fileInput.files.length === 0)) {
+            let countFileArt = document.querySelectorAll('a.file_art').length;
+            if (!countFileArt) {
 
-    //     if (!art_title && is_true) {
-    //         is_true = false
-    //         setToastDanger("عنوان اثر را وارد کنید");
+                setToastDanger('لطفاً فایل اثر خود انتخاب کنید.');
+                return;
 
-    //     }
+            }
+        }
 
-    //     const subject_art = $($formDiv + " input[name=subject_art]:checked").val();
-    //     if (!subject_art && !Number(subject_art) && is_true) {
-    //         is_true = false
-    //         setToastDanger("موضوع اثر را وارد کنید");
-
-    //     }
-
-
-
-
-    //     if (is_true) {
-
-    //         startLoading();
-    //     }
-    // });
+        console.log('is ok');
+        startLoading();
+        this.submit();
+    });
 
 
 
@@ -89,10 +138,10 @@ jQuery(document).ready(function ($) {
         }
     });
 
-let item = 0;
+    let item = 0;
     $('#add_document').click(function (e) {
         e.preventDefault();
-            $('#documentation').append(`            
+        $('#documentation').append(`            
                 <div class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2">
                     <input type="file" name="documentation${item}" accept=".zip,.rar,.7zip" class="form-control text-primary w-100 fw-bold f-24">
                     <button onclick="this.closest('div').remove()" type="button" class="btn btn-danger btn-lg">حذف</button>
@@ -100,21 +149,6 @@ let item = 0;
         `);
         item++;
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     $(document).on('click', '#remove-document', function (e) {

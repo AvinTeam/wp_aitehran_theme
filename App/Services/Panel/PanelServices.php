@@ -249,12 +249,15 @@ class PanelServices extends Service {
                 $action = "create";
             }
         }
+                $this->checkTaxonomy( $request );
+
 
         if ( "update" == $action ) {
             $this->updateArt( $art_id, $request );
 
             $massage = "اثر شما با موفقیت ویرایش شد";
         }
+
 
         if ( "create" == $action ) {
             $create = $this->createArt( $request, $file );
@@ -356,6 +359,27 @@ class PanelServices extends Service {
             throw new \Exception( 'قالب انتخاب شده وجود ندارد' );
         }
 
+        $set = wp_set_object_terms( $art_id, array( absint( $request[ 'format_art' ] ) ), 'format_art', false );
+
+        if ( is_wp_error( $set ) ) {
+            throw new \Exception( "ثبت قالب به مشکل خورده است دوباره تلاش کنید" );
+        }
+
+        $term = get_term( absint( $request[ 'subject_art' ] ), 'subject_art' );
+
+        if ( ! $term || is_wp_error( $term ) ) {
+            throw new \Exception( 'موضوع انتخاب شده وجود ندارد' );
+        }
+
+        $set = wp_set_object_terms( $art_id, array( absint( $request[ 'subject_art' ] ) ), 'subject_art', false );
+
+        if ( is_wp_error( $set ) ) {
+            throw new \Exception( "ثبت موضوع به مشکل خورده است دوباره تلاش کنید" );
+        }
+    }
+
+    public function checkTaxonomy( $request ) {
+
         $args = array(
             'post_type'      => 'matart',
             'author'         => get_current_user_id(),
@@ -377,24 +401,6 @@ class PanelServices extends Service {
 
         if ( $count >= 5 ) {
             throw new \Exception( "شما نمیتوانید بیش از 5 اثر در این قالب ارسال کنید" );
-        }
-
-        $set = wp_set_object_terms( $art_id, array( absint( $request[ 'format_art' ] ) ), 'format_art', false );
-
-        if ( is_wp_error( $set ) ) {
-            throw new \Exception( "ثبت قالب به مشکل خورده است دوباره تلاش کنید" );
-        }
-
-        $term = get_term( absint( $request[ 'subject_art' ] ), 'subject_art' );
-
-        if ( ! $term || is_wp_error( $term ) ) {
-            throw new \Exception( 'موضوع انتخاب شده وجود ندارد' );
-        }
-
-        $set = wp_set_object_terms( $art_id, array( absint( $request[ 'subject_art' ] ) ), 'subject_art', false );
-
-        if ( is_wp_error( $set ) ) {
-            throw new \Exception( "ثبت موضوع به مشکل خورده است دوباره تلاش کنید" );
         }
     }
 

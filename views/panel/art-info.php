@@ -20,7 +20,10 @@
                 <h4 class="text-white">کد رهگیری :
                     <?php echo $_GET[ 'tracking_code' ] ?>
                 </h4>
-                <a href="<?php echo home_url( '/panel/art-info' ) ?>" class="btn btn-warning btn-lg rounded-40 mt-40">ارسال اثر جدید</a>
+                <div class="d-flex flex-row ">
+                    <a href="<?php echo home_url( '/panel/art-info' ) ?>"
+                        class="btn btn-warning btn-lg rounded-40 mt-40">ارسال اثر جدید</a>
+                </div>
 
             </div>
         </div>
@@ -41,7 +44,7 @@
 <section class="px-2 px-lg-0 mb-100  ">
     <div class=" mt-40 container">
         <div class="d-flex flex-column-reverse flex-lg-row justify-content-between row-gap-4 row-gap-lg-0">
-          <div class="col-12 col-lg-4 d-flex flex-column position-relative px-2">
+            <div class="col-12 col-lg-4 d-flex flex-column position-relative px-2">
                 <div
                     class="bg-secondary d-flex flex-column justify-content-center align-items-center rounded-65  px-40 py-24 mb-3">
                     <div class="rounded-32 w-100 text-white text-center p-16 mb-4 f-32 fw-bold">
@@ -70,7 +73,6 @@
                 <form id="art_info" action="" method="post" enctype="multipart/form-data">
                     <section class="d-flex flex-column row-gap-3 w-100 bg-gray rounded-65 py-40 px-100 ">
 
-                        <?php wp_nonce_field( config( 'app.key' ) . '_art-info' ); ?>
 
                         <!--'formats_art' -->
                         <div
@@ -80,7 +82,7 @@
                             </label>
 
                             <select class="form-select form-select-lg fw-bold f-32 text-primary" name="format_art">
-                                <option> انتخاب قالب</option>
+                                <option value="0"> انتخاب قالب</option>
                                 <?php
 
                                     foreach ( $formats_art as $key => $item ):
@@ -88,10 +90,10 @@
                                         if ( "selected" == $key ) {continue;}
 
                                     ?>
-	                                <option value="<?php echo $item->term_id ?>"
-	                                    <?php echo selected( $item->term_id, $formats_art[ "selected" ] ?? 'format_art' ) ?>>
-	                                    <?php echo $item->name ?></option>
-	                                <?php endforeach; ?>
+                                <option value="<?php echo $item->term_id ?>"
+                                    <?php echo selected( $item->term_id, $formats_art[ "selected" ] ?? 'format_art' ) ?>>
+                                    <?php echo $item->name ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 
@@ -114,7 +116,7 @@
                             </label>
 
                             <select class="form-select form-select-lg fw-bold f-32 text-primary" name="subject_art">
-                                <option> انتخاب قالب</option>
+                                <option value="0"> انتخاب موضوع</option>
                                 <?php
 
                                     foreach ( $subjects_art as $key => $item ):
@@ -122,10 +124,10 @@
                                         if ( "selected" == $key ) {continue;}
 
                                     ?>
-	                                <option value="<?php echo $item->term_id ?>"
-	                                    <?php echo selected( $item->term_id, $subjects_art[ "selected" ] ?? 'subject_art' ) ?>>
-	                                    <?php echo $item->name ?></option>
-	                                <?php endforeach; ?>
+                                <option value="<?php echo $item->term_id ?>"
+                                    <?php echo selected( $item->term_id, $subjects_art[ "selected" ] ?? 'subject_art' ) ?>>
+                                    <?php echo $item->name ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 
@@ -138,13 +140,13 @@
 
 
                             <select class="form-select form-select-lg fw-bold f-32 text-primary" name="year">
-                                <option>سال تولید اثر</option>
+                                <option value="0">سال تولید اثر</option>
                                 <?php
 
                                     for ( $i = 1405; $i > 1379; --$i ):
 
                                 ?>
-                                <option value="<?php echo $i ?>"<?php echo selected( $i, $year ) ?>>
+                                <option value="<?php echo $i ?>" <?php echo selected( $i, $year ) ?>>
                                     <?php echo $i ?></option>
                                 <?php endfor; ?>
                             </select>
@@ -193,7 +195,7 @@
                             <div class="w-100">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="ownership" id="ownership_genuine"
-                                        value="genuine"                                                        <?php echo checked( $ownership, "genuine" ) ?>>
+                                        value="genuine" <?php echo checked( $ownership, "genuine" ) ?>>
                                     <label class="form-check-label" for="ownership_genuine">
                                         حقیقی
                                     </label>
@@ -202,7 +204,7 @@
 
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="ownership" id="ownership_legal"
-                                        value="legal"                                                      <?php echo checked( $ownership, "legal" ) ?>>
+                                        value="legal" <?php echo checked( $ownership, "legal" ) ?>>
                                     <label class="form-check-label" for="ownership_legal">
                                         حقوقی
                                     </label>
@@ -243,18 +245,18 @@
 
                                         ?>
 
-	                                <div data-id="<?php echo $document ?>"
-	                                    class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2 image-document">
+                                <div data-id="<?php echo $document ?>"
+                                    class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2 image-document">
 
-	                                    <a href="<?php echo esc_url( $file_url ) ?>" type="button"
-	                                        class="btn btn-warning rounded-32 w-100 p-2 f-24 fw-bold">
-	                                        <?php echo basename( $file_url ) ?>
-	                                    </a>
+                                    <a href="<?php echo esc_url( $file_url ) ?>" type="button"
+                                        class="btn btn-warning rounded-32 w-100 p-2 f-24 fw-bold">
+                                        <?php echo basename( $file_url ) ?>
+                                    </a>
 
-	                                    <button id="remove-document" type="button" class="btn btn-danger">حذف</button>
-	                                </div>
+                                    <button id="remove-document" type="button" class="btn btn-danger">حذف</button>
+                                </div>
 
-	                                <?php
+                                <?php
                                         endforeach;
                                         }
 
@@ -275,24 +277,24 @@
                                     class="text-secondary me-2">8-</span>
                                 بارگذاری اثر
                             </label>
+                            <div id="preview_art"
+                                class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2">
 
+                                <?php
 
-
-
-                            <?php
-
-                            if ( ! empty( $art_file ) ): ?>
-
-                            <div class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2">
-
+                                if ( ! empty( $art_file ) ): ?>
                                 <a href="<?php echo esc_url( $art_file ) ?>" type="button"
-                                    class="btn btn-warning rounded-32 w-100 p-2 f-24 fw-bold">
+                                    class="btn btn-warning rounded-32 w-100 p-2 f-24 fw-bold file_art">
                                     دانلود فایل
                                 </a>
+                                <?php endif; ?>
+
+                                <!-- <div class="text-nowrap p-2 fw-bold f-20 text-primary w-100"><span
+                                        class="text-secondary me-2">فایل : </span>
+                                    art-info.zip
+                                </div> -->
+
                             </div>
-
-
-                            <?php endif; ?>
 
                             <button type="button" onclick="document.getElementById('fileInput').click();"
                                 class="btn btn-secondary rounded-32 w-100 p-2 f-24 fw-bold border border-1 border-black">
@@ -301,16 +303,18 @@
 
                             <input type="file" id="fileInput" style="display: none;" name="art_file"
                                 accept=".zip,.rar,.7zip">
-
-
-
                         </div>
 
 
 
+                        <?php wp_nonce_field( config( 'app.key' ) . '_art-info' ); ?>
+
+
+                        <input type="hidden" name="sendForm" value="artInfo">
+
+
                         <div class="w-100 d-flex flex-row justify-content-center align-items-center mt-32">
-                            <button type="submit" name="sendForm" value="artInfo"
-                                class="btn btn-warning rounded-32 w-50 p-2 f-24 fw-bold mt ">
+                            <button type="submit" class="btn btn-warning rounded-32 w-50 p-2 f-24 fw-bold mt ">
                                 ارسال
                             </button>
                         </div>

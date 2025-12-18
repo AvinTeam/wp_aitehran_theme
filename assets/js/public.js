@@ -196,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function national_code(code) {
+
     if (!code || code.length !== 10) {
         return false;
     }
@@ -217,6 +218,7 @@ function national_code(code) {
     const remainder = sum % 11;
     const lastDigit = parseInt(code.charAt(9), 10);
 
+    
     if (remainder < 2) {
         return remainder === lastDigit;
     } else {
@@ -407,6 +409,10 @@ jQuery(document).ready(function ($) {
             setToastDanger("شماره شناسنامه مسئول گروه را وارد کنید");
         }
 
+        if ( !national_code(groupResponsibleNationalCode) && is_true) {
+            is_true = false;
+            setToastDanger("کد ملی مسئول گروه را به درستی وارد کنید");
+        }
 
         const groupResponsibleBirthday = $($formDiv + " input#groupResponsibleBirthday").val();
 

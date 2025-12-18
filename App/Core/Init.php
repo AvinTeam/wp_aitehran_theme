@@ -20,6 +20,11 @@ class Init {
 
         if ( isset( $_POST[ 'sendForm' ] ) && ! empty( $_POST[ 'sendForm' ] ) ) {
             if ( "artInfo" == $_POST[ 'sendForm' ] ) {
+                if ( ! isset( $_POST[ '_wpnonce' ] ) || ! wp_verify_nonce( $_POST[ '_wpnonce' ], config( 'app.key' ) . '_art-info' ) ) {
+                    setAlert( "danger", "مشکلی در ثبت اثر پیش آمده لطفا دوباره ارسال کنید." );
+                    wp_redirect( home_url( "/panel/art-info/" ) );
+                }
+
                 $redirect = $_REQUEST[ '_wp_http_referer' ];
                 $result   = ( new PanelController() )->sendArtInfo( $_REQUEST, $_FILES );
 
