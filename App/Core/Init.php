@@ -1,28 +1,43 @@
 <?php
 namespace TAI\App\Core;
 
-(defined('ABSPATH')) || exit;
+use TAI\App\Controllers\Panel\PanelController;
 
-class Init
-{
+( defined( 'ABSPATH' ) ) || exit;
 
-    public function __construct()
-    {
+class Init {
 
-        add_action('init', [ $this, 'init' ]);
+    public function __construct() {
 
+        add_action( 'init', array( $this, 'init' ), 11 );
     }
 
     /**
      * Fires after WordPress has finished loading but before any headers are sent.
      *
      */
-    public function init(): void
-    {
-  
+    public function init(): void {
 
+        if ( isset( $_POST[ 'sendForm' ] ) && ! empty( $_POST[ 'sendForm' ] ) ) {
+            if ( "artInfo" == $_POST[ 'sendForm' ] ) {
+                $redirect = $_REQUEST[ '_wp_http_referer' ];
+                $result   = ( new PanelController() )->sendArtInfo( $_REQUEST, $_FILES );
+
+                if ( $result->success ) {
+                    $redirect = "/panel/artList";
+
+                    if ( "create" == $result->result ) {
+                        $redirect = "/panel/art-info/?tracking_code=" . $result->massage;
+                    }
+                }
+
+                if ( ! $result->result ) {
+                    setAlert( $result->success, $result->massage );
+                }
+
+                wp_redirect( home_url( $redirect ) );
+                exit;
+            }
+        }
     }
-
-  
-
 }

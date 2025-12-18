@@ -24,7 +24,6 @@ class AcademyController extends Controller {
 
     public function sidebar() {
         view( 'academy/single/sidebar' );
-
     }
     public function sidebar_archive() {
 

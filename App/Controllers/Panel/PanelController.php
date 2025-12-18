@@ -1,6 +1,7 @@
 <?php
 namespace TAI\App\Controllers\Panel;
 
+use Exception;
 use TAI\App\Controllers\Controller;
 use TAI\App\Services\Panel\PanelServices;
 
@@ -16,36 +17,40 @@ class PanelController extends Controller {
 
     }
 
-    
-
     public function dashboard() {
         return $this->services->dashboard();
     }
-    
-    public function update($request) {
-        return $this->services->update($request);
-    }
-    
 
-    public function content() {
-        view( 'academy/single/content', array( "video" => $this->services->get_video() )
-
-        );
+    public function update( $request ) {
+        return $this->services->update( $request );
     }
 
-    public function sidebar() {
-        view( 'academy/single/sidebar' );
-
+    public function artList() {
+        return $this->services->artList( $_REQUEST );
     }
-    public function sidebar_archive() {
 
-        view( 'academy/archive/sidebar',
-            $this->services->sidebar() );
-
+    public function artInfo() {
+        return $this->services->artInfo();
     }
-    public function archive() {
-        view( 'academy/archive/content',
-            array( "items" => $this->services->archive() ) );
+
+    public function sendArtInfo( $request, $file ) {
+
+        try {
+
+            $result = $this->services->sendArtInfo( $request, $file );
+
+            return $this->success(
+                $result[ 'massage' ],
+                $result[ 'data' ] ?? null,
+
+            );
+
+        } catch ( Exception $exception ) {
+            return $this->error(
+                $exception->getMessage()
+            );
+
+        }
 
     }
 

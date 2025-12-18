@@ -1,7 +1,7 @@
-// jalaliDatepicker.startWatch({
-//     minDate: "attr",
-//     maxDate: "attr"
-// });
+jalaliDatepicker.startWatch({
+    minDate: "attr",
+    maxDate: "attr"
+});
 
 
 // lightbox.option({
@@ -196,33 +196,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function national_code(code) {
-    // بررسی طول کد
     if (!code || code.length !== 10) {
         return false;
     }
 
-    // بررسی اینکه فقط رقم باشد
     if (!/^\d+$/.test(code)) {
         return false;
     }
 
-    // بررسی اینکه همه ارقام یکسان نباشند
     const firstChar = code.charAt(0);
     if (code === firstChar.repeat(10)) {
         return false;
     }
 
-    // محاسبه مجموع وزنی
     let sum = 0;
     for (let i = 0; i < 9; i++) {
         sum += (10 - i) * parseInt(code.charAt(i), 10);
     }
 
-    // محاسبه باقیمانده
     const remainder = sum % 11;
     const lastDigit = parseInt(code.charAt(9), 10);
 
-    // بررسی صحت کد ملی
     if (remainder < 2) {
         return remainder === lastDigit;
     } else {
@@ -230,10 +224,16 @@ function national_code(code) {
     }
 }
 
+function setToastDanger(massage) {
+    const toastElement = document.getElementById('taiToast');
+    const toastBody = toastElement.querySelector('.toast-body');
 
+    toastBody.innerHTML = "";
+    toastBody.innerHTML = massage;
 
-
-
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElement);
+    toastBootstrap.show();
+}
 
 
 jQuery(document).ready(function ($) {
@@ -367,18 +367,6 @@ jQuery(document).ready(function ($) {
     });
 
 
-    function setToastDanger(massage) {
-
-        $("#taiToast .toast-body").html("");
-        $("#taiToast .toast-body").html(massage);
-
-        const toastLiveExample = document.getElementById('taiToast')
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-        toastBootstrap.show()
-
-    }
-
-
     $("button#nextLevel").click(function (e) {
         e.preventDefault();
 
@@ -476,6 +464,9 @@ jQuery(document).ready(function ($) {
                     console.log(result);
 
                     if (result.success) {
+
+                        window.location.href = result.data;
+
 
                     } else {
                         setToastDanger(result.data);

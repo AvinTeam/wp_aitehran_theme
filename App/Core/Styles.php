@@ -13,7 +13,6 @@ class Styles {
         add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) );
 
         add_action( 'wp_enqueue_scripts', array( $this, 'public_style' ) );
-
     }
 
     public function admin_script() {
@@ -47,16 +46,17 @@ class Styles {
                 'socials' => config( 'app.socials', array() ),
             )
         );
-
     }
 
     public function public_style() {
 
         $this->bootstrap();
         $this->swiper();
-        // $this->select2();
-        // $this->lightbox();
-        // $this->jalalidatepicker();
+        $this->jalalidatepicker();
+
+// $this->select2();
+
+// $this->lightbox();
         // $this->clipboard();
 
         wp_enqueue_style(
@@ -73,23 +73,24 @@ class Styles {
             TAI_VERSION,
             true
         );
-        wp_enqueue_script(
-            'tai_search_js',
-            TAI_JS . 'search.js',
-            array( 'jquery' ),
-            TAI_VERSION,
-            true
-        );
+
+        if ( get_query_var( "panel" ) == "art-info" ) {
+            wp_enqueue_script(
+                'tai_artInfo_js',
+                TAI_JS . 'artInfo.js',
+                array( 'jquery', "tai_js" ),
+                TAI_VERSION,
+                true
+            );
+        }
 
         wp_localize_script(
             'tai_js',
             'tai_js',
             array(
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),
-                'nonce'   => wp_create_nonce( 'ajax-nonce' . tai_cookie() ),
             )
         );
-
     }
 
     private function bootstrap() {
@@ -116,7 +117,6 @@ class Styles {
             '5.3.7',
             true
         );
-
     }
 
     private function select2() {
@@ -136,7 +136,6 @@ class Styles {
             '4.1.0-rc.0',
             true
         );
-
     }
 
     private function jalalidatepicker() {
@@ -156,7 +155,6 @@ class Styles {
             '0.9.6',
             true
         );
-
     }
 
     private function swiper() {
@@ -176,7 +174,6 @@ class Styles {
             '12.0.3',
 
         );
-
     }
 
     private function lightbox() {
@@ -196,7 +193,6 @@ class Styles {
             '2.11.3',
 
         );
-
     }
 
     private function clipboard() {
@@ -208,7 +204,6 @@ class Styles {
             array(),
             '2.0.11',
         );
-
     }
 
     private function custom() {
@@ -228,7 +223,5 @@ class Styles {
             '1.0.0',
 
         );
-
     }
-
 }

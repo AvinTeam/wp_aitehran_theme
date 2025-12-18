@@ -31,7 +31,7 @@ class DashboardAJAX extends AJAX {
         $create = $controller->update( $_POST );
 
         if ( $create[ 'success' ] ) {
-            wp_send_json_success( $create[ 'massage' ] );
+            wp_send_json_success( home_url( '/panel/artList' ) );
         }
 
         wp_send_json_error( $create[ 'massage' ] );

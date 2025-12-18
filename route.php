@@ -6,14 +6,21 @@ get_header();
 
 $controller = new PanelController();
 
-$page  = "login";
+$site_page  = "login";
 $array = array();
 
 if ( is_user_logged_in() ) {
+    $site_page = $tai_route;
+
     switch ( $tai_route ) {
         case 'dashboard':
-            $page  = $tai_route;
             $array = $controller->dashboard();
+            break;
+        case 'artList':
+            $array = $controller->artList();
+            break;
+        case 'art-info':
+            $array = $controller->artInfo();
             break;
 
         default:
@@ -22,6 +29,6 @@ if ( is_user_logged_in() ) {
     }
 }
 
-view( "panel/$page", $array );
+view( "panel/$site_page", $array );
 
 get_footer();

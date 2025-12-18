@@ -13,7 +13,7 @@
 
             <h2 class="text-white">یه مشکلی تووکاره !!!</h2>
             <h4 class="text-white">باید صفحه دیگه ای رو بررسی کنید</h4>
-            <button class="btn btn-warning btn-lg">ورود به صفحه نخست</button>
+            <a  href="<?php echo home_url( '/' )?>" class="btn btn-warning btn-lg rounded-40 mt-64">ورود به صفحه نخست</a>
 
         </div>
     </div>

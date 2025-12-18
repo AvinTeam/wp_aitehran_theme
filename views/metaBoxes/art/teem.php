@@ -1,17 +1,25 @@
 <?php
 ( defined( 'ABSPATH' ) ) || exit; ?>
 
-<p>سر تیم: <?php echo $leader_name ?></p>
+<p>
+    <b>نام گروه</b>
+    <?php echo $groupName ?>
+</p>
+<p>
+    <b>نام خانوادگی مسئول گروه</b>
+    <?php echo $leaderName ?>
+</p>
 
-<hr>
+<?php
 
+if ( $teem_list ): ?>
 <div class="mat_form_point">
     <div class="form-group-point">
         <label class="label" for="title_art">اعضای تیم</label>
         <ol>
             <?php
 
-            foreach ( $art_teem_list as $key => $teem ) {?>
+            foreach ( $teem_list as $key => $teem ) {?>
 
             <li><?php echo $teem[ 'name' ] ?></li>
             <?php }
@@ -21,3 +29,7 @@
     </div>
 
 </div>
+<?php endif; ?>
+
+
+<hr>
