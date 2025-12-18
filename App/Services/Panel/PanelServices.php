@@ -149,9 +149,6 @@ class PanelServices extends Service {
             $art_id = absint( substr( $_GET[ 'tracking_code' ], 8 ) );
 
 
-
-            $tracking_code = get_post_meta( $art_id, "_tracking_code", true );
-
             if ( 
                 ! $art_id || 
                 ! get_post( $art_id ) ||

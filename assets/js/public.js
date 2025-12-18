@@ -422,12 +422,12 @@ jQuery(document).ready(function ($) {
         }
 
 
-        const groupResponsibleEdu = $($formDiv + " input#groupResponsibleEdu").val();
+        // const groupResponsibleEdu = $($formDiv + " input#groupResponsibleEdu").val();
 
-        if (!groupResponsibleEdu && is_true) {
-            is_true = false;
-            setToastDanger("مدرک تحصیلی مسئول گروه را وارد کنید");
-        }
+        // if (!groupResponsibleEdu && is_true) {
+        //     is_true = false;
+        //     setToastDanger("مدرک تحصیلی مسئول گروه را وارد کنید");
+        // }
 
         const groupResponsibleAddress = $($formDiv + " input#groupResponsibleAddress").val();
 

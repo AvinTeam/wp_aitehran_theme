@@ -79,6 +79,11 @@
                             <input type="text" id="groupResponsibleBirthday"
                                 value="<?php echo $groupResponsibleBirthday ?>"
                                 class="form-control w-100 border border-1 border-black rounded-32 d-ltr">
+
+                            <input id="groupResponsibleBirthday" type="text"
+                                class="form-control w-100 border border-1 border-black rounded-32 d-ltr" data-jdp=""
+                                data-jdp-only-date="" data-jdp-min-date="today"
+                                value="<?php echo $groupResponsibleBirthday ?>">
                         </div>
                     </div>
 
@@ -109,11 +114,13 @@
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="groupResponsibleAddressPost" class="col-form-label text-nowrap p-2 f-24 fw-bold">آدرس پستی :
+                            <label for="groupResponsibleAddressPost"
+                                class="col-form-label text-nowrap p-2 f-24 fw-bold">آدرس پستی :
                             </label>
                         </div>
                         <div class="w-100">
-                            <input type="text" id="groupResponsibleAddressPost" value="<?php echo $groupResponsibleAddressPost ?>"
+                            <input type="text" id="groupResponsibleAddressPost"
+                                value="<?php echo $groupResponsibleAddressPost ?>"
                                 class="form-control w-100 border border-1 border-black rounded-32">
                         </div>
                     </div>
@@ -144,6 +151,3 @@
         </div>
     </div>
 </section>
-
-
-
