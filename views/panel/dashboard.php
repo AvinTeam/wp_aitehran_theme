@@ -18,6 +18,8 @@
             </div>
 
             <div class="col-12 col-lg-8 px-2 ">
+                <?php getAlert(); ?>
+
                 <section id="dashboardForm" class="d-flex flex-column row-gap-3 w-100 bg-gray rounded-65 py-40 px-100 ">
 
                     <?php wp_nonce_field( config( 'app.key' ) . '_dashboardForm_' . get_current_user_id() ); ?>
@@ -35,107 +37,134 @@
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="groupResponsible" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام
+                            <label for="fullName" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام
                                 خانوادگی مسئول گروه :
                             </label>
                         </div>
                         <div class="w-100">
-                            <input type="text" id="groupResponsible" value="<?php echo $groupResponsible ?>"
+                            <input type="text" id="fullName" value="<?php echo $fullName ?>"
                                 class="form-control w-100 border border-1 border-black rounded-32">
                         </div>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="groupResponsibleParent" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام
+                            <label for="parent" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام
                                 پدرِ مسئول گروه :
                             </label>
                         </div>
                         <div class="w-100">
-                            <input type="text" id="groupResponsibleParent" value="<?php echo $groupResponsibleParent ?>"
+                            <input type="text" id="parent" value="<?php echo $parent ?>"
                                 class="form-control w-100 border border-1 border-black rounded-32">
                         </div>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="groupResponsibleNationalCode"
-                                class="col-form-label text-nowrap p-2 f-24 fw-bold">شماره شناسنامه
+                            <label for="nationalCode" class="col-form-label text-nowrap p-2 f-24 fw-bold">کد ملی
                                 مسئول گروه : </label>
                         </div>
                         <div class="w-100">
-                            <input type="text" id="groupResponsibleNationalCode"
-                                value="<?php echo $groupResponsibleNationalCode ?>"
-                                class="form-control w-100 border border-1 border-black rounded-32 d-ltr">
+                            <input type="text" id="nationalCode" value="<?php echo $nationalCode ?>"
+                                class="form-control w-100 border border-1 border-black rounded-32 d-ltr onlyNumbersInput"
+                                maxlength="10" inputmode="numeric" pattern="\d*">
                         </div>
                     </div>
-                    <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                    <div class=" d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="groupResponsibleBirthday"
-                                class="col-form-label text-nowrap p-2 f-24 fw-bold">تاریخ تولد مسئول
+                            <label for="birthday" class="col-form-label text-nowrap p-2 f-24 fw-bold">تاریخ تولد مسئول
                                 گروه : </label>
                         </div>
                         <div class="w-100">
-                            <input type="text" id="groupResponsibleBirthday"
-                                value="<?php echo $groupResponsibleBirthday ?>"
-                                class="form-control w-100 border border-1 border-black rounded-32 d-ltr">
 
-                            <input id="groupResponsibleBirthday" type="text"
+
+                            <input id="birthday" type="text"
                                 class="form-control w-100 border border-1 border-black rounded-32 d-ltr" data-jdp=""
-                                data-jdp-only-date="" data-jdp-min-date="today"
-                                value="<?php echo $groupResponsibleBirthday ?>">
+                                data-jdp-only-date="" data-jdp-max-date="today" value="<?php echo $birthday ?>">
                         </div>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="groupResponsibleEdu" class="col-form-label text-nowrap p-2 f-24 fw-bold">مدرک
+                            <label for="edu" class="col-form-label text-nowrap p-2 f-24 fw-bold">مدرک
                                 تحصیلی مسئول گروه :
                             </label>
                         </div>
                         <div class="w-100">
-                            <input type="text" id="groupResponsibleEdu" value="<?php echo $groupResponsibleEdu ?>"
+                            <input type="text" id="edu" value="<?php echo $edu ?>"
                                 class="form-control w-100 border border-1 border-black rounded-32">
                         </div>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="groupResponsibleAddress" class="col-form-label text-nowrap p-2 f-24 fw-bold">محل
+                            <label for="address" class="col-form-label text-nowrap p-2 f-24 fw-bold">محل
                                 سکونت مسئول گروه
                                 : </label>
                         </div>
                         <div class="w-100">
-                            <input type="text" id="groupResponsibleAddress"
-                                value="<?php echo $groupResponsibleAddress ?>"
+                            <input type="text" id="address" value="<?php echo $address ?>"
                                 class="form-control w-100 border border-1 border-black rounded-32">
                         </div>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="groupResponsibleAddressPost"
-                                class="col-form-label text-nowrap p-2 f-24 fw-bold">آدرس پستی :
+                            <label for="addressPost" class="col-form-label text-nowrap p-2 f-24 fw-bold">آدرس پستی :
                             </label>
                         </div>
                         <div class="w-100">
-                            <input type="text" id="groupResponsibleAddressPost"
-                                value="<?php echo $groupResponsibleAddressPost ?>"
+                            <input type="text" id="addressPost" value="<?php echo $addressPost ?>"
                                 class="form-control w-100 border border-1 border-black rounded-32">
                         </div>
                     </div>
 
+                    <?php
+                            $m = 1;
+
+                        if ( $teems ): ?>
 
 
-                    <button type="button"
+                    <h2>لیست اعضا</h2>
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">نام خانوادگی</th>
+                                <th scope="col">کد ملی</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php
+
+                                foreach ( $teems as $teem ): ?>
+                            <tr>
+                                <th scope="row"><?php echo $m ?></th>
+                                <td><?php echo $teem[ 'name' ] ?></td>
+                                <td><?php echo $teem[ 'nationalCode' ] ?></td>
+                                <td>
+                                    <a href="<?php echo home_url( '/panel/addTeem/?teem=' . $teem[ 'username' ] ) ?>"
+                                        class="btn btn-info">ویرایش</a>
+                                    <button type="button" id="delTeem" data-username="<?php echo $teem[ 'username' ] ?>"
+                                        class="btn btn-danger">حذف</button>
+                                </td>
+                            </tr>
+
+                            <?php ++$m;endforeach; ?>
+                        </tbody>
+                    </table>
+                    <?php endif; ?>
+
+                    <?php
+
+                        if ( $m <= 4 ): ?>
+                    <a href="<?php echo home_url( "/panel/addTeem" ) ?>"
                         class="btn btn-secondary rounded-32 w-100 p-2 f-24 fw-bold border border-1 border-black">
                         افزودن عضو جدید (+)
-                    </button>
-
-
-                    <div id="alert" class="alert alert-success d-none" role="alert">
-                        پیام شما با موفقت ثبت شد
-                    </div>
+                    </a>
+                    <?php endif; ?>
 
                 </section>
 
@@ -151,3 +180,24 @@
         </div>
     </div>
 </section>
+
+
+
+
+<div class="modal fade" id="modalDelTeem" tabindex="-1" aria-labelledby="modalDelTeemLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalDelTeemLabel">حذف هم تیمی</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                آیا مطمئن هستید که میخواهید هم تیمی خود را حذف کنید؟
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خیر</button>
+                <a href="" class="btn btn-primary" id="hasDelTeem">بله</a>
+            </div>
+        </div>
+    </div>
+</div>

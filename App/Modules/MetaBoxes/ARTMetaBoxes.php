@@ -54,7 +54,7 @@ class ARTMetaBoxes extends MetaBoxes {
 
         view( 'metaBoxes/art/teem',
             array(
-                'leaderName' => get_user_meta( get_current_user_id(), "groupResponsible", true ),
+                'leaderName' => get_user_meta( get_current_user_id(), "fullName", true ),
                 'groupName'  => get_user_meta( get_current_user_id(), "groupName", true ),
                 'teem_list'  => is_array( $teem_list ) ? $teem_list : array(),
 

@@ -218,7 +218,7 @@ function national_code(code) {
     const remainder = sum % 11;
     const lastDigit = parseInt(code.charAt(9), 10);
 
-    
+
     if (remainder < 2) {
         return remainder === lastDigit;
     } else {
@@ -244,9 +244,6 @@ jQuery(document).ready(function ($) {
     $('.onlyNumbersInput').on('input paste', function () {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
-
-
-
 
     let alertSuccess = "alert-success";
     let alertDanger = "alert-danger";
@@ -385,60 +382,58 @@ jQuery(document).ready(function ($) {
             setToastDanger("نام گروه را وارد کنید");
         }
 
-        const groupResponsible = $($formDiv + " input#groupResponsible").val();
+        const fullName = $($formDiv + " input#fullName").val();
 
-        if (!groupResponsible && is_true) {
+        if (!fullName && is_true) {
             is_true = false;
             setToastDanger("نام خانوادگی مسئول گروه را وارد کنید");
         }
 
 
-        const groupResponsibleParent = $($formDiv + " input#groupResponsibleParent").val();
+        const parent = $($formDiv + " input#parent").val();
 
-        if (!groupResponsibleParent && is_true) {
+        if (!parent && is_true) {
             is_true = false;
             setToastDanger("نام پدرِ مسئول گروه را وارد کنید");
         }
 
+        const nationalCode = $($formDiv + " input#nationalCode").val();
 
-
-        const groupResponsibleNationalCode = $($formDiv + " input#groupResponsibleNationalCode").val();
-
-        if (!groupResponsibleNationalCode && is_true) {
+        if (!nationalCode && is_true) {
             is_true = false;
-            setToastDanger("شماره شناسنامه مسئول گروه را وارد کنید");
+            setToastDanger("کد ملی مسئول گروه را وارد کنید");
         }
 
-        if ( !national_code(groupResponsibleNationalCode) && is_true) {
+        if (!national_code(nationalCode) && is_true) {
             is_true = false;
             setToastDanger("کد ملی مسئول گروه را به درستی وارد کنید");
         }
 
-        const groupResponsibleBirthday = $($formDiv + " input#groupResponsibleBirthday").val();
+        const birthday = $($formDiv + " input#birthday").val();
 
-        if (!groupResponsibleBirthday && is_true) {
+        if (!birthday && is_true) {
             is_true = false;
             setToastDanger("تاریخ تولد مسئول گروه را وارد کنید");
         }
 
 
-        // const groupResponsibleEdu = $($formDiv + " input#groupResponsibleEdu").val();
+        const edu = $($formDiv + " input#edu").val();
 
-        // if (!groupResponsibleEdu && is_true) {
+        // if (!edu && is_true) {
         //     is_true = false;
         //     setToastDanger("مدرک تحصیلی مسئول گروه را وارد کنید");
         // }
 
-        const groupResponsibleAddress = $($formDiv + " input#groupResponsibleAddress").val();
+        const address = $($formDiv + " input#address").val();
 
-        if (!groupResponsibleAddress && is_true) {
+        if (!address && is_true) {
             is_true = false;
             setToastDanger("محل سکونت مسئول گروه را وارد کنید");
         }
 
-        const groupResponsibleAddressPost = $($formDiv + " input#groupResponsibleAddressPost").val();
+        const addressPost = $($formDiv + " input#addressPost").val();
 
-        if (!groupResponsibleAddressPost && is_true) {
+        if (!addressPost && is_true) {
             is_true = false;
             setToastDanger("آدرس پستی را وارد کنید");
         }
@@ -452,13 +447,13 @@ jQuery(document).ready(function ($) {
                 action: 'tai_dashboard',
                 wpnonce: $($formDiv + " input#_wpnonce").val(),
                 groupName: groupName,
-                groupResponsible: groupResponsible,
-                groupResponsibleParent: groupResponsibleParent,
-                groupResponsibleNationalCode: groupResponsibleNationalCode,
-                groupResponsibleBirthday: groupResponsibleBirthday,
-                groupResponsibleEdu: groupResponsibleEdu,
-                groupResponsibleAddress: groupResponsibleAddress,
-                groupResponsibleAddressPost: groupResponsibleAddressPost,
+                fullName: fullName,
+                parent: parent,
+                nationalCode: nationalCode,
+                birthday: birthday,
+                edu: edu,
+                address: address,
+                addressPost: addressPost,
             }
 
             $.ajax({
@@ -476,10 +471,10 @@ jQuery(document).ready(function ($) {
 
                     } else {
                         setToastDanger(result.data);
+                        endLoading();
 
                     }
 
-                    endLoading();
 
                 },
                 error: function () {
@@ -499,5 +494,117 @@ jQuery(document).ready(function ($) {
     });
 
 
+    $("button#btnAddTeem").click(function (e) {
+        e.preventDefault();
+
+
+
+        $formDiv = "section#addTeemForm";
+
+        let is_true = true;
+
+
+        const fullName = $($formDiv + " input#fullName").val();
+
+        if (fullName == "") {
+            setToastDanger("نام خانوادگی را وارد کنید");
+            return;
+        }
+
+        const parent = $($formDiv + " input#parent").val();
+        if (parent == "") {
+            setToastDanger("نام پدرِ را وارد کنید");
+            return;
+        }
+
+        const nationalCode = $($formDiv + " input#nationalCode").val();
+
+        if (nationalCode == "") {
+            setToastDanger("کد ملی را وارد کنید");
+            return;
+        }
+
+        if (!national_code(nationalCode)) {
+            setToastDanger("کد ملی را به درستی وارد کنید");
+            return;
+        }
+
+        const birthday = $($formDiv + " input#birthday").val();
+
+        if (!birthday && is_true) {
+            setToastDanger("تاریخ تولد را وارد کنید");
+            return;
+        }
+
+
+        const edu = $($formDiv + " input#edu").val();
+
+        // if (edu=="") {
+        //     setToastDanger("مدرک تحصیلی مسئول گروه را وارد کنید");
+        // return;
+        // }
+
+
+        startLoading();
+
+        const data = {
+            action: 'tai_addTeem',
+            wpnonce: $($formDiv + " input#_wpnonce").val(),
+            fullName: fullName,
+            parent: parent,
+            nationalCode: nationalCode,
+            birthday: birthday,
+            edu: edu,
+            username: $($formDiv + " input#username").val(),
+        }
+
+        $.ajax({
+            url: tai_js.ajaxurl,
+            method: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (result) {
+
+                if (result.success) {
+
+                    window.location.href = result.data;
+
+
+                } else {
+                    setToastDanger(result.data);
+                    endLoading();
+
+                }
+
+            },
+            error: function () {
+                setToastDanger("ثبت اطلاعات شما به خطا خورده است دوباره تلاش  کنید");
+
+                console.error("به خطا خورده");
+
+                endLoading();
+
+
+            }
+        });
+
+
+
+
+    });
+
+    $("button#delTeem").click(function (e) {
+        e.preventDefault();
+
+        let userneme = $(this).attr("data-username");
+
+        $("#modalDelTeem #hasDelTeem").attr("href", "/panel/?delTeem=" + userneme);
+
+        $("#modalDelTeem").modal("show");
+
+
+    });
+
+    // /panel/?delTeem='
 
 });

@@ -16,6 +16,9 @@ if ( is_user_logged_in() ) {
         case 'dashboard':
             $array = $controller->dashboard();
             break;
+        case 'addTeem':
+            $array = $controller->getTeem();
+            break;
         case 'artList':
             $array = $controller->artList();
             break;

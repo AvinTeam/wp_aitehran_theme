@@ -4,6 +4,7 @@ namespace TAI\App\Services\Panel;
 use Exception;
 use TAI\App\Services\Service;
 use WP_Query;
+use WP_User_Query;
 
 ( defined( 'ABSPATH' ) ) || exit;
 
@@ -13,16 +14,37 @@ class PanelServices extends Service {
     }
 
     public function dashboard() {
+
+        $args = array(
+            'meta_key'   => 'user_leader',
+            'meta_value' => get_current_user_id(),
+        );
+
+        $user_query = new WP_User_Query( $args );
+
+        $users = $user_query->get_results();
+
+        if ( ! empty( $users ) ) {
+            foreach ( $users as $user ) {
+                $user_data[  ] = array(
+                    'username'     => $user->user_login,
+                    'name'         => get_user_meta( $user->ID, "fullName", true ),
+                    'nationalCode' => get_user_meta( $user->ID, "nationalCode", true ),
+                );
+            }
+        }
+
         return array(
 
-            'groupName'                    => get_user_meta( get_current_user_id(), "groupName", true ),
-            'groupResponsible'             => get_user_meta( get_current_user_id(), "groupResponsible", true ),
-            'groupResponsibleParent'       => get_user_meta( get_current_user_id(), "groupResponsibleParent", true ),
-            'groupResponsibleNationalCode' => get_user_meta( get_current_user_id(), "groupResponsibleNationalCode", true ),
-            'groupResponsibleBirthday'     => get_user_meta( get_current_user_id(), "groupResponsibleBirthday", true ),
-            'groupResponsibleEdu'          => get_user_meta( get_current_user_id(), "groupResponsibleEdu", true ),
-            'groupResponsibleAddress'      => get_user_meta( get_current_user_id(), "groupResponsibleAddress", true ),
-            'groupResponsibleAddressPost'  => get_user_meta( get_current_user_id(), "groupResponsibleAddressPost", true ),
+            'groupName'    => get_user_meta( get_current_user_id(), "groupName", true ),
+            'fullName'     => get_user_meta( get_current_user_id(), "fullName", true ),
+            'parent'       => get_user_meta( get_current_user_id(), "parent", true ),
+            'nationalCode' => get_user_meta( get_current_user_id(), "nationalCode", true ),
+            'birthday'     => get_user_meta( get_current_user_id(), "birthday", true ),
+            'edu'          => get_user_meta( get_current_user_id(), "edu", true ),
+            'address'      => get_user_meta( get_current_user_id(), "address", true ),
+            'addressPost'  => get_user_meta( get_current_user_id(), "addressPost", true ),
+            'teems'        => $user_data ?? array(),
 
         );
     }
@@ -30,22 +52,122 @@ class PanelServices extends Service {
     public function update( $request ) {
 
         update_user_meta( get_current_user_id(), "groupName", sanitize_text_field( $request[ 'groupName' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsible", sanitize_text_field( $request[ 'groupResponsible' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsibleParent", sanitize_text_field( $request[ 'groupResponsibleParent' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsibleNationalCode", sanitize_text_field( $request[ 'groupResponsibleNationalCode' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsibleBirthday", sanitize_text_field( $request[ 'groupResponsibleBirthday' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsibleEdu", sanitize_text_field( $request[ 'groupResponsibleEdu' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsibleAddress", sanitize_text_field( $request[ 'groupResponsibleAddress' ] ) );
-        update_user_meta( get_current_user_id(), "groupResponsibleAddressPost", sanitize_text_field( $request[ 'groupResponsibleAddressPost' ] ) );
+        update_user_meta( get_current_user_id(), "fullName", sanitize_text_field( $request[ 'fullName' ] ) );
+        update_user_meta( get_current_user_id(), "parent", sanitize_text_field( $request[ 'parent' ] ) );
+        update_user_meta( get_current_user_id(), "nationalCode", sanitize_text_field( $request[ 'nationalCode' ] ) );
+        update_user_meta( get_current_user_id(), "birthday", sanitize_text_field( $request[ 'birthday' ] ) );
+        update_user_meta( get_current_user_id(), "edu", sanitize_text_field( $request[ 'edu' ] ) );
+        update_user_meta( get_current_user_id(), "address", sanitize_text_field( $request[ 'address' ] ) );
+        update_user_meta( get_current_user_id(), "addressPost", sanitize_text_field( $request[ 'addressPost' ] ) );
 
         return array(
-            "massage" => "پیام شما با موفقیت ثبت شد",
+            "massage" => "پروفایل شما با موفقیت بروز شد",
             "success" => true,
 
         );
     }
 
-    
+    public function getTeem( $request ) {
+
+        $user_id = 0;
+
+        if ( isset( $request[ 'teem' ] ) && ! empty( $request[ 'teem' ] ) ) {
+            $user = get_user_by( 'login', $request[ 'teem' ] );
+
+            if ( $user->ID && get_current_user_id() == get_user_meta( $user->ID, "user_leader", true ) ) {
+                $user_id = $user->ID;
+            }
+        }
+
+        if ( ! $user_id ) {
+            $args = array(
+                'meta_key'   => 'user_leader',
+                'meta_value' => get_current_user_id(),
+            );
+
+            $user_query = new WP_User_Query( $args );
+
+            if ( $user_query->get_total() >= 4 ) {
+                wp_redirect( home_url( '/panel' ) );
+            }
+        }
+
+        return array(
+
+            'fullName'     => get_user_meta( $user_id, "fullName", true ),
+            'parent'       => get_user_meta( $user_id, "parent", true ),
+            'nationalCode' => get_user_meta( $user_id, "nationalCode", true ),
+            'birthday'     => get_user_meta( $user_id, "birthday", true ),
+            'edu'          => get_user_meta( $user_id, "edu", true ),
+
+        );
+    }
+
+    public function addTeem( $request ) {
+
+        $nationalCode = sanitize_text_field( $request[ 'nationalCode' ] );
+
+        $args = array(
+            'meta_key'   => 'nationalCode',
+            'meta_value' => $nationalCode,
+        );
+
+        $user_query = new WP_User_Query( $args );
+
+        if ( $user_query->get_total() ) {
+            return array(
+                "massage" => "این کاربر قبلا ثبت نام شده است",
+                "success" => false,
+
+            );
+        }
+
+        $username = rand( 10, 99 ) . intval( round( microtime( true ) * 10 ) );
+
+        $user_id = wp_create_user( $username, wp_generate_password(), $username . '@tai.com' );
+
+        if ( $user_id ) {
+            update_user_meta( $user_id, "fullName", sanitize_text_field( $request[ 'fullName' ] ) );
+            update_user_meta( $user_id, "parent", sanitize_text_field( $request[ 'parent' ] ) );
+            update_user_meta( $user_id, "nationalCode", $nationalCode );
+            update_user_meta( $user_id, "birthday", sanitize_text_field( $request[ 'birthday' ] ) );
+            update_user_meta( $user_id, "edu", sanitize_text_field( $request[ 'edu' ] ) );
+            update_user_meta( $user_id, "user_leader", get_current_user_id() );
+        }
+
+        return array(
+            "massage" => $user_id ? "هم تیمی شما با موفقیت ثبت شد" : "ثبت هم تیمی شما با مشکل مواجه شده دوباره تلاش کنید",
+            "success" => $user_id ? true : false,
+
+        );
+    }
+
+    public function updateTeem( $request ) {
+
+        $user = get_user_by( 'login', $request[ 'username' ] );
+
+        if ( $user->ID && get_current_user_id() == get_user_meta( $user->ID, "user_leader", true ) ) {
+            $user_id = $user->ID;
+
+            update_user_meta( $user_id, "fullName", sanitize_text_field( $request[ 'fullName' ] ) );
+            update_user_meta( $user_id, "parent", sanitize_text_field( $request[ 'parent' ] ) );
+            update_user_meta( $user_id, "nationalCode", sanitize_text_field( $request[ 'nationalCode' ] ) );
+            update_user_meta( $user_id, "birthday", sanitize_text_field( $request[ 'birthday' ] ) );
+            update_user_meta( $user_id, "edu", sanitize_text_field( $request[ 'edu' ] ) );
+            return array(
+                "massage" => "هم تیمی شما با موفقیت ویرایش شد",
+                "success" => true,
+
+            );
+        }
+
+        return array(
+            "massage" => "هم تیمی شما با موفقیت ویرایش نشد",
+            "success" => false,
+
+        );
+    }
+
     public function sidebar() {
 
         $args = array(
@@ -126,7 +248,6 @@ class PanelServices extends Service {
         );
     }
 
-
     public function artInfo() {
 
         $is_administrator = current_user_can( 'administrator' );
@@ -148,12 +269,11 @@ class PanelServices extends Service {
         if ( isset( $_GET[ 'tracking_code' ] ) && ! empty( $_GET[ 'tracking_code' ] ) ) {
             $art_id = absint( substr( $_GET[ 'tracking_code' ], 8 ) );
 
-
-            if ( 
-                ! $art_id || 
+            if (
+                ! $art_id ||
                 ! get_post( $art_id ) ||
-                get_post_meta( $art_id, "_tracking_code", true ) != $_GET[ 'tracking_code' ]                
-                ) {
+                get_post_meta( $art_id, "_tracking_code", true ) != $_GET[ 'tracking_code' ]
+            ) {
                 wp_redirect( home_url( "/panel/artList/" ) );
                 exit;
             }
@@ -256,15 +376,14 @@ class PanelServices extends Service {
                 $action = "create";
             }
         }
-                $this->checkTaxonomy( $request );
 
+        $this->checkTaxonomy( $request );
 
         if ( "update" == $action ) {
             $this->updateArt( $art_id, $request );
 
             $massage = "اثر شما با موفقیت ویرایش شد";
         }
-
 
         if ( "create" == $action ) {
             $create = $this->createArt( $request, $file );

@@ -21,8 +21,9 @@ class Init {
         if ( isset( $_POST[ 'sendForm' ] ) && ! empty( $_POST[ 'sendForm' ] ) ) {
             if ( "artInfo" == $_POST[ 'sendForm' ] ) {
                 if ( ! isset( $_POST[ '_wpnonce' ] ) || ! wp_verify_nonce( $_POST[ '_wpnonce' ], config( 'app.key' ) . '_art-info' ) ) {
-                    setAlert( "danger", "مشکلی در ثبت اثر پیش آمده لطفا دوباره ارسال کنید." );
+                    setAlert( false, "مشکلی در ثبت اثر پیش آمده لطفا دوباره ارسال کنید." );
                     wp_redirect( home_url( "/panel/art-info/" ) );
+                    exit;
                 }
 
                 $redirect = $_REQUEST[ '_wp_http_referer' ];
@@ -36,11 +37,32 @@ class Init {
                     }
                 }
 
-                    setAlert( $result->success, $result->massage );
+                setAlert( $result->success, $result->massage );
 
                 wp_redirect( home_url( $redirect ) );
                 exit;
             }
+        }
+
+        if ( isset( $_GET[ "delTeem" ] ) && ! empty( $_GET[ 'delTeem' ] ) ) {
+            $user = get_user_by( 'login', $_GET[ 'delTeem' ] );
+
+            if ( $user->ID && get_current_user_id() == get_user_meta( $user->ID, "user_leader", true ) ) {
+                $user_id = $user->ID;
+
+                require_once ABSPATH . 'wp-admin/includes/user.php';
+
+                if ( wp_delete_user( $user_id ) ) {
+                    setAlert( "success", "هم تیمی شما حذف شد" );
+                } else {
+                    setAlert( false, "مشکلی در هم تیمی پیش آمده لطفا دوباره ارسال کنید." );
+                }
+
+                wp_redirect( home_url( "/panel" ) );
+                exit;
+            }
+
+            dd( $_GET[ 'delTeem' ] );
         }
     }
 }

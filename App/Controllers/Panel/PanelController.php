@@ -25,6 +25,18 @@ class PanelController extends Controller {
         return $this->services->update( $request );
     }
 
+    public function getTeem() {
+        return $this->services->getTeem( $_REQUEST );
+    }
+    public function addTeem( $request ) {
+        return $this->services->addTeem( $_REQUEST );
+    }
+
+      public function updateTeem( $request ) {
+        return $this->services->updateTeem( $_REQUEST );
+    }
+
+
     public function artList() {
         return $this->services->artList( $_REQUEST );
     }
