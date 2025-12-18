@@ -83,6 +83,15 @@ class Styles {
                 true
             );
         }
+        if ( get_query_var( "panel" ) == "dashboard" && !is_user_logged_in() ) {
+            wp_enqueue_script(
+                'tai_login_js',
+                TAI_JS . 'login.js',
+                array( 'jquery', "tai_js" ),
+                TAI_VERSION,
+                true
+            );
+        }
 
         wp_localize_script(
             'tai_js',
