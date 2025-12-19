@@ -1,5 +1,5 @@
 <?php
-namespace App\Core;
+namespace TAI\App\Core;
 
 class Captcha {
     private $encryptionKey;
@@ -62,22 +62,16 @@ class Captcha {
 
         $image = imagecreate( 200, 50 );
 
-        $background_color = imagecolorallocate( $image, 255, 255, 255 );
+        $background_color = imagecolorallocate( $image, 249, 255, 226 );
 
         $text_color = imagecolorallocate( $image, 0, 0, 0 );
 
-        $line_color = imagecolorallocate( $image, 0, 255, 0 );
-
-        $pixel_color = imagecolorallocate( $image, 255, 0, 0 );
+        $line_color = imagecolorallocate( $image, 46, 48, 146 );
 
         imagefilledrectangle( $image, 0, 0, 200, 50, $background_color );
 
-        for ( $i = 0; $i < 3; ++$i ) {
+        for ( $i = 0; $i < 4; ++$i ) {
             imageline( $image, 0, rand( 0, 50 ), 200, rand( 0, 50 ), $line_color );
-        }
-
-        for ( $i = 0; $i < 1000; ++$i ) {
-            imagesetpixel( $image, rand( 0, 200 ), rand( 0, 50 ), $pixel_color );
         }
 
         $letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890";
@@ -86,7 +80,7 @@ class Captcha {
 
         $word = "";
 
-        $font = TAI_ASSETS . "fonts/arial.ttf";
+        $font = TAI_PATH . "assets/fonts/arial.ttf";
 
         for ( $i = 0; $i < 6; ++$i ) {
             $letter = $letters[ rand( 0, $len - 1 ) ];
@@ -96,21 +90,20 @@ class Captcha {
             $word = $word . $letter;
         }
 
-        $array = glob( '*.png' );
+        $array = glob( TAI_CAPTCHA . '*.png' );
 
         foreach ( $array as $x ) {
-            $create_time = str_replace( '.png', '', $x );
-
-            if ( $time - $create_time > 8000 ) {
+            if ( $time - basename( $x, ".png" ) > 8000 ) {
                 unlink( $x );
             }
         }
 
-        imagepng( $image, $time . ".png" );
+        imagepng( $image, TAI_CAPTCHA . $time . ".png" );
 
         return array(
-            "key"      => $this->encryptURL( $word ),
-            "fileName" => $time,
+            "word" => $word,
+            "key"  => $this->encryptURL( $word ),
+            "url"  => TAI_CAPTCHA_URL . $time . ".png",
 
         );
     }

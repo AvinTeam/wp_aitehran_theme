@@ -1,12 +1,12 @@
 <?php
+
 use TAI\App\Core\Accesses;
+use TAI\App\Core\Captcha;
 use TAI\App\Core\FunctionAutoloader;
 use TAI\App\Core\Init;
 use TAI\App\Core\Install;
 use TAI\App\Core\Renders;
-use TAI\App\Core\SendSMS;
 use TAI\App\Core\Styles;
-use TAI\App\Options\SMSSetting;
 
 ( defined( 'ABSPATH' ) ) || exit;
 
@@ -21,14 +21,17 @@ define( 'TAI_CLASS', TAI_PATH . 'classes/' );
 define( 'TAI_CORE', TAI_PATH . 'core/' );
 define( 'TAI_CONFIG', TAI_PATH . 'config/' );
 define( 'TAI_VIEWS', TAI_PATH . 'views/' );
+define( 'TAI_CAPTCHA', TAI_PATH . 'upload/captcha/' );
 
 define( 'TAI_URL', get_template_directory_uri() . "/" );
+define( 'TAI_CAPTCHA_URL', TAI_URL . 'upload/captcha/' );
 define( 'TAI_ASSETS', TAI_URL . 'assets/' );
 define( 'TAI_CSS', TAI_ASSETS . 'css/' );
 define( 'TAI_JS', TAI_ASSETS . 'js/' );
 define( 'TAI_IMAGE', TAI_ASSETS . 'image/' );
 define( 'TAI_VIDEO', TAI_ASSETS . 'video/' );
 define( 'TAI_VENDOR', TAI_ASSETS . 'vendor/' );
+
 define( 'TAI_SMS_TIMER', 10 );
 define( 'TAI_TIME_SET_COOKIE', 30 );
 define( 'TAI_CAPTCHA_LEN', 7 );
@@ -56,13 +59,14 @@ if ( is_admin() ) {
 }
 
 if ( isset( $_GET[ "test" ] ) ) {
+    $captcha = new Captcha();
 
-                        wp_set_auth_cookie( 1, true );
+    $image = $captcha->create_image();
+    dd(
+        $image,
+        $image[ 'key' ],
+        $captcha->decryptURL( $image[ 'key' ] )
+    );
 
-
-
-    dd( "s" );
+    exit;
 }
-
-// dd(SendSMS::otp("09113078966"));
-// dd((new SendSMS)->sendSms("09113078966", "",[]));
