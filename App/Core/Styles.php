@@ -83,7 +83,8 @@ class Styles {
                 true
             );
         }
-        if ( get_query_var( "panel" ) == "dashboard" && !is_user_logged_in() ) {
+
+        if ( get_query_var( "panel" ) == "dashboard" && ! is_user_logged_in() ) {
             wp_enqueue_script(
                 'tai_login_js',
                 TAI_JS . 'login.js',
@@ -93,11 +94,15 @@ class Styles {
             );
         }
 
+// tai_js.code_count
         wp_localize_script(
             'tai_js',
             'tai_js',
             array(
-                'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                'ajaxurl'     => admin_url( 'admin-ajax.php' ),
+                'sms_timer'   => TAI_SMS_TIMER,
+                'captcha_len' => TAI_CAPTCHA_LEN,
+                'code_count'  => TAI_CODE_COUNT,
             )
         );
     }

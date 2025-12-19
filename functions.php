@@ -28,7 +28,10 @@ define( 'TAI_JS', TAI_ASSETS . 'js/' );
 define( 'TAI_IMAGE', TAI_ASSETS . 'image/' );
 define( 'TAI_VIDEO', TAI_ASSETS . 'video/' );
 define( 'TAI_VENDOR', TAI_ASSETS . 'vendor/' );
-define( 'TAI_UPLOAD', TAI_URL . 'upload/' );
+define( 'TAI_SMS_TIMER', 5 );
+define( 'TAI_CAPTCHA_LEN', 7 );
+define( 'TAI_CODE_COUNT', 10 );
+
 
 if ( file_exists( TAI_PATH . '/vendor/autoload.php' ) ) {
     require_once TAI_PATH . '/vendor/autoload.php';

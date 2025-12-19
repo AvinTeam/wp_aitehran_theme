@@ -1,8 +1,6 @@
 // ns2.parspack.co
 // ns1.parspack.co
 
-const set_code_count = 4;
-
 
 function validateMobile(mobile) {
     let regex = /^09\d{9}$/;
@@ -21,6 +19,7 @@ if (pageLogin) {
 
         let mobile = document.getElementById('mobile').value;
         let captcha = document.getElementById('captcha').value;
+        let captchaData = document.getElementById('captchaData').value;
 
         if (validateMobile(mobile)) {
 
@@ -53,7 +52,7 @@ if (pageLogin) {
                 endLoading();
 
             };
-            xhr.send(`action=tai_SendSms&captcha=${captcha}&mobileNumber=${mobile}`);
+            xhr.send(`action=tai_SendSms&captcha=${captcha}&mobileNumber=${mobile}&captchaData=${captchaData}`);
 
         } else {
             isSendSms = true
@@ -101,7 +100,7 @@ if (pageLogin) {
         };
 
         $
-        xhr.send(`action=mrsms_sent_verify&captcha=${captcha}&otpNumber=${verificationCode}&mobileNumber=${mobile}`);
+        xhr.send(`action=tai_verifySms&captcha=${captcha}&otpNumber=${verificationCode}&mobileNumber=${mobile}`);
 
 
     });
@@ -122,7 +121,7 @@ if (pageLogin) {
 
         if (end) { clearInterval(interval); } else {
 
-            let timer = 2 * 60,
+            let timer = tai_js.sms_timer * 60,
                 minutes, seconds;
             interval = setInterval(function () {
                 minutes = parseInt(timer / 60, 10);
@@ -208,7 +207,7 @@ jQuery(document).ready(function ($) {
         let mobile = $('#mobileForm #mobile').val();
         let captcha = $('#mobileForm #captcha').val();
 
-        if (captcha.length == 5 && mobile.length == 11 && validateMobile(mobile)) {
+        if (captcha.length == tai_js.captcha_len && mobile.length == 11 && validateMobile(mobile)) {
             $('#mobileForm #send-code').removeAttr('disabled');
         } else {
             $('#mobileForm #send-code').attr('disabled', '');
@@ -248,7 +247,7 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         let mobile = $(this).val();
 
-        if (mobile.length >= set_code_count) {
+        if (mobile.length >= tai_js.code_count) {
             $('#codeVerification #verifyCode').removeAttr('disabled');
         } else {
             $('#codeVerification #verifyCode').attr('disabled', '');
@@ -259,7 +258,7 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         let mobile = $(this).val();
 
-        if (mobile.length >= set_code_count) {
+        if (mobile.length >= tai_js.code_count) {
             $('#codeVerification #verifyCode').removeAttr('disabled');
         } else {
             $('#codeVerification #verifyCode').attr('disabled', '');
@@ -267,6 +266,6 @@ jQuery(document).ready(function ($) {
     });
 
 
-    $('#verificationCode').attr('maxlength', set_code_count);
+    $('#verificationCode').attr('maxlength', tai_js.code_count);
 
 })

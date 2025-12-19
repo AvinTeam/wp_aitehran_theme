@@ -5,9 +5,6 @@ use TAI\App\Core\AJAX;
 
 ( defined( 'ABSPATH' ) ) || exit;
 
-if ( ! class_exists( 'WP_List_Table' ) ) {
-    require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-}
 
 class SendSmsAJAX extends AJAX {
 

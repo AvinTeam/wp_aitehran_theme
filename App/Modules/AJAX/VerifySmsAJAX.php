@@ -1,14 +1,14 @@
 <?php
 namespace TAI\App\Modules\AJAX;
 
-use TAI\App\Controllers\Contacts\ContactsController;
 use TAI\App\Core\AJAX;
 
 ( defined( 'ABSPATH' ) ) || exit;
 
-class ContactAJAX extends AJAX {
 
-    private $kay = "tai_contact";
+class VerifySmsAJAX extends AJAX {
+
+    private $kay = "tai_verifySms";
 
     public function __construct() {
 
@@ -20,14 +20,8 @@ class ContactAJAX extends AJAX {
 
     public function callback() {
 
-        $contactsController = new ContactsController();
+        wp_send_json_success( $_POST );
 
-        $create = $contactsController->create( $_POST );
-
-        if ( $create[ 'success' ] ) {
-            wp_send_json_success( $create[ 'massage' ] );
-        }
-
-        wp_send_json_error( $create[ 'massage' ] );
+        // wp_send_json_error( $create[ 'massage' ] );
     }
 }
