@@ -9,17 +9,16 @@ class SendSMS extends SMSSetting {
 
     public static function art( int $userId, $artName, $trackingCode ) {
 
-        $mobile = get_user_meta( $userId, "mobile", true );
+        $mobile   = get_user_meta( $userId, "mobile", true );
+        $fullname = get_user_meta( $userId, "fullName", true );
 
         $config = self::getArt();
-
-        $fullname = get_user_meta( $userId, "fullName", true );
 
         if ( ! empty( $fullname ) && ! empty( $config[ 'templateID' ] ) ) {
             $parameters = array(
                 array(
                     'name'  => $config[ 'fullname' ],
-                    'value' => "",
+                    'value' => $fullname,
                 ),
                 array(
                     'name'  => $config[ 'artName' ],

@@ -41,6 +41,7 @@ class SMSMenu extends Menu {
             "smsSettingSubmit" == $_POST[ 'act' ] &&
             wp_verify_nonce( $_POST[ '_wpnonce' ], config( 'app.key' ) . '_setting_' . get_current_user_id() )
         ) {
+
             if ( SMSSetting::set( $_POST[ "sms" ] ) ) {
                 $this->success( 'تغییر با موفقیت انجام شد' );
             } else {

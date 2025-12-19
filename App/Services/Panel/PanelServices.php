@@ -360,8 +360,7 @@ class PanelServices extends Service {
 
             if ( ! $show_first ) {
                 SendSMS::art( get_current_user_id(), $art_title, $trackingCode );
-
-                // update_post_meta( $art_id, "_show_first", 1 );
+                update_post_meta( $art_id, "_show_first", 1 );
             }
 
             $teem_list = get_post_meta( $art_id, "_art_teem", true );

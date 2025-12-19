@@ -17,7 +17,6 @@ class SMSSetting extends Options {
     public static function set( array $input ) {
 
         $sms[ self::$arrayKey ] = $input;
-
         return self::setter( $sms );
     }
 
