@@ -14,8 +14,6 @@
                     <th scope="row"><label for="token">توکن پنل پیامک</label></th>
                     <td><input name="sms[token]" type="text" id="token" value="<?php echo $token ?? '' ?>"
                             class="regular-text d-ltr">
-
-                        <p>RagqjZWYJhtz00kPNsJwYfj4IWMPtSvldlev2gL1Od3ZByPb</p>
                     </td>
 
                 </tr>
@@ -29,14 +27,12 @@
                     <th scope="row"><label for="otpTemplateID">شناسه قالب</label></th>
                     <td><input name="sms[otp][templateID]" type="text" id="otpTemplateID"
                             value="<?php echo $otp[ 'templateID' ] ?? '' ?>" class="regular-text d-ltr">
-                        <p>167784</p>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="otpToken">متغیر OTP</label></th>
                     <td><input name="sms[otp][code]" type="text" id="otpToken"
                             value="<?php echo $otp[ 'code' ] ?? '' ?>" class="regular-text d-ltr">
-                        <p>OTP</p>
                     </td>
                 </tr>
             </tbody>

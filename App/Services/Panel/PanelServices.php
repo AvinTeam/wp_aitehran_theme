@@ -2,6 +2,7 @@
 namespace TAI\App\Services\Panel;
 
 use Exception;
+use TAI\App\Core\SendSMS;
 use TAI\App\Services\Service;
 use WP_Query;
 use WP_User_Query;
@@ -51,8 +52,19 @@ class PanelServices extends Service {
 
     public function update( $request ) {
 
+        $fullNameOld = get_user_meta( get_current_user_id(), "fullName", true );
+        $fullName    = sanitize_text_field( $request[ 'fullName' ] );
+
+        if ( empty( $fullNameOld ) && ! empty( $fullName ) ) {
+            SendSMS::register( "test", get_current_user_id() );
+        }
+
+        if ( ! empty( $fullNameOld ) && empty( $fullName ) ) {
+            $fullName = $fullNameOld;
+        }
+
         update_user_meta( get_current_user_id(), "groupName", sanitize_text_field( $request[ 'groupName' ] ) );
-        update_user_meta( get_current_user_id(), "fullName", sanitize_text_field( $request[ 'fullName' ] ) );
+        update_user_meta( get_current_user_id(), "fullName", $fullName );
         update_user_meta( get_current_user_id(), "parent", sanitize_text_field( $request[ 'parent' ] ) );
         update_user_meta( get_current_user_id(), "nationalCode", sanitize_text_field( $request[ 'nationalCode' ] ) );
         update_user_meta( get_current_user_id(), "birthday", sanitize_text_field( $request[ 'birthday' ] ) );

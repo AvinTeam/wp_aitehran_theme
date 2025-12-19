@@ -4,8 +4,9 @@ use TAI\App\Core\FunctionAutoloader;
 use TAI\App\Core\Init;
 use TAI\App\Core\Install;
 use TAI\App\Core\Renders;
+use TAI\App\Core\SendSMS;
 use TAI\App\Core\Styles;
-use TAI\App\Modules\Remotes\TVRemotes;
+use TAI\App\Options\SMSSetting;
 
 ( defined( 'ABSPATH' ) ) || exit;
 
@@ -28,10 +29,10 @@ define( 'TAI_JS', TAI_ASSETS . 'js/' );
 define( 'TAI_IMAGE', TAI_ASSETS . 'image/' );
 define( 'TAI_VIDEO', TAI_ASSETS . 'video/' );
 define( 'TAI_VENDOR', TAI_ASSETS . 'vendor/' );
-define( 'TAI_SMS_TIMER', 5 );
+define( 'TAI_SMS_TIMER', 1 );
 define( 'TAI_CAPTCHA_LEN', 7 );
 define( 'TAI_CODE_COUNT', 10 );
-
+define( 'TAI_local', true );
 
 if ( file_exists( TAI_PATH . '/vendor/autoload.php' ) ) {
     require_once TAI_PATH . '/vendor/autoload.php';
@@ -52,3 +53,10 @@ new Renders();
 if ( is_admin() ) {
     new Install();
 }
+
+if ( isset( $_GET[ "test" ] ) ) {
+    dd( SendSMS::register( "09383149343", 1 ) );
+}
+
+// dd(SendSMS::otp("09113078966"));
+// dd((new SendSMS)->sendSms("09113078966", "",[]));
