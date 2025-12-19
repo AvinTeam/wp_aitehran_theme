@@ -248,7 +248,7 @@ function setToastDanger(massage) {
 function setToastDanger(message, type = 'danger') {
     const toastElement = document.getElementById('taiToast');
     const toastBody = toastElement.querySelector('.toast-body');
-    
+
     const typeClasses = {
         'success': 'text-bg-success',
         'danger': 'text-bg-danger',
@@ -256,16 +256,16 @@ function setToastDanger(message, type = 'danger') {
         'info': 'text-bg-info',
         'primary': 'text-bg-primary'
     };
-    
+
     Object.values(typeClasses).forEach(cls => {
         toastElement.classList.remove(cls);
     });
-    
+
     const bgClass = typeClasses[type] || typeClasses['danger'];
     toastElement.classList.add(bgClass);
-    
+
     toastBody.innerHTML = message;
-    
+
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElement);
     toastBootstrap.show();
 }
@@ -327,6 +327,7 @@ jQuery(document).ready(function ($) {
 
         const lastName = $($formDiv + " input[name=last_name]").val();
 
+
         if (!lastName && is_true) {
             is_true = false
             massage = "نام خانوادگی خود را وارد کنید";
@@ -364,12 +365,13 @@ jQuery(document).ready(function ($) {
 
             const data = {
                 action: 'tai_contact',
+                captchaData: $($formDiv + " input#captchaData").val(),
+                captcha: captcha,
                 firstName: firstName,
                 lastName: lastName,
                 mobile: mobile,
                 description: description,
             }
-
             $.ajax({
                 url: tai_js.ajaxurl,
                 method: 'POST',
@@ -377,8 +379,13 @@ jQuery(document).ready(function ($) {
                 dataType: 'json',
                 success: function (result) {
 
-                    alertContact(result.data, result.success);
+                    $($formDiv + " input[name=first_name]").val("");
+                    $($formDiv + " input[name=last_name]").val("");
+                    $($formDiv + " input[name=mobile]").val("");
+                    $($formDiv + " input[name=captcha]").val("");
+                    $($formDiv + " textarea[name=description]").val("");
 
+                    alertContact(result.data, result.success);
                     endLoading();
 
                 },
@@ -494,7 +501,6 @@ jQuery(document).ready(function ($) {
                 address: address,
                 addressPost: addressPost,
             }
-
             $.ajax({
                 url: tai_js.ajaxurl,
                 method: 'POST',
@@ -505,7 +511,7 @@ jQuery(document).ready(function ($) {
 
                     if (result.success) {
 
-                        window.location.href = result.data;
+                        // window.location.href = result.data;
 
 
                     } else {
@@ -514,7 +520,7 @@ jQuery(document).ready(function ($) {
 
                     }
 
-                        endLoading();
+                    endLoading();
 
                 },
                 error: function () {

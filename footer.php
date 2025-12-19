@@ -1,10 +1,15 @@
 <?php
 
+    use TAI\App\Core\Captcha;
     use TAI\App\Options\GeneralSetting;
 
     $general = GeneralSetting::get();
 
-    // dd($general);
+    $captcha = new Captcha();
+
+    $captchaArray = $captcha->create_image();
+
+    // dd( $captchaArray );
 ?>
 
 <footer class="container-fluid d-flex flex-column align-items-center justify-content-center pb-100">
@@ -22,6 +27,8 @@
                 <div>
                     <form id="contact_us_form" action="" method="POST" class="">
 
+                            <input type="hidden" id="captchaData" value="<?php echo $captchaArray[ 'key' ] ?>">
+
 
                         <?php wp_nonce_field( config( 'app.key' ) . '_contact_us' ); ?>
 
@@ -38,12 +45,15 @@
                         </div>
                         <div class="row mb-32">
                             <div class="col">
-                                <input type="text" name="mobile"
-                                    class="form-control form-control-lg bg-black text-white" placeholder="تلفن تماس" required>
+                                <input type="text" name="mobile" inputmode="numeric" pattern="\d*" placeholder="تلفن تماس" 
+                                    class="form-control form-control-lg bg-black text-white onlyNumbersInput"  required>
                             </div>
-                            <div class="col">
+                            <div class="col position-relative">
                                 <input type="text" name="captcha" class="form-control form-control-lg bg-black text-white"
-                                    placeholder="کد امنیتی" required>
+                                    placeholder="کد امنیتی" value="<?php echo $captchaArray[ 'word' ] ?? "" ?>" required>
+                                    <img src="<?php echo $captchaArray[ 'url' ] ?>"
+                                    class="h-32 position-absolute translate-middle-y"
+                                    style="left: 20px; top: 50%;">
                             </div>
                         </div>
 
