@@ -30,16 +30,17 @@ if (pageLogin) {
             xhr.onload = function () {
 
                 const response = JSON.parse(xhr.responseText);
+
+                console.log(response.data);
+
                 if (xhr.status === 200 && response.success) {
                     document.getElementById('mobileForm').style.display = 'none';
                     document.getElementById('codeVerification').style.display = 'block';
                     document.getElementById('resendCode').disabled = true;
+
                     let otpInput = document.getElementById('verificationCode');
-
                     otpInput.focus();
-
                     timerSms = response.data.timer;
-
                     setToastDanger(response.data.massage, 'success');
 
                     startTimer();

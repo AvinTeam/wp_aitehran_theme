@@ -34,7 +34,7 @@ define( 'TAI_VENDOR', TAI_ASSETS . 'vendor/' );
 
 define( 'TAI_SMS_TIMER', 10 );
 define( 'TAI_TIME_SET_COOKIE', 30 );
-define( 'TAI_CAPTCHA_LEN', 7 );
+define( 'TAI_CAPTCHA_LEN', 5 );
 define( 'TAI_OTP_COUNT', 4 );
 define( 'TAI_local', true );
 

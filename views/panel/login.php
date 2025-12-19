@@ -23,7 +23,8 @@
 
                     <form id="loginForm">
                         <div id="mobileForm">
-                            <input type="text" id="captchaData" value="test">
+
+                            <input type="text" id="captchaData" value="<?php echo $key?>">
 
                             <div class="d-flex flex-column row-gap-2">
                                 <div class="d-flex flex-column row-gap-2 ">
@@ -34,8 +35,12 @@
                                 </div>
 
                                 <div class="d-flex flex-column row-gap-2 ">
-                                    <label class="f-24 fw-bold" for="captcha">کد امنیتی</label>
-                                    <input type="text" id="captcha" maxlength="<?= TAI_CAPTCHA_LEN ?>"
+                                    <div class="d-flex flex-row justify-content-between align-items-center">
+                                        <label class="f-24 fw-bold" for="captcha">کد امنیتی</label>
+                                        <img src="<?php echo $url?>" class="h-45 object-fit-cover">
+                                    </div>
+                                    <input type="text" id="captcha" value="<?php echo $word?>"
+                                        maxlength="<?php echo TAI_CAPTCHA_LEN?>"
                                         class="w-100 rounded-32 overflow-hidden border-1 border border-black f-24 fw-bold text-center p-2">
                                 </div>
                                 <button id="send-code" class="btn btn-warning fw-bold f-20 mt-5 mb-3 rounded-40"
@@ -54,7 +59,8 @@
                                 </div>
                                 <div class="d-flex flex-row justify-content-around align-items-center">
                                     <div id="timer">00:00</div>
-                                    <button type="button" id="resendCode"  class="btn btn-line rounded-40" disabled>ارسال مجدد کد</button>
+                                    <button type="button" id="resendCode" class="btn btn-line rounded-40" disabled>ارسال
+                                        مجدد کد</button>
                                 </div>
 
                                 <button type="submit" id="verifyCode"

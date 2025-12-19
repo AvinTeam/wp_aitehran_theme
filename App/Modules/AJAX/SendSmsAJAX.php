@@ -2,6 +2,7 @@
 namespace TAI\App\Modules\AJAX;
 
 use TAI\App\Core\AJAX;
+use TAI\App\Core\Captcha;
 use TAI\App\Core\SendSMS;
 
 ( defined( 'ABSPATH' ) ) || exit;
@@ -20,7 +21,11 @@ class SendSmsAJAX extends AJAX {
 
     public function callback() {
 
-        if ( true ) {
+        $captcha = new Captcha();
+
+        $captchaChecker = $captcha->decryptURL( $_POST[ 'captchaData' ] );
+
+        if ( $captchaChecker[ 'success' ] && strtolower($captchaChecker[ 'data' ]) == strtolower($_POST[ 'captcha' ]) ) {
             if ( sanitize_phone( $_POST[ 'mobileNumber' ] ) !== "" ) {
                 wp_send_json_success( SendSMS::otp( sanitize_phone( $_POST[ 'mobileNumber' ] ) ) );
             }

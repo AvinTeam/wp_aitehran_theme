@@ -82,7 +82,7 @@ class Captcha {
 
         $font = TAI_PATH . "assets/fonts/arial.ttf";
 
-        for ( $i = 0; $i < 6; ++$i ) {
+        for ( $i = 0; $i < TAI_CAPTCHA_LEN; ++$i ) {
             $letter = $letters[ rand( 0, $len - 1 ) ];
 
             imagettftext( $image, 20, rand( 20, 60 ), 25 + ( $i * 30 ), 30, $text_color, $font, $letter );

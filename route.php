@@ -1,13 +1,14 @@
 <?php
 
 use TAI\App\Controllers\Panel\PanelController;
+use TAI\App\Core\Captcha;
 
 get_header();
 
 $controller = new PanelController();
 
-$site_page  = "login";
-$array = array();
+$site_page = "login";
+$array     = array();
 
 if ( is_user_logged_in() ) {
     $site_page = $tai_route;
@@ -30,6 +31,10 @@ if ( is_user_logged_in() ) {
             wp_redirect( home_url( "/404" ) );
             break;
     }
+} else {
+    $captcha = new Captcha();
+
+    $array = $captcha->create_image();
 }
 
 view( "panel/$site_page", $array );
