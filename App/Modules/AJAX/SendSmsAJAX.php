@@ -30,8 +30,6 @@ class SendSmsAJAX extends AJAX {
             wp_send_json_error( 'کد امنیتی را به درستی وارد کنید' );
         }
 
-        wp_send_json_success( $_POST );
-
-        // wp_send_json_error( $create[ 'massage' ] );
+        wp_send_json_error( "ارسال پیامک با مشکل مواجه شده دوباره تلاش کنید" );
     }
 }

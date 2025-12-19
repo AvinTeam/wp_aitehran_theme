@@ -52,11 +52,38 @@ class PanelServices extends Service {
 
     public function update( $request ) {
 
-        $fullNameOld = get_user_meta( get_current_user_id(), "fullName", true );
-        $fullName    = sanitize_text_field( $request[ 'fullName' ] );
+        $fullNameOld     = get_user_meta( get_current_user_id(), "fullName", true );
+        $nationalCodeOld = get_user_meta( get_current_user_id(), "nationalCode", true );
+
+        $fullName     = sanitize_text_field( $request[ 'fullName' ] );
+        $nationalCode = sanitize_text_field( $request[ 'nationalCode' ] );
+
+        if ( ! national_code( $nationalCode ) ) {
+            return array(
+                "massage" => "کد ملی معتبر نیست از کد ملی درست استفاده نمایید",
+                "success" => false,
+            );
+        }
+
+        if ( $nationalCodeOld != $nationalCode ) {
+            $args = array(
+                'meta_key'   => 'nationalCode',
+                'meta_value' => $nationalCode,
+            );
+
+            $user_query = new WP_User_Query( $args );
+
+            if ( $user_query->get_total() ) {
+                return array(
+                    "massage" => "این کاربر قبلا ثبت نام شده است",
+                    "success" => false,
+
+                );
+            }
+        }
 
         if ( empty( $fullNameOld ) && ! empty( $fullName ) ) {
-            SendSMS::register( "test", get_current_user_id() );
+            SendSMS::register( get_current_user_id(), $fullName );
         }
 
         if ( ! empty( $fullNameOld ) && empty( $fullName ) ) {
@@ -66,7 +93,7 @@ class PanelServices extends Service {
         update_user_meta( get_current_user_id(), "groupName", sanitize_text_field( $request[ 'groupName' ] ) );
         update_user_meta( get_current_user_id(), "fullName", $fullName );
         update_user_meta( get_current_user_id(), "parent", sanitize_text_field( $request[ 'parent' ] ) );
-        update_user_meta( get_current_user_id(), "nationalCode", sanitize_text_field( $request[ 'nationalCode' ] ) );
+        update_user_meta( get_current_user_id(), "nationalCode", $nationalCode );
         update_user_meta( get_current_user_id(), "birthday", sanitize_text_field( $request[ 'birthday' ] ) );
         update_user_meta( get_current_user_id(), "edu", sanitize_text_field( $request[ 'edu' ] ) );
         update_user_meta( get_current_user_id(), "address", sanitize_text_field( $request[ 'address' ] ) );
@@ -118,6 +145,13 @@ class PanelServices extends Service {
     public function addTeem( $request ) {
 
         $nationalCode = sanitize_text_field( $request[ 'nationalCode' ] );
+
+        if ( ! national_code( $nationalCode ) ) {
+            return array(
+                "massage" => "کد ملی معتبر نیست از کد ملی درست استفاده نمایید",
+                "success" => false,
+            );
+        }
 
         $args = array(
             'meta_key'   => 'nationalCode',
@@ -281,10 +315,12 @@ class PanelServices extends Service {
         if ( isset( $_GET[ 'tracking_code' ] ) && ! empty( $_GET[ 'tracking_code' ] ) ) {
             $art_id = absint( substr( $_GET[ 'tracking_code' ], 8 ) );
 
+            $trackingCode = get_post_meta( $art_id, "_tracking_code", true );
+
             if (
                 ! $art_id ||
                 ! get_post( $art_id ) ||
-                get_post_meta( $art_id, "_tracking_code", true ) != $_GET[ 'tracking_code' ]
+                $trackingCode != $_GET[ 'tracking_code' ]
             ) {
                 wp_redirect( home_url( "/panel/artList/" ) );
                 exit;
@@ -323,7 +359,9 @@ class PanelServices extends Service {
             $show_first = absint( get_post_meta( $art_id, "_show_first", true ) );
 
             if ( ! $show_first ) {
-                update_post_meta( $art_id, "_show_first", 1 );
+                SendSMS::art( get_current_user_id(), $art_title, $trackingCode );
+
+                // update_post_meta( $art_id, "_show_first", 1 );
             }
 
             $teem_list = get_post_meta( $art_id, "_art_teem", true );

@@ -7,7 +7,9 @@ use TAI\App\Options\SMSSetting;
 
 class SendSMS extends SMSSetting {
 
-    public static function art( $mobile, int $userId, $artName, $trackingCode ) {
+    public static function art( int $userId, $artName, $trackingCode ) {
+
+        $mobile = get_user_meta( $userId, "mobile", true );
 
         $config = self::getArt();
 
@@ -38,27 +40,25 @@ class SendSMS extends SMSSetting {
         }
     }
 
-    public static function register( $mobile, int $userId ) {
+    public static function register( $userId, $fullName ) {
+
+        $mobile = get_user_meta( $userId, "mobile", true );
 
         $config = self::getRegister();
 
-        $fullname = get_user_meta( $userId, "fullName", true );
+        $parameters = array(
+            array(
+                'name'  => $config[ 'fullname' ],
+                'value' => $fullName,
+            ),
+        );
 
-        if ( ! empty( $fullname ) && ! empty( $config[ 'templateID' ] ) ) {
-            $parameters = array(
-                array(
-                    'name'  => $config[ 'fullname' ],
-                    'value' => $fullname,
-                ),
-            );
+        self::sendSms( $mobile, $config[ 'templateID' ], $parameters );
 
-            self::sendSms( $mobile, $config[ 'templateID' ], $parameters );
-
-            return array(
-                'success' => true,
-                'massage' => "پیام ارسال شد",
-            );
-        }
+        return array(
+            'success' => true,
+            'massage' => "پیام ارسال شد",
+        );
     }
 
     public static function otp( $mobile ) {

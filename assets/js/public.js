@@ -410,8 +410,6 @@ jQuery(document).ready(function ($) {
     $("button#nextLevel").click(function (e) {
         e.preventDefault();
 
-
-
         $formDiv = "section#dashboardForm";
 
         let is_true = true;
@@ -516,6 +514,7 @@ jQuery(document).ready(function ($) {
 
                     }
 
+                        endLoading();
 
                 },
                 error: function () {
