@@ -101,7 +101,7 @@ class Captcha {
         imagepng( $image, TAI_CAPTCHA . $time . ".png" );
 
         return array(
-            "word" => $word,
+            "word" => TAI_local ? $word : "",
             "key"  => $this->encryptURL( $word ),
             "url"  => TAI_CAPTCHA_URL . $time . ".png",
 

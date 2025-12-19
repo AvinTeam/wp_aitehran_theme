@@ -8,8 +8,6 @@
     $captcha = new Captcha();
 
     $captchaArray = $captcha->create_image();
-
-    // dd( $captchaArray );
 ?>
 
 <footer class="container-fluid d-flex flex-column align-items-center justify-content-center pb-100">

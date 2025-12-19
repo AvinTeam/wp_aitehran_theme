@@ -14,6 +14,15 @@ class AcademyController extends Controller {
 
         $this->services = new AcademyServices();
 
+
+
+        if ( !is_user_logged_in() ) {
+
+            wp_redirect(home_url('/panel'));
+            exit;
+
+        }
+
     }
 
     public function content() {
