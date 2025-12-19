@@ -102,7 +102,7 @@ class Styles {
                 'ajaxurl'     => admin_url( 'admin-ajax.php' ),
                 'sms_timer'   => TAI_SMS_TIMER,
                 'captcha_len' => TAI_CAPTCHA_LEN,
-                'code_count'  => TAI_CODE_COUNT,
+                'code_count'  => TAI_OTP_COUNT,
             )
         );
     }

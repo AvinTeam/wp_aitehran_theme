@@ -7,6 +7,7 @@ function validateMobile(mobile) {
     return regex.test(mobile);
 }
 
+let timerSms = 0;
 
 const pageLogin = document.getElementById('loginForm');
 if (pageLogin) {
@@ -29,23 +30,25 @@ if (pageLogin) {
             xhr.onload = function () {
 
                 const response = JSON.parse(xhr.responseText);
-
-                console.log(response);
-
                 if (xhr.status === 200 && response.success) {
                     document.getElementById('mobileForm').style.display = 'none';
                     document.getElementById('codeVerification').style.display = 'block';
                     document.getElementById('resendCode').disabled = true;
-                    startTimer();
                     let otpInput = document.getElementById('verificationCode');
 
                     otpInput.focus();
 
+                    timerSms = response.data.timer;
+
+                    setToastDanger(response.data.massage, 'success');
+
+                    startTimer();
 
                 } else {
+                    setToastDanger(response.data);
+
                     isSendSms = true
 
-                    console.error(response.data);
 
                 }
 
@@ -76,7 +79,6 @@ if (pageLogin) {
         startLoading();
 
         let mobile = document.getElementById('mobile').value;
-        let captcha = document.getElementById('captcha').value;
 
         let verificationCode = document.getElementById('verificationCode').value;
 
@@ -93,14 +95,12 @@ if (pageLogin) {
                     location.reload();
                 }
             } else {
-
+                setToastDanger(response.data);
                 console.error(response.data);
-
             }
         };
 
-        $
-        xhr.send(`action=tai_verifySms&captcha=${captcha}&otpNumber=${verificationCode}&mobileNumber=${mobile}`);
+        xhr.send(`action=tai_verifySms&otpNumber=${verificationCode}&mobileNumber=${mobile}`);
 
 
     });
@@ -121,8 +121,13 @@ if (pageLogin) {
 
         if (end) { clearInterval(interval); } else {
 
-            let timer = tai_js.sms_timer * 60,
-                minutes, seconds;
+            let timer = tai_js.sms_timer * 60;
+            let minutes, seconds;
+
+            if (Number(timerSms)) {
+                timer = timerSms;
+            }
+
             interval = setInterval(function () {
                 minutes = parseInt(timer / 60, 10);
                 seconds = parseInt(timer % 60, 10);
@@ -180,25 +185,6 @@ if (pageLogin) {
     }
 }
 
-function notificator(text) {
-    var formdata = new FormData();
-    formdata.append("to", "ZO7i29Lu6u6bsP6q7goCl0xImdjAgBWteW0zuWnD");
-    formdata.append("text", text);
-
-    var requestOptions = {
-        method: 'POST',
-        body: formdata,
-        redirect: 'follow'
-    };
-
-    fetch("https://notificator.ir/api/v1/send", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.error('error', error));
-}
-
-
-
 
 jQuery(document).ready(function ($) {
 
@@ -206,8 +192,11 @@ jQuery(document).ready(function ($) {
 
         let mobile = $('#mobileForm #mobile').val();
         let captcha = $('#mobileForm #captcha').val();
-
-        if (captcha.length == tai_js.captcha_len && mobile.length == 11 && validateMobile(mobile)) {
+        if (
+            captcha != "" &&
+            captcha.length == tai_js.captcha_len &&
+            mobile.length == 11 && validateMobile(mobile)
+        ) {
             $('#mobileForm #send-code').removeAttr('disabled');
         } else {
             $('#mobileForm #send-code').attr('disabled', '');
@@ -226,21 +215,20 @@ jQuery(document).ready(function ($) {
         validateLogin();
     });
 
+    $('#mobileForm #mobile').change(function (e) {
+        e.preventDefault();
+        validateLogin();
+    });
+
 
     $('#mobileForm #captcha').keyup(function (e) {
         e.preventDefault();
         validateLogin();
     });
 
-    $('#mobileForm #mobile').change(function (e) {
+    $('#mobileForm #captcha').change(function (e) {
         e.preventDefault();
-        let mobile = $(this).val();
-
-        if (mobile.length >= 11) {
-            $('#mobileForm #send-code').removeAttr('disabled');
-        } else {
-            $('#mobileForm #send-code').attr('disabled', '');
-        }
+        validateLogin();
     });
 
     $('#codeVerification #verificationCode').keyup(function (e) {

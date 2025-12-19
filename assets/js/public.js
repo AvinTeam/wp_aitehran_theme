@@ -228,6 +228,9 @@ function national_code(code) {
 
 function setToastDanger(massage) {
     const toastElement = document.getElementById('taiToast');
+
+
+
     const toastBody = toastElement.querySelector('.toast-body');
 
     toastBody.innerHTML = "";
@@ -236,6 +239,44 @@ function setToastDanger(massage) {
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElement);
     toastBootstrap.show();
 }
+
+
+
+
+
+
+function setToastDanger(message, type = 'danger') {
+    const toastElement = document.getElementById('taiToast');
+    const toastBody = toastElement.querySelector('.toast-body');
+    
+    const typeClasses = {
+        'success': 'text-bg-success',
+        'danger': 'text-bg-danger',
+        'warning': 'text-bg-warning',
+        'info': 'text-bg-info',
+        'primary': 'text-bg-primary'
+    };
+    
+    Object.values(typeClasses).forEach(cls => {
+        toastElement.classList.remove(cls);
+    });
+    
+    const bgClass = typeClasses[type] || typeClasses['danger'];
+    toastElement.classList.add(bgClass);
+    
+    toastBody.innerHTML = message;
+    
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastElement);
+    toastBootstrap.show();
+}
+
+
+
+
+
+
+
+
 
 
 jQuery(document).ready(function ($) {

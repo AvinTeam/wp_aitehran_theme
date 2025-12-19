@@ -75,7 +75,7 @@ class SendSMS extends SMSSetting {
 
                 $otpCode = '';
 
-                for ( $i = 0; $i < TAI_CODE_COUNT; ++$i ) {
+                for ( $i = 0; $i < TAI_OTP_COUNT; ++$i ) {
                     $otpCode .= rand( 0, 9 );
                 }
 
@@ -87,6 +87,8 @@ class SendSMS extends SMSSetting {
                 );
                 set_transient( $key_transient, $otpCode, ( TAI_SMS_TIMER * MINUTE_IN_SECONDS ) );
 
+                $lastTIme = get_transient_time_remaining( $key_transient );
+
                 self::sendSms( $mobile, $config[ 'templateID' ], $parameters );
 
                 $massage = "کد تایید با موفقیت ارسال شد";
@@ -95,6 +97,7 @@ class SendSMS extends SMSSetting {
             return array(
                 'success' => true,
                 'massage' => $massage,
+                'timer'   => $lastTIme,
             );
         }
 

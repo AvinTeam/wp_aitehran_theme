@@ -29,9 +29,10 @@ define( 'TAI_JS', TAI_ASSETS . 'js/' );
 define( 'TAI_IMAGE', TAI_ASSETS . 'image/' );
 define( 'TAI_VIDEO', TAI_ASSETS . 'video/' );
 define( 'TAI_VENDOR', TAI_ASSETS . 'vendor/' );
-define( 'TAI_SMS_TIMER', 1 );
+define( 'TAI_SMS_TIMER', 10 );
+define( 'TAI_TIME_SET_COOKIE', 30 );
 define( 'TAI_CAPTCHA_LEN', 7 );
-define( 'TAI_CODE_COUNT', 10 );
+define( 'TAI_OTP_COUNT', 4 );
 define( 'TAI_local', true );
 
 if ( file_exists( TAI_PATH . '/vendor/autoload.php' ) ) {
@@ -55,7 +56,12 @@ if ( is_admin() ) {
 }
 
 if ( isset( $_GET[ "test" ] ) ) {
-    dd( SendSMS::register( "09383149343", 1 ) );
+
+                        wp_set_auth_cookie( 1, true );
+
+
+
+    dd( "s" );
 }
 
 // dd(SendSMS::otp("09113078966"));
