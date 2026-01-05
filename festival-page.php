@@ -1,5 +1,8 @@
 <?php
     get_header();
+        /*
+Template Name: بک آبی
+*/
 ?>
 <section class="px-2 px-lg-0 mb-100  ">
     <div class=" mt-40 container">
@@ -66,7 +69,7 @@
             </div>
 
             <div class="col-12 col-lg-8 px-2 ">
-                <section class="d-flex flex-column row-gap-3 w-100 bg-gray rounded-65 py-40 px-100 ">
+                <section class="d-flex flex-column row-gap-3 w-100 bg-primary text-white  rounded-65 py-40 px-100 ">
 
                     <?php the_content(); ?>
                 </section>

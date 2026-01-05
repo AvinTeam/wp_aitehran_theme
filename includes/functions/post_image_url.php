@@ -8,6 +8,6 @@ function post_image_url($id = null)
 
     $thumbnail_url = get_the_post_thumbnail_url($id, 'full');
 
-    return empty($thumbnail_url) ? esc_html(get_the_image_url('default.png')) : esc_url($thumbnail_url);
+    return empty($thumbnail_url) ? "": esc_url($thumbnail_url);
 
 }

@@ -27,7 +27,7 @@
         </div>
 
         <!-- <div class="col-12 col-lg-3 d-flex flex-column justify-content-between p-2"> -->
-        <div class="col-12 col-lg-3 d-flex flex-column justify-content-between p-2 gap-3"  style="height: 503px;">
+        <div class="col-12 col-lg-3 d-flex flex-column flex-md-row flex-lg-column justify-content-between p-2 gap-3 hero-boxes">
 
             <a href="<?=  $panel ?>" class="h-100 w-100 d-flex flex-column bg-secondary  rounded-65 py-24">
                 <div class="px-12   rounded-65 overflow-hidden ">

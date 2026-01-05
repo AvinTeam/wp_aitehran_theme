@@ -43,15 +43,20 @@
                         </div>
                         <div class="row mb-32">
                             <div class="col">
-                                <input type="text" name="mobile" inputmode="numeric" pattern="\d*" placeholder="تلفن تماس" 
+                                <input type="text" name="mobile" inputmode="numeric" pattern="\d*" placeholder="تلفن تماس"
                                     class="form-control form-control-lg bg-black text-white onlyNumbersInput"  required>
                             </div>
                             <div class="col position-relative">
                                 <input type="text" name="captcha" class="form-control form-control-lg bg-black text-white"
                                     placeholder="کد امنیتی" value="<?php echo $captchaArray[ 'word' ] ?? "" ?>" required>
                                     <img src="<?php echo $captchaArray[ 'url' ] ?>"
-                                    class="h-32 position-absolute translate-middle-y"
+                                    class="h-32 d-none d-md-block position-absolute translate-middle-y"
                                     style="left: 20px; top: 50%;">
+                            </div>
+                        </div>
+                        <div class="row mb-32  d-md-none d-block">
+                             <div class="col">
+                                <img src="<?php echo $captchaArray[ 'url' ] ?>" class="w-50 h-48">
                             </div>
                         </div>
 
