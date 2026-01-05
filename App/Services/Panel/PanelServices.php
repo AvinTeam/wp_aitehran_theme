@@ -82,9 +82,6 @@ class PanelServices extends Service {
             }
         }
 
-        if ( empty( $fullNameOld ) && ! empty( $fullName ) ) {
-            SendSMS::register( get_current_user_id(), $fullName );
-        }
 
         if ( ! empty( $fullNameOld ) && empty( $fullName ) ) {
             $fullName = $fullNameOld;
@@ -98,6 +95,12 @@ class PanelServices extends Service {
         update_user_meta( get_current_user_id(), "edu", sanitize_text_field( $request[ 'edu' ] ) );
         update_user_meta( get_current_user_id(), "address", sanitize_text_field( $request[ 'address' ] ) );
         update_user_meta( get_current_user_id(), "addressPost", sanitize_text_field( $request[ 'addressPost' ] ) );
+
+
+
+        if ( empty( $fullNameOld ) && ! empty( $fullName ) ) {
+            SendSMS::register( get_current_user_id(), $fullName );
+        }
 
         return array(
             "massage" => "پروفایل شما با موفقیت بروز شد",

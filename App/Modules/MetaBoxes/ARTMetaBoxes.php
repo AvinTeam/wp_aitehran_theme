@@ -30,6 +30,7 @@ class ARTMetaBoxes extends MetaBoxes {
         $this->art_teem( $post );
         $this->art_year( $post );
         $this->art_ownership( $post );
+        $this->art_documentation( $post );
     }
 
     public function art_file( $post ) {
@@ -52,6 +53,9 @@ class ARTMetaBoxes extends MetaBoxes {
 
         $teem_list = get_post_meta( $post->ID, "_art_teem", true );
 
+
+            $teem_list = is_array( $teem_list ) ? $teem_list : array();
+
         view( 'metaBoxes/art/teem',
             array(
                 'leaderName' => get_user_meta( get_current_user_id(), "fullName", true ),
@@ -65,9 +69,12 @@ class ARTMetaBoxes extends MetaBoxes {
 
         $art_ownership = get_post_meta( $post->ID, "_art_ownership", true );
 
-        if ( ! empty( $art_ownership ) ) {
-            $ownership = absint( $art_ownership ) ? "حقیقی" : "حقوقی  (  $art_ownership  )";
-        }
+            if ( "genuine" != $art_ownership && ! empty( $art_ownership ) ) {
+                        $ownership =  "حقوقی  (  $art_ownership  )";
+
+            } else {
+                $ownership = "حقیقی" ;
+            }
 
         if ( isset( $ownership ) ) {
             view( 'metaBoxes/art/ownership',
@@ -77,6 +84,8 @@ class ARTMetaBoxes extends MetaBoxes {
                 ) );
         }
     }
+
+
 
     public function art_year( $post ) {
 
@@ -95,11 +104,23 @@ class ARTMetaBoxes extends MetaBoxes {
 
         $documentation = get_post_meta( $post->ID, "_art_documentation", true );
 
-        if ( is_array( $documentation ) ) {
-            foreach ( $documentation as $document ) {
-                $document_list[  ] = wp_get_attachment_url( absint( $document ) );
-            }
-        }
+
+
+
+            
+
+                                    if ( ! empty( $documentation ) ) {
+                                        foreach ( explode( ",", $documentation ) as $document ){
+
+                                            $file_url = wp_get_attachment_url( $document );
+
+                                            if ( ! $file_url ) {continue;}
+
+                                            $document_list[] = $file_url;
+}
+}
+                                        
+
 
         if ( $documentation ) {
             view( 'metaBoxes/art/documentation',

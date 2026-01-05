@@ -1,5 +1,7 @@
 <?php
 
+    $game = get_option( 'tai_game_settings', array() );
+
     if ( 0 === $show_first && isset( $_GET[ 'tracking_code' ] ) && ! empty( $_GET[ 'tracking_code' ] ) ):
 
 ?>
@@ -30,15 +32,7 @@
     </div>
 </section>
 
-
-
 <?php else: ?>
-
-
-
-
-
-
 
 
 <section class="px-2 px-lg-0 mb-100  ">
@@ -90,10 +84,10 @@
                                         if ( "selected" == $key ) {continue;}
 
                                     ?>
-                                <option value="<?php echo $item->term_id ?>"
-                                    <?php echo selected( $item->term_id, $formats_art[ "selected" ] ?? 'format_art' ) ?>>
-                                    <?php echo $item->name ?></option>
-                                <?php endforeach; ?>
+	                                <option value="<?php echo $item->term_id ?>"
+	                                    <?php echo selected( $item->term_id, $formats_art[ "selected" ] ?? 'format_art' ) ?>>
+	                                    <?php echo $item->name ?></option>
+	                                <?php endforeach; ?>
                             </select>
                         </div>
 
@@ -124,10 +118,10 @@
                                         if ( "selected" == $key ) {continue;}
 
                                     ?>
-                                <option value="<?php echo $item->term_id ?>"
-                                    <?php echo selected( $item->term_id, $subjects_art[ "selected" ] ?? 'subject_art' ) ?>>
-                                    <?php echo $item->name ?></option>
-                                <?php endforeach; ?>
+	                                <option value="<?php echo $item->term_id ?>"
+	                                    <?php echo selected( $item->term_id, $subjects_art[ "selected" ] ?? 'subject_art' ) ?>>
+	                                    <?php echo $item->name ?></option>
+	                                <?php endforeach; ?>
                             </select>
                         </div>
 
@@ -146,7 +140,7 @@
                                     for ( $i = 1405; $i > 1379; --$i ):
 
                                 ?>
-                                <option value="<?php echo $i ?>" <?php echo selected( $i, $year ) ?>>
+                                <option value="<?php echo $i ?>"<?php echo selected( $i, $year ) ?>>
                                     <?php echo $i ?></option>
                                 <?php endfor; ?>
                             </select>
@@ -194,7 +188,7 @@
                             <div class="w-100">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="ownership" id="ownership_genuine"
-                                        value="genuine" <?php echo checked( $ownership, "genuine" ) ?>>
+                                        value="genuine"                                                        <?php echo checked( $ownership, "genuine" ) ?>>
                                     <label class="form-check-label" for="ownership_genuine">
                                         حقیقی
                                     </label>
@@ -203,7 +197,7 @@
 
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="ownership" id="ownership_legal"
-                                        value="legal" <?php echo checked( $ownership, "legal" ) ?>>
+                                        value="legal"                                                      <?php echo checked( $ownership, "legal" ) ?>>
                                     <label class="form-check-label" for="ownership_legal">
                                         حقوقی
                                     </label>
@@ -243,18 +237,18 @@
 
                                         ?>
 
-                                <div data-id="<?php echo $document ?>"
-                                    class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2 image-document">
+	                                <div data-id="<?php echo $document ?>"
+	                                    class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2 image-document">
 
-                                    <a href="<?php echo esc_url( $file_url ) ?>" type="button"
-                                        class="btn btn-warning rounded-32 w-100 p-2 f-24 fw-bold">
-                                        <?php echo basename( $file_url ) ?>
-                                    </a>
+	                                    <a href="<?php echo esc_url( $file_url ) ?>" type="button"
+	                                        class="btn btn-warning rounded-32 w-100 p-2 f-24 fw-bold">
+	                                        <?php echo basename( $file_url ) ?>
+	                                    </a>
 
-                                    <button id="remove-document" type="button" class="btn btn-danger">حذف</button>
-                                </div>
+	                                    <button id="remove-document" type="button" class="btn btn-danger">حذف</button>
+	                                </div>
 
-                                <?php
+	                                <?php
                                         endforeach;
                                         }
 
@@ -298,6 +292,8 @@
                         </div>
 
 
+                        <?php
+                        if ( $game[ 'status' ] ?? false ): ?>
 
                         <?php wp_nonce_field( config( 'app.key' ) . '_art-info' ); ?>
 
@@ -311,6 +307,7 @@
                             </button>
                         </div>
 
+                        <?php endif; ?>
 
                     </section>
                 </form>

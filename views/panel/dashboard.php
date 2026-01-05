@@ -26,7 +26,7 @@
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2 ">
                         <div class="">
-                            <label for="groupName" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام گروه :
+                            <label for="groupName" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام گروه<span class="text-danger">*</span> :
                             </label>
                         </div>
                         <div class="w-100">
@@ -38,7 +38,7 @@
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="fullName" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام
-                                خانوادگی مسئول گروه :
+                                خانوادگی مسئول گروه<span class="text-danger">*</span> :
                             </label>
                         </div>
                         <div class="w-100">
@@ -50,7 +50,7 @@
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="parent" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام
-                                پدرِ مسئول گروه :
+                                پدرِ مسئول گروه<span class="text-danger">*</span> :
                             </label>
                         </div>
                         <div class="w-100">
@@ -62,7 +62,7 @@
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="nationalCode" class="col-form-label text-nowrap p-2 f-24 fw-bold">کد ملی
-                                مسئول گروه : </label>
+                                مسئول گروه<span class="text-danger">*</span> :</label>
                         </div>
                         <div class="w-100">
                             <input type="text" id="nationalCode" value="<?php echo $nationalCode ?>"
@@ -73,7 +73,7 @@
                     <div class=" d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="birthday" class="col-form-label text-nowrap p-2 f-24 fw-bold">تاریخ تولد مسئول
-                                گروه : </label>
+                                گروه<span class="text-danger">*</span> :</label>
                         </div>
                         <div class="w-100">
 
@@ -99,8 +99,7 @@
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="address" class="col-form-label text-nowrap p-2 f-24 fw-bold">محل
-                                سکونت مسئول گروه
-                                : </label>
+                                سکونت مسئول گروه<span class="text-danger">*</span> : </label>
                         </div>
                         <div class="w-100">
                             <input type="text" id="address" value="<?php echo $address ?>"
@@ -110,7 +109,7 @@
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="addressPost" class="col-form-label text-nowrap p-2 f-24 fw-bold">آدرس پستی :
+                            <label for="addressPost" class="col-form-label text-nowrap p-2 f-24 fw-bold">آدرس پستی<span class="text-danger">*</span> :
                             </label>
                         </div>
                         <div class="w-100">

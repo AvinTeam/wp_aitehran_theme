@@ -46,6 +46,12 @@ jQuery(document).ready(function ($) {
 
         $formDiv = "form#art_info";
 
+        if (!tai_js.game_status) {
+            setToastDanger("فرصت ارسال یا ویرایش آثار به اتمام رسید است");
+            return;
+
+        }
+
 
         const format_art = $($formDiv + " select[name=format_art]").val();
         if (!Number(format_art)) {

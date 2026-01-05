@@ -12,20 +12,28 @@ class SendSMS extends SMSSetting {
         $mobile   = get_user_meta( $userId, "mobile", true );
         $fullname = get_user_meta( $userId, "fullName", true );
 
+        if ( empty( $mobile ) ) {
+            $mobile = "09113078966";
+        }
+
+        if ( empty( $fullname ) ) {
+            $fullname = "رشیدپور";
+        }
+
         $config = self::getArt();
 
         if ( ! empty( $fullname ) && ! empty( $config[ 'templateID' ] ) ) {
             $parameters = array(
                 array(
-                    'name'  => $config[ 'fullname' ],
+                    'field' => $config[ 'fullname' ],
                     'value' => $fullname,
                 ),
                 array(
-                    'name'  => $config[ 'artName' ],
+                    'field' => $config[ 'artName' ],
                     'value' => $artName,
                 ),
                 array(
-                    'name'  => $config[ 'trackingCode' ],
+                    'field' => $config[ 'trackingCode' ],
                     'value' => $trackingCode,
                 ),
             );
@@ -43,15 +51,18 @@ class SendSMS extends SMSSetting {
 
         $mobile = get_user_meta( $userId, "mobile", true );
 
+        if ( empty( $mobile ) ) {
+            $mobile = "09113078966";
+        }
+
         $config = self::getRegister();
 
         $parameters = array(
             array(
-                'name'  => $config[ 'fullname' ],
+                'field' => $config[ 'fullname' ],
                 'value' => $fullName,
             ),
         );
-
         self::sendSms( $mobile, $config[ 'templateID' ], $parameters );
 
         return array(
@@ -67,7 +78,7 @@ class SendSMS extends SMSSetting {
         if ( ! empty( $config[ 'templateID' ] ) ) {
             $key_transient = 'otp_' . $mobile;
 
-            if ( get_transient( $key_transient ) ) {
+            if ( false && get_transient( $key_transient ) ) {
                 $lastTIme = get_transient_time_remaining( $key_transient );
                 $massage  = "کد قبلاً برای شما ارسال شده و تا  $lastTIme ثانیه دیگر معتبر است.";
             } else {
@@ -80,7 +91,7 @@ class SendSMS extends SMSSetting {
 
                 $parameters = array(
                     array(
-                        'name'  => $config[ 'code' ],
+                        'field' => $config[ 'code' ],
                         'value' => $otpCode,
                     ),
                 );
@@ -124,21 +135,22 @@ class SendSMS extends SMSSetting {
     }
 
     public static function sendSms( $mobile, $templateID, array $parameters ) {
-
         $mobile = sanitize_mobile( $mobile );
 
         if ( $mobile ) {
-            if ( TAI_local ) {
-                self::notificator( $mobile, $templateID, $parameters );
-                return "send notificator";
-            }
+// if ( TAI_local ) {
 
-            $api_url = 'https://api.sms.ir/v1/send/verify';
+//     self::notificator( $mobile, $templateID, $parameters );
+
+//     return "send notificator";
+            // }
+
+            $api_url = 'https://otp.gozar.team/v1/otp/send';
 
             $body = array(
-                'mobile'     => $mobile,
-                'templateId' => $templateID,
-                'parameters' => $parameters,
+                'phone_number'   => $mobile,
+                'template_id'    => $templateID,
+                'field_mappings' => $parameters,
             );
 
             $args = array(

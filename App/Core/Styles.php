@@ -94,6 +94,8 @@ class Styles {
             );
         }
 
+                $game = get_option( 'tai_game_settings', array() );
+
 // tai_js.code_count
         wp_localize_script(
             'tai_js',
@@ -103,6 +105,7 @@ class Styles {
                 'sms_timer'   => TAI_SMS_TIMER,
                 'captcha_len' => TAI_CAPTCHA_LEN,
                 'code_count'  => TAI_OTP_COUNT,
+                'game_status'  => $game[ 'status' ] ?? false,
             )
         );
     }

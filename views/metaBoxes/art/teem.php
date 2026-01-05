@@ -19,9 +19,9 @@ if ( $teem_list ): ?>
         <ol>
             <?php
 
-            foreach ( $teem_list as $key => $teem ) {?>
+            foreach ( $teem_list as $teem ) {?>
 
-            <li><?php echo $teem[ 'name' ] ?></li>
+            <li><?php echo $teem?></li>
             <?php }
 
             ?>

@@ -18,7 +18,10 @@ class Init {
      */
     public function init(): void {
 
-        if ( isset( $_POST[ 'sendForm' ] ) && ! empty( $_POST[ 'sendForm' ] ) ) {
+            $game = get_option( 'tai_game_settings', array() );
+
+
+        if ( isset( $_POST[ 'sendForm' ] ) && ! empty( $_POST[ 'sendForm' ] ) && ($game[ 'status' ] ?? false) ) {
             if ( "artInfo" == $_POST[ 'sendForm' ] ) {
                 if ( ! isset( $_POST[ '_wpnonce' ] ) || ! wp_verify_nonce( $_POST[ '_wpnonce' ], config( 'app.key' ) . '_art-info' ) ) {
                     setAlert( false, "مشکلی در ثبت اثر پیش آمده لطفا دوباره ارسال کنید." );

@@ -511,7 +511,7 @@ jQuery(document).ready(function ($) {
 
                     if (result.success) {
 
-                        // window.location.href = result.data;
+                        window.location.href = result.data;
 
 
                     } else {
@@ -523,7 +523,9 @@ jQuery(document).ready(function ($) {
                     endLoading();
 
                 },
-                error: function () {
+                error: function (e) {
+                                        console.log(e);
+
                     setToastDanger("ثبت اطلاعات شما به خطا خورده است دوباره تلاش  کنید");
 
                     console.error("به خطا خورده");

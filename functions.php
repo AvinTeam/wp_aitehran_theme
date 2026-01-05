@@ -6,6 +6,7 @@ use TAI\App\Core\FunctionAutoloader;
 use TAI\App\Core\Init;
 use TAI\App\Core\Install;
 use TAI\App\Core\Renders;
+use TAI\App\Core\SendSMS;
 use TAI\App\Core\Styles;
 
 ( defined( 'ABSPATH' ) ) || exit;
@@ -59,14 +60,6 @@ if ( is_admin() ) {
 }
 
 if ( isset( $_GET[ "test" ] ) ) {
-    $captcha = new Captcha();
-
-    $image = $captcha->create_image();
-    dd(
-        $image,
-        $image[ 'key' ],
-        $captcha->decryptURL( $image[ 'key' ] )
-    );
 
     exit;
 }

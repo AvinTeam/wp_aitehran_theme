@@ -25,6 +25,8 @@ class AddTeemAJAX extends AJAX {
 
         $controller = new PanelController();
 
+        
+
         if ( $_POST[ 'username' ] ) {
             $create = $controller->updateTeem( $_POST );
         } else {
