@@ -103,8 +103,6 @@ jQuery(document).ready(function ($) {
     $('#subject_artchecklist input').attr('type', 'radio');
 
 
-
-
     var background_uploader;
     $('.select_images').click(function (e) {
         e.preventDefault();
@@ -293,6 +291,37 @@ jQuery(document).ready(function ($) {
 
     });
 
+
+
+          let frame;
+
+            $(".upload-category-image").on("click", function(e){
+                e.preventDefault();
+
+                if ( frame ) {
+                    frame.open();
+                    return;
+                }
+
+                frame = wp.media({
+                    title: "انتخاب تصویر دسته‌بندی",
+                    button: { text: "انتخاب" },
+                    multiple: false
+                });
+
+                frame.on("select", function(){
+                    const attachment = frame.state().get("selection").first().toJSON();
+                    $("#category-image-id").val(attachment.id);
+                    $("#category-image-preview").html("<img src=\'" + attachment.sizes.thumbnail.url + "\' style=\'max-width:150px;\'>");
+                });
+
+                frame.open();
+            });
+
+            $(".remove-category-image").on("click", function(){
+                $("#category-image-id").val("");
+                $("#category-image-preview").html("");
+            });
 
 
 

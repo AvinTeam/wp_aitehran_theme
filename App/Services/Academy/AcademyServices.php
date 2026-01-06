@@ -37,8 +37,10 @@ class AcademyServices extends Service {
             wp_reset_postdata();
         endif;
 
+
+
         return array(
-            'items' => $allPost ?? array(),
+            'items'        => $allPost ?? array(),
         );
     }
 

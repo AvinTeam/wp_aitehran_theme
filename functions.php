@@ -8,6 +8,7 @@ use TAI\App\Core\Renders;
 use TAI\App\Core\SendSMS;
 use TAI\App\Core\Styles;
 use TAI\App\EditColumn\UserEditColumn;
+use TAI\App\EditForms\CategoryTaxonomyEditForms;
 use TAI\App\EditForms\UserEditForms;
 
 ( defined( 'ABSPATH' ) ) || exit;
@@ -15,7 +16,7 @@ use TAI\App\EditForms\UserEditForms;
 // header( 'Content-Type: text/html; charset=utf-8' );
 date_default_timezone_set( 'Asia/Tehran' );
 
-define( 'TAI_VERSION', '0.0.33' );
+define( 'TAI_VERSION', '0.0.36' );
 
 define( 'TAI_PATH', get_template_directory() . "/" );
 define( 'TAI_INCLUDES', TAI_PATH . 'includes/' );
@@ -55,6 +56,7 @@ new Styles();
 new Renders();
 new UserEditColumn();
 new UserEditForms();
+new CategoryTaxonomyEditForms();
 
 // new TVRemotes;
 
