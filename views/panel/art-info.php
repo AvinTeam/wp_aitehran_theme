@@ -42,7 +42,7 @@
                 <div
                     class="bg-secondary d-flex flex-column justify-content-center align-items-center rounded-65  px-40 py-24 mb-3">
                     <div class="rounded-32 w-100 text-white text-center p-16 mb-4 f-32 fw-bold">
-                        آموزش‌های کاربردی
+                       ثبت نام و ارسال اثر
                     </div>
 
                     <div>

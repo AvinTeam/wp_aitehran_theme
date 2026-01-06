@@ -519,17 +519,17 @@ jQuery(document).ready(function ($) {
 
         const address = $($formDiv + " input#address").val();
 
-        if (!address && is_true) {
-            is_true = false;
-            setToastDanger("محل سکونت مسئول گروه را وارد کنید");
-        }
+        // if (!address && is_true) {
+        //     is_true = false;
+        //     setToastDanger("محل سکونت مسئول گروه را وارد کنید");
+        // }
 
         const addressPost = $($formDiv + " input#addressPost").val();
 
-        if (!addressPost && is_true) {
-            is_true = false;
-            setToastDanger("آدرس پستی را وارد کنید");
-        }
+        // if (!addressPost && is_true) {
+        //     is_true = false;
+        //     setToastDanger("آدرس پستی را وارد کنید");
+        // }
 
 
         if (is_true) {

@@ -1,6 +1,6 @@
 <?php
 
- $game = get_option( 'tai_game_settings', array() );
+    $game = get_option( 'tai_game_settings', array() );
 ?>
 
 <section class="px-2 px-lg-0 mb-100  ">
@@ -10,7 +10,7 @@
                 <div
                     class="bg-secondary d-flex flex-column justify-content-center align-items-center rounded-65  px-40 py-24 mb-3">
                     <div class="rounded-32 w-100 text-white text-center p-16 mb-4 f-32 fw-bold">
-                        آموزش‌های کاربردی
+                       ثبت نام و ارسال اثر
                     </div>
 
                     <div>
@@ -33,7 +33,7 @@
 
                     <?php
 
-                    if ( $pagination[ 'total_posts' ] < 10  && ( $game[ 'status' ] ?? false) ): ?>
+                    if ( $pagination[ 'total_posts' ] < 10 && ( $game[ 'status' ] ?? false ) ): ?>
                     <a href="<?php echo home_url( "/panel/art-info" ) ?>"
                         class="btn btn-warning rounded-32 px-24 py-2 f-24 fw-bold">
                         ثبت اثر جدید
@@ -42,10 +42,15 @@
 
                 </div>
                 <?php getAlert(); ?>
-                <section class="d-flex flex-column row-gap-3 w-100 bg-gray rounded-65 py-40 px-100 ">
+                <section class="d-flex flex-column row-gap-3 w-100 bg-gray rounded-65 py-40 px-100  ">
                     <div class="d-flex flex-column justify-content-center align-items-center">
 
                         <?php
+
+                            if ( count( $items ) == 0 ) {
+                                echo '<p class="w-100  text-center ">شما اثری ثبت نکرده اید</p>';
+                            }
+
                             $m = 1;
 
                         foreach ( $items as $item ): ?>
@@ -55,10 +60,10 @@
                             <div>
                                 <span class="text-secondary me-2"><?php echo $m ?>-</span><?php echo $item[ 'title' ] ?>
                             </div>
-                                <span style="color: #5A5A5A; font-size: 14px;">
+                            <span style="color: #5A5A5A; font-size: 14px;">
                                 <?php echo sprintf( "قالب اثر : %s", $item[ 'format' ] ) ?>
 
-                                </span>
+                            </span>
 
 
 

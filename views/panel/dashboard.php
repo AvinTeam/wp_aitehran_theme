@@ -7,7 +7,7 @@
 
 
                     <div class="rounded-32 w-100 text-white text-center p-16 mb-4 f-32 fw-bold">
-                        آموزش‌های کاربردی
+                        ثبت نام و ارسال اثر
                     </div>
 
                     <div>
@@ -99,7 +99,7 @@
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="address" class="col-form-label text-nowrap p-2 f-24 fw-bold">محل
-                                سکونت مسئول گروه<span class="text-danger">*</span> : </label>
+                                سکونت مسئول گروه : </label>
                         </div>
                         <div class="w-100">
                             <input type="text" id="address" value="<?php echo $address ?>"
@@ -109,7 +109,7 @@
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="addressPost" class="col-form-label text-nowrap p-2 f-24 fw-bold">آدرس پستی<span class="text-danger">*</span> :
+                            <label for="addressPost" class="col-form-label text-nowrap p-2 f-24 fw-bold">آدرس پستی :
                             </label>
                         </div>
                         <div class="w-100">
