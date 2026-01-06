@@ -31,22 +31,21 @@ class SearchController extends Controller
 
     }
 
-    public function header()
-    {
-
-        view('search/header',
-            $this->services->header()
-        );
-    }
-
-    public function results()
-    {
-        $this->services->results();
-    }
-
     public function pagination()
     {
         $this->services->pagination();
+
+    }
+
+    public function sidebar_archive() {
+
+        view( 'search/sidebar',
+            $this->services->sidebar() );
+
+    }
+    public function archive() {
+        view( 'search/content',
+            array( "items" => $this->services->archive() ) );
 
     }
 

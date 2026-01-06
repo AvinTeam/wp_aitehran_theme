@@ -16,9 +16,9 @@ class AcademyMetaBoxes extends MetaBoxes {
 
         add_meta_box(
             'tai_academy_video',
-            'ویدئو آیه ها',
+            'ویدئو',
             array( $this, 'video' ),
-            'academy',
+            ['academy' , 'post'],
             'normal',
             'high',
         );

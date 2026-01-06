@@ -14,9 +14,8 @@ class SearchServices extends Service
 {
     use JDF;
 
-    private array $types     = [ 'news', 'ayeh', MediaEnums::VIDEO, MediaEnums::SOUND ];
     private int $total_items = 0;
-    private int $par_page    = 30;
+    private int $par_page    = 12;
     private int $paged       = 1;
 
     private $result = [  ];
@@ -24,36 +23,12 @@ class SearchServices extends Service
     public function __construct(array $result)
     {
 
-        if (! isset($result[ 'type' ]) || ! in_array($result[ 'type' ], $this->types)) {
-
-            throw new Exception("پویش یافت نشد", 404);
-        }
-
         $this->result = $result;
 
         $this->paged = (isset($this->result[ 'page' ]) && absint($this->result[ 'page' ]) >= 1) ? absint($this->result[ 'page' ]) : 1;
 
     }
 
-    public function header()
-    {
-        return [
-            'title' => "نتایج جستجو برای: " . get_search_query(),
-         ];
-    }
-
-    public function results()
-    {
-        $result = $this->result;
-        if ($result[ 'type' ] == 'news') {
-            $this->news();
-        } elseif ($result[ 'type' ] == 'ayeh') {
-            $this->ayeh();
-        } elseif (in_array($result[ 'type' ], [ MediaEnums::VIDEO, MediaEnums::SOUND ])) {
-            $this->media($result[ 'type' ]);
-        }
-
-    }
 
     public function pagination()
     {
@@ -62,139 +37,111 @@ class SearchServices extends Service
         generatePagination($url, $this->par_page, $this->total_items, $this->paged);
 
     }
+    
+    public function sidebar() {
 
-    public function news()
-    {
-
-        $this->par_page = 15;
-
-        $args = [
+        $args = array(
             'post_type'      => 'post',
-            'posts_per_page' => $this->par_page,
-            'paged'          => $this->paged,
-            'fields'         => 'ids',
-            's'              => get_search_query(),
-         ];
+            'category_name'  => "news",
+            'posts_per_page' => 4,
+            'post_status'    => 'publish',
+            'orderby'        => 'rand',
 
-        $query = new WP_Query($args);
+        );
 
-        $total_posts       = $query->found_posts;
-        $this->total_items = $total_posts;
+        $query = new WP_Query( $args );
 
-        if ($query->have_posts()) {
+        if ( $query->have_posts() ):
 
-            while ($query->have_posts()) {
-                $query->the_post();
+            while ( $query->have_posts() ): $query->the_post();
+                $allPost[  ] = array(
+                    "title" => get_the_title(),
+                    "image" => post_image_url(),
+                    "link"  => get_permalink(),
+                );
+            endwhile;
 
-                $id       = get_the_ID();
-                $news[  ] = [
-                    'title'   => get_the_title($id),
-                    'image'   => post_image_url($id),
-                    'side'    => get_post_meta($id, '_comment_side', true),
-                    'content' => get_the_excerpt($id),
-                    'link'    => get_permalink($id),
-                 ];
+            wp_reset_postdata();
+        endif;
 
+        return array(
+            'items' => $allPost ?? array(),
+        );
+    }
+
+    public function get_video() {
+        if ( is_user_logged_in() ) {
+            $user_meta = get_user_meta( get_current_user_id(), "post_see", true );
+
+            $user_meta = is_array( $user_meta ) ? $user_meta : array();
+
+            if ( ! in_array( get_the_ID(), $user_meta ) ) {
+                $user_meta[  ] = get_the_ID();
+                update_user_meta( get_current_user_id(), "post_see", $user_meta );
             }
         }
 
-        wp_reset_postdata();
+        $video = get_post_meta( get_the_ID(), '_post_video', true );
 
-        view('search/news',
-            [
-                'newsList' => $news ?? [  ],
-             ]);
+        $image = absint( $video[ 'image' ] ?? 0 );
 
+        $imageUrl = $image ? esc_url( wp_get_attachment_image_url( $image, 'full' ) ) : '';
+
+        if ( isset( $video[ 'video' ] ) ) {
+            $array = array(
+                'link'   => $video[ 'video' ],
+                'poster' => $imageUrl,
+            );
+        }
+
+        return $array ?? null;
     }
 
-    public function ayeh()
-    {
+    public function archive() {
 
-        $this->par_page = 15;
+        $user_see = array();
 
-        $args = [
-            'post_type'      => 'content_ayeh',
+        if ( is_user_logged_in() ) {
+            $user_meta = get_user_meta( get_current_user_id(), "post_see", true );
+
+            $user_see = is_array( $user_meta ) ? $user_meta : array();
+        }
+
+        $args = array(
+            'post_type'      => 'post',
             'posts_per_page' => $this->par_page,
             'paged'          => $this->paged,
-            'fields'         => 'ids',
+            'fields'         => 'ids',            
             's'              => get_search_query(),
-         ];
+        );
 
-        $query = new WP_Query($args);
+        $query = new WP_Query( $args );
 
         $total_posts       = $query->found_posts;
         $this->total_items = $total_posts;
 
-        if ($query->have_posts()) {
-
-            while ($query->have_posts()) {
+        if ( $query->have_posts() ) {
+            while ( $query->have_posts() ) {
+                
                 $query->the_post();
 
                 $id = get_the_ID();
 
-                $surah = get_post_meta($id, '_ayeh_surah', true);
-                $verse = get_post_meta($id, '_ayeh_verse', true);
+                $video = get_post_meta( get_the_ID(), '_post_video', true );
 
-                $list[  ] = [
-                    'title'    => get_the_title($id),
-                    'ayeh'     => get_post_meta($id, '_ayeh_ayeh', true),
-                    'tarjomeh' => get_post_meta($id, '_ayeh_tarjomeh', true),
-                    'surah'    => "سوره $surah آیه $verse",
-                    'link'     => get_the_permalink($id),
-                 ];
-
+                $posts[  ] = array(
+                    "title"  => get_the_title( $id ),
+                    "image"  => post_image_url( $id ),
+                    "link"   => get_permalink( $id ),
+                    "time"   => ( isset( $video[ 'time' ] ) && ! empty( $video[ 'time' ] ) ) ? $video[ 'time' ] : "00:00",
+                    "is_see" => in_array( $id, $user_see ),
+                );
             }
         }
 
         wp_reset_postdata();
-
-        view('ayeh/taxonomy/List', [
-            'list' => $list ?? [  ],
-         ]);
-
+        return $posts ?? array();
     }
 
-    public function media($type)
-    {
-
-        $this->par_page = 15;
-
-        $like = "%" . sanitize_text_field(get_search_query()) . "%";
-
-        $medias =
-        Media::all()
-            ->orWhere('surah', 'LIKE', $like)
-            ->orWhere('option', 'LIKE', $like)
-            ->toArray();
-
-        foreach ($medias as $media) {
-
-            if ($media[ 'ayeh_type' ] != $type) {continue;}
-
-            $term = get_term_by('id', absint(($media[ 'campaign_id' ] ?? 0)), 'cat_ayeh');
-
-            $array = [
-                'campaign_link'  => get_term_link(absint(($media[ 'campaign_id' ]) ?? 0)),
-                'campaign_title' => $term ? $term->name : '',
-                'surah'          => $media[ 'surah' ] . " " . $media[ 'verse' ],
-                'surah_link'     => get_permalink($media[ 'ayeh_id' ]),
-             ];
-
-            $option = unserialize($media[ 'option' ]);
-
-            $array[ 'image' ] = get_the_image_url_by_id(absint($option[ 'image' ]));
-            $array[ 'title' ] = $option[ 'title' ] ?? '';
-            $array[ 'link' ]  = $option[ 'link' ] ?? '';
-
-            $media_list[  ] = $array;
-
-        }
-
-        view('search/media', [
-            'mediaType'  => $type,
-            'media_list' => $media_list ?? [  ],
-         ]);
-
-    }
 
 }

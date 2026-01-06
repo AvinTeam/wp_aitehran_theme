@@ -7,7 +7,7 @@
                 foreach ( $items ?? array() as $post ):
             ?>
         <div class="p-1">
-            <div class="d-flex flex-column justify-content-center align-items-center
+            <div class="d-flex flex-column justify-content-center align-items-center w-100
                 <?php echo $post[ "is_see" ] ? "bg-primary" : "bg-black" ?> ">
                 <a href="<?php echo $post[ "link" ] ?>">
                     <img src="<?php echo $post[ "image" ] ?>" alt="<?php echo $post[ "title" ] ?>"

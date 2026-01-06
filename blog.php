@@ -16,7 +16,7 @@ $controller = new BlogController(($_GET ?? [  ]));
             </div>
 
             <div class="col-12 col-lg-8 px-2 h-auto ">
-                <div class="bg-gray w-100  rounded-65 pt-100 px-40 pb-40 ">
+                <div class="bg-gray w-100  rounded-65 pt-64 px-40 pb-40 ">
 
                 
                 <?php $controller->archive(); ?>
