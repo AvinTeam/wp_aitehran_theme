@@ -1,7 +1,6 @@
 <?php
 
 use TAI\App\Core\Accesses;
-use TAI\App\Core\Captcha;
 use TAI\App\Core\FunctionAutoloader;
 use TAI\App\Core\Init;
 use TAI\App\Core\Install;
@@ -16,7 +15,7 @@ use TAI\App\EditForms\UserEditForms;
 // header( 'Content-Type: text/html; charset=utf-8' );
 date_default_timezone_set( 'Asia/Tehran' );
 
-define( 'TAI_VERSION', '0.0.17' );
+define( 'TAI_VERSION', '0.0.27' );
 
 define( 'TAI_PATH', get_template_directory() . "/" );
 define( 'TAI_INCLUDES', TAI_PATH . 'includes/' );
@@ -39,15 +38,13 @@ define( 'TAI_SMS_TIMER', 1 );
 define( 'TAI_TIME_SET_COOKIE', 30 );
 define( 'TAI_CAPTCHA_LEN', 5 );
 define( 'TAI_OTP_COUNT', 4 );
-define( 'TAI_local', $_SERVER[ 'HTTP_HOST' ] == "localhost:85" ? true : false );
-
-
+define( 'TAI_local', "localhost:85" == $_SERVER[ 'HTTP_HOST' ] ? true : false );
 
 if ( file_exists( TAI_PATH . '/vendor/autoload.php' ) ) {
     require_once TAI_PATH . '/vendor/autoload.php';
 }
 
-flush_rewrite_rules();
+// flush_rewrite_rules();
 
 // require_once TAI_INCLUDES . '/started.php';
 new FunctionAutoloader();

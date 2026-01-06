@@ -17,7 +17,6 @@ class UserEditForms {
         add_action( 'user_new_form', array( $this, "dsl_user_inputs" ) );
         add_action( 'edit_user_profile_update', array( $this, "dsl_update_user" ) );
         add_action( 'personal_options_update', array( $this, "dsl_update_user" ) );
-        add_action( 'user_register', array( $this, "dsl_update_user" ) );
     }
 
     public function dsl_user_inputs( $user ) {
@@ -84,6 +83,7 @@ class UserEditForms {
 
         if ( isset( $_POST[ 'nationalCode' ] ) ) {
             $nationalCode = $_POST[ 'nationalCode' ];
+
             if ( ! national_code( $nationalCode ) ) {
                 $this->error( "کد ملی معتبر نیست از کد ملی درست استفاده نمایید" );
                 exit;

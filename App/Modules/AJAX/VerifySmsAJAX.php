@@ -3,7 +3,6 @@ namespace TAI\App\Modules\AJAX;
 
 use TAI\App\Core\AJAX;
 use WP_User;
-use WP_User_Query;
 
 ( defined( 'ABSPATH' ) ) || exit;
 
@@ -40,15 +39,9 @@ class VerifySmsAJAX extends AJAX {
 
             delete_transient( 'otp_' . $mobile );
 
-            $user_query = new WP_User_Query( array(
-                'meta_key'   => 'mobile',
-                'meta_value' => $mobile,
-                'number'     => 1,
-            ) );
+            $user = get_user_by( 'login', $mobile );
 
-            if ( ! empty( $user_query->get_results() ) ) {
-                $user = $user_query->get_results()[ 0 ];
-
+            if ( $user ) {
                 wp_set_current_user( $user->ID );
                 wp_set_auth_cookie( $user->ID, true );
 

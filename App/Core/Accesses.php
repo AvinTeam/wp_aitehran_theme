@@ -68,11 +68,9 @@ class Accesses {
             return $search;
         }
 
-        // دریافت عبارت جستجو و ایجاد عبارت LIKE ایمن برای استفاده در کوئری
         $search_term = $wp_query->query_vars[ 's' ];
         $like        = '%' . $wpdb->esc_like( $search_term ) . '%';
 
-        // ساخت یک کوئری سفارشی که عنوان، محتوا و متا را جستجو کند
         $search = $wpdb->prepare( " AND (
         ({$wpdb->posts}.post_title LIKE %s)
         OR ({$wpdb->posts}.post_content LIKE %s)
