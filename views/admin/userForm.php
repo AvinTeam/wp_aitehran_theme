@@ -41,7 +41,7 @@
 
                     <option <?=selected(get_current_user_id(), $user_leader)?> value="<?=get_current_user_id()?>">
                         <?=$user_is_admin->display_name?> </option>
-                    <?php foreach ($mat_leader_option as $key => $value): ?>
+                    <?php foreach ($mat_leader_option??[] as $key => $value): ?>
                     <option <?=selected($value->ID, $user_leader)?> value="<?=$value->ID?>"><?=$value->display_name?>
                     </option>
                     <?php endforeach;?>

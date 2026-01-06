@@ -13,7 +13,7 @@
                 foreach ( $items as $item ): ?>
                 <div class="swiper-slide">
                     <div class="d-flex flex-row justify-content-center p-24"
-                        style="background-color:                                                                                                                                                                                                                                                                                                                                                                                                                                              <?php echo $color; ?>;">
+                        style="background-color:<?php echo $color; ?>; min-height: 195px;">
                         <a href="<?php echo $item[ "link" ] ?>"
                             class="p-2 col-6 d-flex justify-content-center align-items-center">
                             <img src="<?php echo $item[ "image" ] ?>" alt="<?php echo $item[ "title" ] ?>"

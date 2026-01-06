@@ -54,12 +54,12 @@ class HomeServices extends Service {
         );
     }
 
-    public function tai_get_posts_by_category( $category ) {
+    public function tai_get_posts_by_category( $category , $per_page ) {
 
         $args = array(
             'post_type'      => 'post',
             'category_name'  => $category,
-            'posts_per_page' => 10,
+            'posts_per_page' => $per_page,
             'post_status'    => 'publish',
 
         );

@@ -11,7 +11,7 @@
                             class="d-flex flex-column justify-content-center align-items-center bg-black position-relative overflow-hidden rounded-65 ">
                             <a href="<?php echo $item[ "link" ] ?>">
                                 <img src="<?php echo $item[ "image" ] ?>" alt="<?php echo $item[ "title" ] ?>"
-                                    class="w-100 object-fit-cover" style="height: 503px;">
+                                    class="w-100 object-fit-cover">
                             </a>
                             <div class="d-flex flex-column justify-content-center align-items-center row-gap-3 w-100 px-24 position-absolute bottom-0 opacity-75"
                                 style="background-color: #2E3092; height: 105px;">
@@ -27,13 +27,13 @@
         </div>
 
         <!-- <div class="col-12 col-lg-3 d-flex flex-column justify-content-between p-2"> -->
-        <div class="col-12 col-lg-3 d-flex flex-column flex-md-row flex-lg-column justify-content-between p-2 gap-3 hero-boxes">
+        <div class="col-12 col-lg-3 d-flex flex-column flex-md-row flex-lg-column justify-content-between p-2 gap-3">
 
             <a href="<?=  $panel ?>" class="h-100 w-100 d-flex flex-column bg-secondary  rounded-65 py-24">
-                <div class="px-12   rounded-65 overflow-hidden ">
+                <div class="px-12 rounded-65 overflow-hidden ">
 
                     <img src="<?php echo get_the_image_url( 'panel.png' ) ?>"
-                        class="w-100 h-120 object-fit-cover  rounded-65" alt="ثبت نام و ارسال اثر ">
+                        class="w-100" alt="ثبت نام و ارسال اثر ">
                 </div>
                 <span class="text-white w-100 text-center opacity-75 f-32 fw-bold">
                     ثبت نام و ارسال اثر
@@ -45,7 +45,7 @@
                 <div class="px-12   rounded-65 overflow-hidden ">
 
                     <img src="<?php echo get_the_image_url( 'academy.png' ) ?>"
-                        class="w-100 h-120 object-fit-cover  rounded-65" alt="آموزش">
+                        class="w-100" alt="آموزش">
                 </div>
                 <span class="text-secondary w-100 text-center opacity-75 f-32 fw-bold">
                     آموزش
