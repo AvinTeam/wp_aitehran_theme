@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="bg-secondary h-120  px-4 pb-3 d-flex align-items-end">
-                    <a class="btn btn-link fw-bold f-20 text-nowrap" href="#contact_us">ارتباط با ما</a>
+                    <a class="btn btn-link fw-bold f-20 text-nowrap" href="<?php echo home_url( "/panel" )  ?>">ثبت نام</a>
                 </div>
 
             </div>
