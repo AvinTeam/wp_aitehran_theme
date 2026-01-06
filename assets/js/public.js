@@ -432,7 +432,7 @@ jQuery(document).ready(function ($) {
 
         if (!fullName && is_true) {
             is_true = false;
-            setToastDanger("نام خانوادگی مسئول گروه را وارد کنید");
+            setToastDanger("نام و نام خانوادگی مسئول گروه را وارد کنید");
         }
 
 

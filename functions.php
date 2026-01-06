@@ -8,13 +8,15 @@ use TAI\App\Core\Install;
 use TAI\App\Core\Renders;
 use TAI\App\Core\SendSMS;
 use TAI\App\Core\Styles;
+use TAI\App\EditColumn\UserEditColumn;
+use TAI\App\EditForms\UserEditForms;
 
 ( defined( 'ABSPATH' ) ) || exit;
 
-header( 'Content-Type: text/html; charset=utf-8' );
+// header( 'Content-Type: text/html; charset=utf-8' );
 date_default_timezone_set( 'Asia/Tehran' );
 
-define( 'TAI_VERSION', '0.0.1' );
+define( 'TAI_VERSION', '0.0.17' );
 
 define( 'TAI_PATH', get_template_directory() . "/" );
 define( 'TAI_INCLUDES', TAI_PATH . 'includes/' );
@@ -33,7 +35,7 @@ define( 'TAI_IMAGE', TAI_ASSETS . 'image/' );
 define( 'TAI_VIDEO', TAI_ASSETS . 'video/' );
 define( 'TAI_VENDOR', TAI_ASSETS . 'vendor/' );
 
-define( 'TAI_SMS_TIMER', 10 );
+define( 'TAI_SMS_TIMER', 1 );
 define( 'TAI_TIME_SET_COOKIE', 30 );
 define( 'TAI_CAPTCHA_LEN', 5 );
 define( 'TAI_OTP_COUNT', 4 );
@@ -54,6 +56,8 @@ new Accesses();
 new Init();
 new Styles();
 new Renders();
+new UserEditColumn();
+new UserEditForms();
 
 // new TVRemotes;
 

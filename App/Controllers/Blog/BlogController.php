@@ -36,10 +36,10 @@ class BlogController extends Controller
     public function sidebar() {
         view( 'post/single/sidebar' );
     }
-    public function sidebar_archive() {
+    public function sidebar_archive($sidebarTitle = "آرشیو اخبار") {
 
         view( 'post/archive/sidebar',
-            $this->services->sidebar() );
+            $this->services->sidebar($sidebarTitle) );
 
     }
     public function archive() {

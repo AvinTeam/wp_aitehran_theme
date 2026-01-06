@@ -6,7 +6,7 @@
     <?php echo $groupName ?>
 </p>
 <p>
-    <b>نام خانوادگی مسئول گروه</b>
+    <b>نام و نام خانوادگی مسئول گروه</b>
     <?php echo $leaderName ?>
 </p>
 

@@ -1,6 +1,6 @@
 <?php
     get_header();
-        /*
+    /*
 Template Name: بک گراند پرایمری
 */
 ?>
@@ -15,7 +15,7 @@ Template Name: بک گراند پرایمری
                     </div>
 
                     <div>
-                        <img src="<?php echo  get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>" alt=""
+                        <img src="<?php echo get_the_post_thumbnail_url( get_the_ID(), 'full' ); ?>" alt=""
                             class="w-100 object-fit-cover rounded-65  " style="height: 478px;">
                     </div>
                 </div>
@@ -31,35 +31,40 @@ Template Name: بک گراند پرایمری
 
                         <?php
 
+                            $args = array(
+                                'post_type'      => 'post',
+                                'category_name'  => "news",
+                                'posts_per_page' => 4,
+                                'post_status'    => 'publish',
+                                'post__not_in'   => array( get_the_ID() ),
+                                'orderby'        => 'rand',
 
-                                $args = array(
-                                        'post_type'      => 'post',
-                                        'category_name'  => "news",
-                                        'posts_per_page' => 4,
-                                        'post_status'    => 'publish',
-                                        'post__not_in'   => array( get_the_ID() ),
-                                        'orderby'        => 'rand',
-
-                                    );
+                            );
 
                             $query = new WP_Query( $args );
 
                             if ( $query->have_posts() ):
 
-                                while ( $query->have_posts() ): $query->the_post(); ?>
-                        <div
-                            class="w-100 d-flex flex-column justify-content-center align-items-center row-gap-3 bg-primary p-10">
-                            <a href="<?php echo get_permalink()?>"> <img src="<?php echo post_image_url() ?>"
-                                    alt="<?php echo  get_the_title() ?>" class="w-100 h-120 object-fit-cover"> </a>
-                            <a href="<?php echo get_permalink() ?>"
-                                class="btn btn-link f-20 fw-bold "><?php echo  get_the_title()?></a>
+                            while ( $query->have_posts() ): $query->the_post(); ?>
 
-                        </div>
-                        <?php
-                                endwhile;
+		                        <?php if ( ! post_image_url() ) { ?>
+		                        <div
+		                            class="w-100 d-flex flex-column justify-content-center align-items-center row-gap-3 bg-primary p-10">
+		                            <a href="<?php echo get_permalink() ?>"> <img src="<?php echo post_image_url() ?>"
+		                                    alt="<?php echo get_the_title() ?>" class="w-100 h-120 object-fit-cover"> </a>
+		                            <a href="<?php echo get_permalink() ?>"
+		                                class="btn btn-link f-20 fw-bold "><?php echo get_the_title() ?></a>
 
-                                wp_reset_postdata();
-                            endif; ?>
+		                        </div>
+		                        <?php }
+
+                                        ?>
+
+		                        <?php
+                                        endwhile;
+
+                                        wp_reset_postdata();
+                                endif; ?>
                     </div>
                 </div>
             </div>

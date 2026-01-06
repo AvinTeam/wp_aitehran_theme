@@ -55,7 +55,6 @@ if (pageLogin) {
 
             };
 
-        console.log(`action=tai_SendSms&captcha=${captcha}&mobileNumber=${mobile}&captchaData=${captchaData}`);
             xhr.send(`action=tai_SendSms&captcha=${captcha}&mobileNumber=${mobile}&captchaData=${captchaData}`);
 
         } else {
@@ -88,6 +87,8 @@ if (pageLogin) {
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
 
+            console.log(xhr.responseText);
+
             const response = JSON.parse(xhr.responseText);
             endLoading();
 
@@ -101,7 +102,9 @@ if (pageLogin) {
             }
         };
 
+        console.log(`action=tai_verifySms&otpNumber=${verificationCode}&mobileNumber=${mobile}`);
         xhr.send(`action=tai_verifySms&otpNumber=${verificationCode}&mobileNumber=${mobile}`);
+
 
 
     });

@@ -12,7 +12,7 @@ class BlogServices extends Service {
     private $sections        = array();
     private int $total_items = 0;
     private int $paged       = 1;
-    private int $par_page    = 3;
+    private int $par_page    = 12;
 
     public function __construct( array $result ) {
 
@@ -28,7 +28,7 @@ class BlogServices extends Service {
         generatePagination( $url, $this->par_page, $this->total_items, $this->paged );
     }
 
-    public function sidebar() {
+    public function sidebar($sidebarTitle) {
 
         $args = array(
             'post_type'      => 'post',
@@ -55,6 +55,7 @@ class BlogServices extends Service {
         endif;
 
         return array(
+            "sidebar_title" => $sidebarTitle ?? "آرشیو اخبار",
             'items' => $allPost ?? array(),
         );
     }
@@ -97,12 +98,19 @@ class BlogServices extends Service {
             $user_see = is_array( $user_meta ) ? $user_meta : array();
         }
 
+
+
         $args = array(
             'post_type'      => 'post',
             'posts_per_page' => $this->par_page,
             'paged'          => $this->paged,
             'fields'         => 'ids',
         );
+
+        
+        if($term = get_queried_object()){
+            $args["category_name"] =  $term->slug;
+        };
 
         $query = new WP_Query( $args );
 

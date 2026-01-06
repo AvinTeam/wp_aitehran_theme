@@ -82,7 +82,6 @@ class PanelServices extends Service {
             }
         }
 
-
         if ( ! empty( $fullNameOld ) && empty( $fullName ) ) {
             $fullName = $fullNameOld;
         }
@@ -96,7 +95,14 @@ class PanelServices extends Service {
         update_user_meta( get_current_user_id(), "address", sanitize_text_field( $request[ 'address' ] ) );
         update_user_meta( get_current_user_id(), "addressPost", sanitize_text_field( $request[ 'addressPost' ] ) );
 
+        //    $full_name = $first_name . ' ' . $last_name;
 
+        update_user_meta( get_current_user_id(), 'nickname', $fullName );
+
+        wp_update_user( array(
+            'ID'           => get_current_user_id(),
+            'display_name' => $fullName,
+         ) );
 
         if ( empty( $fullNameOld ) && ! empty( $fullName ) ) {
             SendSMS::register( get_current_user_id(), $fullName );

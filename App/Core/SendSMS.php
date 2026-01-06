@@ -11,15 +11,6 @@ class SendSMS extends SMSSetting {
 
         $mobile   = get_user_meta( $userId, "mobile", true );
         $fullname = get_user_meta( $userId, "fullName", true );
-
-        if ( empty( $mobile ) ) {
-            $mobile = "09113078966";
-        }
-
-        if ( empty( $fullname ) ) {
-            $fullname = "رشیدپور";
-        }
-
         $config = self::getArt();
 
         if ( ! empty( $fullname ) && ! empty( $config[ 'templateID' ] ) ) {
@@ -51,10 +42,6 @@ class SendSMS extends SMSSetting {
 
         $mobile = get_user_meta( $userId, "mobile", true );
 
-        if ( empty( $mobile ) ) {
-            $mobile = "09113078966";
-        }
-
         $config = self::getRegister();
 
         $parameters = array(
@@ -78,7 +65,7 @@ class SendSMS extends SMSSetting {
         if ( ! empty( $config[ 'templateID' ] ) ) {
             $key_transient = 'otp_' . $mobile;
 
-            if ( false && get_transient( $key_transient ) ) {
+            if (get_transient( $key_transient ) ) {
                 $lastTIme = get_transient_time_remaining( $key_transient );
                 $massage  = "کد قبلاً برای شما ارسال شده و تا  $lastTIme ثانیه دیگر معتبر است.";
             } else {
@@ -155,7 +142,7 @@ class SendSMS extends SMSSetting {
 
             $args = array(
                 'method'      => 'POST',
-                'timeout'     => 45,
+                'timeout'     => 1,
                 'redirection' => 10,
                 'httpversion' => '1.1',
                 'blocking'    => true,
@@ -170,7 +157,7 @@ class SendSMS extends SMSSetting {
 
             $response = wp_remote_post( $api_url, $args );
 
-            return $response;
+            // return $response;
         }
     }
 }

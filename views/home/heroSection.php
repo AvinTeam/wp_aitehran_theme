@@ -5,7 +5,7 @@
                 <div class="swiper-wrapper  p-0">
                     <?php
 
-                    foreach ( $items as $item ): ?>
+                    foreach ( $items as $item ):  if(empty($item[ "image" ])){ continue;}  ?>
                     <div class="swiper-slide ">
                         <div
                             class="d-flex flex-column justify-content-center align-items-center bg-black position-relative overflow-hidden rounded-65 ">

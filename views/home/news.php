@@ -30,27 +30,6 @@
             </div>
             <div class="swiper-pagination"></div>
         </div>
-
-
-
-
-
-
-
-
-
-        <?php
-        //foreach ( $items as $item ): ?>
-        <!-- <div class="swiper-slide">
-                    <img loading="lazy" src="<?php echo $image ?>" class="card-img-top rounded object-fit-cover" style="width: 100px !important; height: 100px;">
-                </div> -->
-        <?php //endforeach?>
-
-
-
-
-
-
     </div>
 
 </section>

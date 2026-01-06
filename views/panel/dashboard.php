@@ -38,7 +38,7 @@
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="fullName" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام
-                                خانوادگی مسئول گروه<span class="text-danger">*</span> :
+                                و نام خانوادگی مسئول گروه<span class="text-danger">*</span> :
                             </label>
                         </div>
                         <div class="w-100">

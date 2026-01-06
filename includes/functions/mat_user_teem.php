@@ -18,7 +18,7 @@ function mat_user_teem( $userid ) {
             $user_data[  ] = array(
                 'username' => $user->user_login,
                 'name'     => $user->display_name,
-                'code'     => $user->national_code,
+                'code'     => $user->nationalCode,
              );
         }
     }
