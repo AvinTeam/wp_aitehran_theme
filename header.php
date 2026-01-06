@@ -66,10 +66,10 @@
                         <?php endforeach; ?>
                     </div>
 
-                    <form id="search-header" class="w-100 position-relative">
-                        <input type="text" name="search" id="search-header-input"
+                    <form id="search-header" class="w-100 position-relative" action="/" method="get">
+                        <input type="text" name="s" id="search-header-input"
                             class="form-control w-100 rounded-circle bg-primary border border-1 border-secondary text-white"
-                            aria-label="Search" value="" placeholder="جستجو">
+                            aria-label="Search" value="<?php echo get_search_query(); ?>" placeholder="جستجو">
                         <i class="bi bi-search text-secondary position-absolute" style="left: 12px; top: 25%;"></i>
                     </form>
                 </div>

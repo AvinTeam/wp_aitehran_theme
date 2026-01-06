@@ -1,3 +1,8 @@
+<?php
+
+ $game = get_option( 'tai_game_settings', array() );
+?>
+
 <section class="px-2 px-lg-0 mb-100  ">
     <div class=" mt-40 container">
         <div class="d-flex flex-column-reverse flex-lg-row justify-content-between row-gap-4 row-gap-lg-0">
@@ -28,7 +33,7 @@
 
                     <?php
 
-                    if ( $pagination[ 'total_posts' ] < 10 ): ?>
+                    if ( $pagination[ 'total_posts' ] < 10  && ( $game[ 'status' ] ?? false) ): ?>
                     <a href="<?php echo home_url( "/panel/art-info" ) ?>"
                         class="btn btn-warning rounded-32 px-24 py-2 f-24 fw-bold">
                         ثبت اثر جدید

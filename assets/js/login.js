@@ -54,6 +54,8 @@ if (pageLogin) {
                 endLoading();
 
             };
+
+        console.log(`action=tai_SendSms&captcha=${captcha}&mobileNumber=${mobile}&captchaData=${captchaData}`);
             xhr.send(`action=tai_SendSms&captcha=${captcha}&mobileNumber=${mobile}&captchaData=${captchaData}`);
 
         } else {

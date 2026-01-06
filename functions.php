@@ -37,7 +37,9 @@ define( 'TAI_SMS_TIMER', 10 );
 define( 'TAI_TIME_SET_COOKIE', 30 );
 define( 'TAI_CAPTCHA_LEN', 5 );
 define( 'TAI_OTP_COUNT', 4 );
-define( 'TAI_local', true );
+define( 'TAI_local', $_SERVER[ 'HTTP_HOST' ] == "localhost:85" ? true : false );
+
+
 
 if ( file_exists( TAI_PATH . '/vendor/autoload.php' ) ) {
     require_once TAI_PATH . '/vendor/autoload.php';
@@ -61,5 +63,6 @@ if ( is_admin() ) {
 
 if ( isset( $_GET[ "test" ] ) ) {
 
+    dd(SendSMS::otp( sanitize_phone( "09113078966") ));
     exit;
 }

@@ -18,25 +18,33 @@ class BlogController extends Controller
 
     }
 
-    public function header()
-    {
-        view('post/archive/header',
-            $this->services->header()
-        );
 
-    }
-
-    public function results()
-    {
-        view('post/archive/results',
-            $this->services->results()
-        );
-
-    }
 
     public function pagination()
     {
         $this->services->pagination();
+
+    }
+
+
+        public function content() {
+        view( 'post/single/content', array( "video" => $this->services->get_video() )
+
+        );
+    }
+
+    public function sidebar() {
+        view( 'post/single/sidebar' );
+    }
+    public function sidebar_archive() {
+
+        view( 'post/archive/sidebar',
+            $this->services->sidebar() );
+
+    }
+    public function archive() {
+        view( 'post/archive/content',
+            array( "items" => $this->services->archive() ) );
 
     }
 

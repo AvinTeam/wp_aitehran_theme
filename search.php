@@ -3,6 +3,7 @@
     use TAI\App\Controllers\Search\SearchController;
 
     get_header();
+    dd();
 
     $controller = new SearchController(($_GET ?? [  ]));
 

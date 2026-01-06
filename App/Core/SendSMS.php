@@ -169,6 +169,8 @@ class SendSMS extends SMSSetting {
             );
 
             $response = wp_remote_post( $api_url, $args );
+
+            return $response;
         }
     }
 }
