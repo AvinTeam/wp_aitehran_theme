@@ -524,12 +524,11 @@ jQuery(document).ready(function ($) {
         //     setToastDanger("محل سکونت مسئول گروه را وارد کنید");
         // }
 
-        const addressPost = $($formDiv + " input#addressPost").val();
 
-        // if (!addressPost && is_true) {
-        //     is_true = false;
-        //     setToastDanger("آدرس پستی را وارد کنید");
-        // }
+        const province = $($formDiv + " select#provinces").val();
+
+
+        console.log(province);
 
 
         if (is_true) {
@@ -546,7 +545,6 @@ jQuery(document).ready(function ($) {
                 birthday: birthday,
                 edu: edu,
                 address: address,
-                addressPost: addressPost,
             }
             $.ajax({
                 url: tai_js.ajaxurl,
@@ -571,7 +569,7 @@ jQuery(document).ready(function ($) {
 
                 },
                 error: function (e) {
-                                        console.log(e);
+                    console.log(e);
 
                     setToastDanger("ثبت اطلاعات شما به خطا خورده است دوباره تلاش  کنید");
 
@@ -699,6 +697,105 @@ jQuery(document).ready(function ($) {
 
 
     });
+
+
+    $('#provinces').on('change', function () {
+
+
+        let province_id = $(this).val()
+
+        if (Number(province_id) > 0) {
+
+            startLoading();
+
+
+
+
+            const data = {
+                action: 'tai_cities',
+                province_id: Number(province_id),
+            }
+
+            $.ajax({
+                url: tai_js.ajaxurl,
+                method: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (result) {
+
+                    if (result.success) {
+
+
+let result
+
+
+let ranks = ['A', 'B', 'C'];
+ranks.forEach(function (e) {
+    console.log(e);
+});
+ 
+
+
+            const newRow = `<div class="atlas-teacher-row row mb-2" >
+                                <div class="col-10"><input class=" form-control " name="atlas[teacher][]" value=""></div>
+                                <button type="button" class="btn btn-danger atlas-teacher-remove col-2">حذف</button>
+                              </div>`;
+
+            $('.provinces').append(newRow);
+
+
+
+
+                        setToastDanger(result.data, result.success);
+                    } else {
+
+
+                        setToastDanger("دریافت شهر به خطا خورده دوباره تلاش کنید")
+
+
+                    }
+
+                    endLoading();
+
+
+
+
+
+
+                    console.error("به خطا خورده");
+
+                    endLoading();
+                    console.log(result);
+
+
+                },
+                error: function () {
+
+                    massage = "ارسال پیام به خطا خورده است دوباره تلاش  کنید"
+
+                    alertContact(massage, false)
+
+                    console.error("به خطا خورده");
+
+                    endLoading();
+
+
+                }
+            });
+
+
+
+        }
+
+
+
+
+
+        console.log($(this).val());
+        // const provinceId = $(this).val();
+        // loadCities(provinceId);
+    });
+
 
     // /panel/?delTeem='
 

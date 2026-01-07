@@ -102,19 +102,10 @@
 
         <tr class="user-address-wrap">
             <th>
-                <label for="address">محل سکونت </label>
+                <label for="address">آدرس سکونت</label>
             </th>
             <td>
-                <input type="text" class="regular-text" name="address" placeholder="محل سکونت"
-                    value="<?php echo esc_html($address); ?>">
-            </td>
-        </tr>
-        <tr class="user-addressPost-wrap">
-            <th>
-                <label for="addressPost">آدرس پستی</label>
-            </th>
-            <td>
-                <textarea name="addressPost" rows="5" cols="30"><?php echo esc_html($addressPost); ?></textarea>
+                <textarea name="address" rows="5" cols="30"><?php echo esc_html($address); ?></textarea>
             </td>
         </tr>
     </tbody>

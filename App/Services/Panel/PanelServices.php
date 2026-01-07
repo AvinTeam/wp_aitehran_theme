@@ -3,6 +3,7 @@ namespace TAI\App\Services\Panel;
 
 use Exception;
 use TAI\App\Core\SendSMS;
+use TAI\App\Models\Iran;
 use TAI\App\Services\Service;
 use WP_Query;
 use WP_User_Query;
@@ -16,36 +17,29 @@ class PanelServices extends Service {
 
     public function dashboard() {
 
-        $args = array(
-            'meta_key'   => 'user_leader',
-            'meta_value' => get_current_user_id(),
-        );
+        $provinces = Iran::all()->where( "province_id", "=", 0 )->orderBy( "name" )->toArray();
 
-        $user_query = new WP_User_Query( $args );
+        $user_province = absint( get_user_meta( get_current_user_id(), "provinceId", true ) );
 
-        $users = $user_query->get_results();
-
-        if ( ! empty( $users ) ) {
-            foreach ( $users as $user ) {
-                $user_data[  ] = array(
-                    'username'     => $user->user_login,
-                    'name'         => get_user_meta( $user->ID, "fullName", true ),
-                    'nationalCode' => get_user_meta( $user->ID, "nationalCode", true ),
-                );
-            }
+        if ( $user_province ) {
+            $cities = Iran::all()->where( "province_id", "=", $user_province )->orderBy( "name" )->toArray();
         }
 
         return array(
 
-            'groupName'    => get_user_meta( get_current_user_id(), "groupName", true ),
-            'fullName'     => get_user_meta( get_current_user_id(), "fullName", true ),
-            'parent'       => get_user_meta( get_current_user_id(), "parent", true ),
-            'nationalCode' => get_user_meta( get_current_user_id(), "nationalCode", true ),
-            'birthday'     => get_user_meta( get_current_user_id(), "birthday", true ),
-            'edu'          => get_user_meta( get_current_user_id(), "edu", true ),
-            'address'      => get_user_meta( get_current_user_id(), "address", true ),
-            'addressPost'  => get_user_meta( get_current_user_id(), "addressPost", true ),
-            'teems'        => $user_data ?? array(),
+            'groupName'     => get_user_meta( get_current_user_id(), "groupName", true ),
+            'fullName'      => get_user_meta( get_current_user_id(), "fullName", true ),
+            'parent'        => get_user_meta( get_current_user_id(), "parent", true ),
+            'nationalCode'  => get_user_meta( get_current_user_id(), "nationalCode", true ),
+            'birthday'      => get_user_meta( get_current_user_id(), "birthday", true ),
+            'edu'           => get_user_meta( get_current_user_id(), "edu", true ),
+            'address'       => get_user_meta( get_current_user_id(), "address", true ),
+            'teems'         => $user_data ?? array(),
+            'provinces'     => $provinces ?? array(),
+            'user_province' => $user_province,
+            'cities'        => $cities ?? array(),
+            'user_city'     => get_user_meta( get_current_user_id(), "cityId", true ),
+            'user_area'     => get_user_meta( get_current_user_id(), "areaId", true ),
 
         );
     }
@@ -93,7 +87,6 @@ class PanelServices extends Service {
         update_user_meta( get_current_user_id(), "birthday", sanitize_text_field( $request[ 'birthday' ] ) );
         update_user_meta( get_current_user_id(), "edu", sanitize_text_field( $request[ 'edu' ] ) );
         update_user_meta( get_current_user_id(), "address", sanitize_text_field( $request[ 'address' ] ) );
-        update_user_meta( get_current_user_id(), "addressPost", sanitize_text_field( $request[ 'addressPost' ] ) );
 
         //    $full_name = $first_name . ' ' . $last_name;
 
@@ -102,7 +95,7 @@ class PanelServices extends Service {
         wp_update_user( array(
             'ID'           => get_current_user_id(),
             'display_name' => $fullName,
-         ) );
+        ) );
 
         if ( empty( $fullNameOld ) && ! empty( $fullName ) ) {
             SendSMS::register( get_current_user_id(), $fullName );

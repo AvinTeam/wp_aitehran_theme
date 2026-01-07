@@ -26,7 +26,8 @@
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2 ">
                         <div class="">
-                            <label for="groupName" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام گروه<span class="text-danger">*</span> :
+                            <label for="groupName" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام گروه<span
+                                    class="text-danger">*</span> :
                             </label>
                         </div>
                         <div class="w-100">
@@ -98,6 +99,60 @@
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
+                            <label for="provinces" class="col-form-label text-nowrap p-2 f-24 fw-bold">استان مسئول گروه : </label>
+                        </div>
+                        <div class="w-100">
+                            <select class="form-select form-select w-100 border border-1 border-black rounded-32" id="provinces" name="provinces">
+                                <option value="0"> انتخاب استان</option>
+                                <?php foreach ( $provinces ?? array(  ) as $province ): ?>
+                                <option value="<?php echo $province[ 'id' ] ?>"
+                                    <?php echo selected( $province[ 'id' ], $user_province ) ?>>
+                                    <?php echo $province[ 'name' ] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    
+                    <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        <div class="">
+                            <label for="address" class="col-form-label text-nowrap p-2 f-24 fw-bold">شهر مسئول گروه : </label>
+                        </div>
+                        <div class="w-100">
+                            <select class="form-select form-select w-100 border border-1 border-black rounded-32" id="provinces" name="provinces">
+                                <option value="0"> انتخاب شهر</option>
+                                <?php foreach ( $cities ?? array(  ) as $city ): ?>
+                                <option value="<?php echo $city[ 'id' ] ?>"
+                                    <?php echo selected( $city[ 'id' ], $user_city ) ?>>
+                                    <?php echo $city[ 'name' ] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    
+                    <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        <div class="">
+                            <label for="address" class="col-form-label text-nowrap p-2 f-24 fw-bold">منطقه مسئول گروه : </label>
+                        </div>
+                        <div class="w-100">
+                            <select class="form-select form-select w-100 border border-1 border-black rounded-32" id="provinces" name="provinces">
+                                <option value="0"> انتخاب شهر</option>
+                                <?php foreach ( $cities ?? array(  ) as $city ): ?>
+                                <option value="<?php echo $city[ 'id' ] ?>"
+                                    <?php echo selected( $city[ 'id' ], $user_city ) ?>>
+                                    <?php echo $city[ 'name' ] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        <div class="">
                             <label for="address" class="col-form-label text-nowrap p-2 f-24 fw-bold">محل
                                 سکونت مسئول گروه : </label>
                         </div>
@@ -107,21 +162,10 @@
                         </div>
                     </div>
 
-                    <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
-                        <div class="">
-                            <label for="addressPost" class="col-form-label text-nowrap p-2 f-24 fw-bold">آدرس پستی :
-                            </label>
-                        </div>
-                        <div class="w-100">
-                            <input type="text" id="addressPost" value="<?php echo $addressPost ?>"
-                                class="form-control w-100 border border-1 border-black rounded-32">
-                        </div>
-                    </div>
-
                     <?php
-                            $m = 1;
+                        $m = 1;
 
-                        if ( $teems ): ?>
+                    if ( $teems ): ?>
 
 
                     <h2>لیست اعضا</h2>
@@ -138,7 +182,7 @@
 
                             <?php
 
-                                foreach ( $teems as $teem ): ?>
+                            foreach ( $teems as $teem ): ?>
                             <tr>
                                 <th scope="row"><?php echo $m ?></th>
                                 <td><?php echo $teem[ 'name' ] ?></td>
@@ -158,7 +202,7 @@
 
                     <?php
 
-                        if ( $m <= 4 ): ?>
+                    if ( $m <= 4 ): ?>
                     <a href="<?php echo home_url( "/panel/addTeem" ) ?>"
                         class="btn btn-secondary rounded-32 w-100 p-2 f-24 fw-bold border border-1 border-black">
                         افزودن عضو جدید (+)

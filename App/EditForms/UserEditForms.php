@@ -30,7 +30,6 @@ class UserEditForms {
             $birthday            = $user->birthday;
             $edu                 = $user->edu;
             $mat_referee_massage = $user->mat_referee_massage;
-            $addressPost         = $user->addressPost;
             $mat_referee_massage = $user->mat_referee_massage;
             $user_role           = '';
 
@@ -67,7 +66,6 @@ class UserEditForms {
             "birthday"            => $birthday ?? "",
             "edu"                 => $edu ?? "",
             "address"             => $address ?? "",
-            "addressPost"         => $addressPost ?? "",
         ) );
     }
 
@@ -120,9 +118,7 @@ class UserEditForms {
             update_user_meta( $user_id, 'address', $_POST[ 'address' ] );
         }
 
-        if ( isset( $_POST[ 'addressPost' ] ) ) {
-            update_user_meta( $user_id, 'addressPost', $_POST[ 'addressPost' ] );
-        }
+
 
         if ( isset( $_POST[ 'mobile' ] ) ) {
             $mobile = sanitize_phone( $_POST[ 'mobile' ] );
