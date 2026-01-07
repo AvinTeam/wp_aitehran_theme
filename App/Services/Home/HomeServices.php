@@ -37,7 +37,7 @@ class HomeServices extends Service {
         endif;
 
         return array(
-            'items'  => $allPost ?? array(),
+            'items'   => $allPost ?? array(),
             'panel'   => home_url( "/panel" ),
             'academy' => home_url( "/academy" ),
 
@@ -45,16 +45,27 @@ class HomeServices extends Service {
     }
 
     public function format() {
-        $formats = array_map( "basename", glob( TAI_PATH . 'assets/image/formats/*' ) );
+        $banners = get_option( 'tai_banner' );
+
+        if ( ! empty( $banners ) ) {
+            $banners = unserialize( $banners );
+
+            foreach ( $banners as $value ) {
+                $items[  ] = array(
+                    'url'  => get_the_image_url_by_id( $value[ 'image' ] ),
+                    'link' => $value[ 'link' ],
+                );
+            }
+        }
+
+        // $formats = array_map( "basename", glob( TAI_PATH . 'assets/image/formats/*' ) );
 
         return array(
-
-            "formats" => $formats,
-
+            "formats" => $items ?? array(  ),
         );
     }
 
-    public function tai_get_posts_by_category( $category , $per_page ) {
+    public function tai_get_posts_by_category( $category, $per_page ) {
 
         $args = array(
             'post_type'      => 'post',

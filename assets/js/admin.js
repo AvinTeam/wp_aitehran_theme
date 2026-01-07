@@ -293,35 +293,79 @@ jQuery(document).ready(function ($) {
 
 
 
-          let frame;
+    let frame;
 
-            $(".upload-category-image").on("click", function(e){
-                e.preventDefault();
+    $(".upload-category-image").on("click", function (e) {
+        e.preventDefault();
 
-                if ( frame ) {
-                    frame.open();
-                    return;
-                }
+        if (frame) {
+            frame.open();
+            return;
+        }
 
-                frame = wp.media({
-                    title: "انتخاب تصویر دسته‌بندی",
-                    button: { text: "انتخاب" },
-                    multiple: false
-                });
+        frame = wp.media({
+            title: "انتخاب تصویر دسته‌بندی",
+            button: { text: "انتخاب" },
+            multiple: false
+        });
 
-                frame.on("select", function(){
-                    const attachment = frame.state().get("selection").first().toJSON();
-                    $("#category-image-id").val(attachment.id);
-                    $("#category-image-preview").html("<img src=\'" + attachment.sizes.thumbnail.url + "\' style=\'max-width:150px;\'>");
-                });
+        frame.on("select", function () {
+            const attachment = frame.state().get("selection").first().toJSON();
+            $("#category-image-id").val(attachment.id);
+            $("#category-image-preview").html("<img src=\'" + attachment.sizes.thumbnail.url + "\' style=\'max-width:150px;\'>");
+        });
 
-                frame.open();
-            });
+        frame.open();
+    });
 
-            $(".remove-category-image").on("click", function(){
-                $("#category-image-id").val("");
-                $("#category-image-preview").html("");
-            });
+    $(".remove-category-image").on("click", function () {
+        $("#category-image-id").val("");
+        $("#category-image-preview").html("");
+    });
+
+
+
+    let nextItemBanner = 0;
+    $('#banner-form button#add-banner').click(function (e) {
+        e.preventDefault();
+
+        if (nextItemBanner == 0) {
+            nextItemBanner = Number($(this).attr('data-nextItem'));
+        }
+
+        $('#banner-list').append(`
+                <div class="draggable-item" draggable="true">
+                    <div class="draggable-handle dashicons dashicons-move"></div>
+                    <button type="button"
+                        class="remove-draggable text-error button-link dashicons dashicons-trash"
+                        onclick="this.closest('.draggable-item').remove()"></button>
+
+                    <div class="draggable-fields">
+                        <section class="d-flex flex-row justify-content-between">
+                            <div>
+                                <label>تصویر</label>
+                                <input type="hidden" name="banner[${nextItemBanner}][image]" value="" />
+                                <p>
+                                    <button type="button" class="button button-secondary select_gallery"
+                                        data-title="انتخاب تصویر" data-buttonText="انتخاب تصویر"
+                                        data-type="image">انتخاب</button>
+
+                                    <button type="button" action="clean" class="button button-error "
+                                        style="display: none;">حذف</button>
+                                </p>
+                            </div>
+                            <img src="" style="max-height: 100px; width: auto; display: none;" />
+                        </section>
+                        <div>
+                            <label>لینک</label>
+                            <input class="d-ltr w-100" type="text" name="banner[${nextItemBanner}][link]" value="">
+                        </div>
+                    </div>
+                </div>
+        `);
+        nextItemBanner++;
+    });
+
 
 
 
