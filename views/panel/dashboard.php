@@ -159,8 +159,7 @@
                     <div id="areasDiv"
                         class="<?php echo 331 == $user_city ? "d-flex" : "d-none" ?>  flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="areas" class="col-form-label text-nowrap p-2 f-24 fw-bold">منطقه مسئول گروه<span
-                                    class="text-danger">*</span> : </label>
+                            <label for="areas" class="col-form-label text-nowrap p-2 f-24 fw-bold">منطقه مسئول گروه<span class="text-danger">*</span> : </label>
                         </div>
                         <div class="w-100">
                             <select class="form-select form-select w-100 border border-1 border-black rounded-32"

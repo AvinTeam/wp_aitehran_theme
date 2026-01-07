@@ -42,7 +42,7 @@
                 <div
                     class="bg-secondary d-flex flex-column justify-content-center align-items-center rounded-65  px-40 py-24 mb-3">
                     <div class="rounded-32 w-100 text-white text-center p-16 mb-4 f-32 fw-bold">
-                       ثبت نام و ارسال اثر
+                        ثبت نام و ارسال اثر
                     </div>
 
                     <div>
@@ -71,12 +71,13 @@
                         <!--'formats_art' -->
                         <div
                             class="px-2 d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
-                            <label class="col-form-label text-nowrap p-2 f-24 fw-bold f-32">
+                            <label class="col-form-label text-nowrap p-2 f-24 fw-bold f-32 text-primary">
                                 <span class="text-secondary me-2">1-</span>
+                                انتخاب قالب اثر<span class="text-danger">*</span>
                             </label>
 
                             <select class="form-select form-select-lg fw-bold f-32 text-primary" name="format_art">
-                                <option value="0"> انتخاب قالب</option>
+                                <option value="0">--</option>
                                 <?php
 
                                     foreach ( $formats_art as $key => $item ):
@@ -84,63 +85,64 @@
                                         if ( "selected" == $key ) {continue;}
 
                                     ?>
-	                                <option value="<?php echo $item->term_id ?>"
-	                                    <?php echo selected( $item->term_id, $formats_art[ "selected" ] ?? 'format_art' ) ?>>
-	                                    <?php echo $item->name ?></option>
-	                                <?php endforeach; ?>
+                                <option value="<?php echo $item->term_id ?>"
+                                    <?php echo selected( $item->term_id, $formats_art[ "selected" ] ?? 'format_art' ) ?>>
+                                    <?php echo $item->name ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 
                         <!--'art_title' -->
                         <div
                             class="px-2 d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
-                            <label class="col-form-label text-nowrap p-2 f-24 fw-bold f-32">
+
+                            <label class="col-form-label text-nowrap p-2 f-24 fw-bold f-32 text-primary">
                                 <span class="text-secondary me-2">2-</span>
+                                عنوان اثر<span class="text-danger">*</span>
                             </label>
 
-                            <input type="text" name="art_title" value="<?php echo $art_title ?>"
-                                class="form-control text-primary w-100 fw-bold f-32" placeholder="عنوان اثر">
+                            <input type="text" name="art_title" value="<?php echo $art_title ?>" require
+                                class="form-control text-primary w-100 fw-bold f-32" placeholder="--">
                         </div>
 
                         <!--'subjects_art' -->
                         <div
                             class="px-2 d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
-                            <label class="col-form-label text-nowrap p-2 f-24 fw-bold f-32">
+
+                            <label class="col-form-label text-nowrap p-2 f-24 fw-bold f-32 text-primary">
                                 <span class="text-secondary me-2">3-</span>
+                                انتخاب موضوع<span class="text-danger">*</span>
                             </label>
 
                             <select class="form-select form-select-lg fw-bold f-32 text-primary" name="subject_art">
-                                <option value="0"> انتخاب موضوع</option>
+                                <option value="0">--</option>
                                 <?php
-
                                     foreach ( $subjects_art as $key => $item ):
 
                                         if ( "selected" == $key ) {continue;}
-
                                     ?>
-	                                <option value="<?php echo $item->term_id ?>"
-	                                    <?php echo selected( $item->term_id, $subjects_art[ "selected" ] ?? 'subject_art' ) ?>>
-	                                    <?php echo $item->name ?></option>
-	                                <?php endforeach; ?>
+                                <option value="<?php echo $item->term_id ?>"
+                                    <?php echo selected( $item->term_id, $subjects_art[ "selected" ] ?? 'subject_art' ) ?>>
+                                    <?php echo $item->name ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 
                         <!--'year' -->
                         <div
-                            class="px-2 d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
-                            <label class="col-form-label text-nowrap p-2 f-24 fw-bold f-32">
+                            class="px-2 d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">                            
+                            <label class="col-form-label text-nowrap p-2 f-24 fw-bold f-32 text-primary">
                                 <span class="text-secondary me-2">4-</span>
+                                سال تولید اثر<span class="text-danger">*</span>
                             </label>
 
-
                             <select class="form-select form-select-lg fw-bold f-32 text-primary" name="year">
-                                <option value="0">سال تولید اثر</option>
                                 <?php
 
                                     for ( $i = 1405; $i > 1379; --$i ):
 
                                 ?>
-                                <option value="<?php echo $i ?>"<?php echo selected( $i, $year ) ?>>
+                                <option value="<?php echo $i ?>" <?php echo selected( $i, $year ) ?>>
                                     <?php echo $i ?></option>
                                 <?php endfor; ?>
                             </select>
@@ -151,7 +153,7 @@
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
                             <label class="col-form-label text-nowrap p-2 fw-bold f-32 text-primary w-100 text-start">
                                 <span class="text-secondary me-2">5-</span>
-                                نام و نام خانوادگی عوامل تولید را بنویسید
+                                نام و نام خانوادگی عوامل تولید<span class="text-danger">*</span>
                             </label>
 
 
@@ -162,7 +164,7 @@
                                 <div
                                     class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2 team-item">
                                     <input type="text" name="teem[]" value="<?php echo esc_html( $team ) ?>"
-                                        class="form-control text-primary w-100 fw-bold f-24"
+                                        class="form-control text-primary w-100 fw-bold f-24 only-fa"
                                         placeholder="نام و نام خانوادگی عوامل تولید">
                                     <button onclick="this.closest('div').remove()" type="button"
                                         class="btn btn-danger btn-lg">حذف</button>
@@ -182,13 +184,13 @@
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
                             <label class="col-form-label text-nowrap p-2 fw-bold f-32 text-primary w-100 text-start">
                                 <span class="text-secondary me-2">6-</span>
-                                وضعیت مالکیت اثر
+                                وضعیت مالکیت اثر<span class="text-danger">*</span>
                             </label>
 
                             <div class="w-100">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="ownership" id="ownership_genuine"
-                                        value="genuine"                                                        <?php echo checked( $ownership, "genuine" ) ?>>
+                                        value="genuine" <?php echo checked( $ownership, "genuine" ) ?>>
                                     <label class="form-check-label" for="ownership_genuine">
                                         حقیقی
                                     </label>
@@ -197,7 +199,7 @@
 
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="ownership" id="ownership_legal"
-                                        value="legal"                                                      <?php echo checked( $ownership, "legal" ) ?>>
+                                        value="legal" <?php echo checked( $ownership, "legal" ) ?>>
                                     <label class="form-check-label" for="ownership_legal">
                                         حقوقی
                                     </label>
@@ -217,7 +219,8 @@
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
                             <label
                                 class="col-form-label text-nowrap p-2 fw-bold f-32 text-primary w-100 d-flex flex-row align-items-center justify-content-between">
-                                <div> <span class="text-secondary me-2">7-</span>مستندات تولید</div>
+                                <div> <span class="text-secondary me-2">7-</span>مستندات تولید<span
+                                        class="text-danger">*</span></div>
                                 <span style="color: #5A5A5A; font-size: 14px;">(صدا، صداگذاری، مستندات تولید اثر،
                                     قراردادها)</span>
                             </label>
@@ -237,18 +240,18 @@
 
                                         ?>
 
-	                                <div data-id="<?php echo $document ?>"
-	                                    class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2 image-document">
+                                <div data-id="<?php echo $document ?>"
+                                    class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2 image-document">
 
-	                                    <a href="<?php echo esc_url( $file_url ) ?>" type="button"
-	                                        class="btn btn-warning rounded-32 w-100 p-2 f-24 fw-bold">
-	                                        <?php echo basename( $file_url ) ?>
-	                                    </a>
+                                    <a href="<?php echo esc_url( $file_url ) ?>" type="button"
+                                        class="btn btn-warning rounded-32 w-100 p-2 f-24 fw-bold">
+                                        <?php echo basename( $file_url ) ?>
+                                    </a>
 
-	                                    <button id="remove-document" type="button" class="btn btn-danger">حذف</button>
-	                                </div>
+                                    <button id="remove-document" type="button" class="btn btn-danger">حذف</button>
+                                </div>
 
-	                                <?php
+                                <?php
                                         endforeach;
                                         }
 
@@ -266,7 +269,7 @@
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
                             <label class="col-form-label text-nowrap p-2 fw-bold f-32 text-primary w-100"><span
                                     class="text-secondary me-2">8-</span>
-                                بارگذاری اثر
+                                بارگذاری اثر<span class="text-danger">*</span>
                             </label>
                             <div id="preview_art"
                                 class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2">
@@ -293,6 +296,7 @@
 
 
                         <?php
+
                         if ( $game[ 'status' ] ?? false ): ?>
 
                         <?php wp_nonce_field( config( 'app.key' ) . '_art-info' ); ?>

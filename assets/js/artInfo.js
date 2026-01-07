@@ -114,7 +114,22 @@ jQuery(document).ready(function ($) {
             }
         }
 
+        const documentation = $('#documentation input[type=file]');
 
+        let isValid = true;
+
+        documentation.each(function () {
+            if (this.files.length === 0) {
+                isValid = false;
+           
+                return false;
+            }
+        });
+
+        if (!isValid || documentation.length < 1) {
+             setToastDanger('مستندات تولید باید وارد شود.');
+            return;  
+        }
 
 
         const fileInput = $('#fileInput')[0];
@@ -129,7 +144,6 @@ jQuery(document).ready(function ($) {
             }
         }
 
-        console.log('is ok');
         startLoading();
         this.submit();
     });
@@ -144,7 +158,7 @@ jQuery(document).ready(function ($) {
         if (nextItems <= 3) {
             $('#teem-list').append(`
             <div class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2 team-item">
-                <input type="text" name="teem[]" value=""class="form-control text-primary w-100 fw-bold f-24"placeholder="نام و نام خانوادگی عوامل تولید">
+                <input type="text" name="teem[]" value=""class="form-control text-primary w-100 fw-bold f-24 only-fa" placeholder="نام و نام خانوادگی عوامل تولید">
                 <button onclick="this.closest('div').remove()" type="button"class="btn btn-danger btn-lg">حذف</button>
             </div>
 
