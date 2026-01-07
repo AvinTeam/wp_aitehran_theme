@@ -117,9 +117,11 @@
                             <select class="form-select form-select-lg fw-bold f-32 text-primary" name="subject_art">
                                 <option value="0">--</option>
                                 <?php
+
                                     foreach ( $subjects_art as $key => $item ):
 
                                         if ( "selected" == $key ) {continue;}
+
                                     ?>
                                 <option value="<?php echo $item->term_id ?>"
                                     <?php echo selected( $item->term_id, $subjects_art[ "selected" ] ?? 'subject_art' ) ?>>
@@ -130,7 +132,7 @@
 
                         <!--'year' -->
                         <div
-                            class="px-2 d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">                            
+                            class="px-2 d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
                             <label class="col-form-label text-nowrap p-2 f-24 fw-bold f-32 text-primary">
                                 <span class="text-secondary me-2">4-</span>
                                 سال تولید اثر<span class="text-danger">*</span>
@@ -139,7 +141,7 @@
                             <select class="form-select form-select-lg fw-bold f-32 text-primary" name="year">
                                 <?php
 
-                                    for ( $i = 1405; $i > 1379; --$i ):
+                                    for ( $i = 1404; $i > 1394; --$i ):
 
                                 ?>
                                 <option value="<?php echo $i ?>" <?php echo selected( $i, $year ) ?>>
@@ -221,8 +223,8 @@
                                 class="col-form-label text-nowrap p-2 fw-bold f-32 text-primary w-100 d-flex flex-row align-items-center justify-content-between">
                                 <div> <span class="text-secondary me-2">7-</span>مستندات تولید<span
                                         class="text-danger">*</span></div>
-                                <span style="color: #5A5A5A; font-size: 14px;">(صدا، صداگذاری، مستندات تولید اثر،
-                                    قراردادها)</span>
+                                <span style="color: #5A5A5A; font-size: 14px;">(پرامپت‌ها و مستندات تولید در قالب فایل
+                                    zip ارسال شود.)</span>
                             </label>
 
 
@@ -260,17 +262,20 @@
 
                             <button type="button" id="add_document"
                                 class="btn btn-secondary rounded-32 w-100 p-2 my-2 f-24 fw-bold border border-1 border-black">
-                                آپلود مستندات تولید(+)
+                                آپلود مستندات تولید(+) <span style="font-size: 14px;">(حداکثر ۷۰۰ مگابایت )</span>
                             </button>
                         </div>
 
                         <!--'art_file' -->
                         <div
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
-                            <label class="col-form-label text-nowrap p-2 fw-bold f-32 text-primary w-100"><span
-                                    class="text-secondary me-2">8-</span>
-                                بارگذاری اثر<span class="text-danger">*</span>
+                            <label
+                                class="col-form-label text-nowrap p-2 fw-bold f-32 text-primary w-100 d-flex flex-row align-items-center justify-content-between">
+                                <div> <span class="text-secondary me-2">8-</span> بارگذاری اثر<span
+                                        class="text-danger">*</span></div>
+                                <span style="color: #5A5A5A; font-size: 14px;">(حداکثر ۷۰۰ مگابایت)</span>
                             </label>
+
                             <div id="preview_art"
                                 class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2">
 

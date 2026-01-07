@@ -17,7 +17,7 @@
 
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 mt-3">
-                        <span class="text-secondary f-16 w-100 text-nowrap"><?php echo $post[ "time" ] ?></span>
+                        <!-- <span class="text-secondary f-16 w-100 text-nowrap"><?php echo $post[ "time" ] ?></span> -->
                         <span class="text-secondary f-16 w-100 text-nowrap text-end">
                             <?php echo $post[ "is_see" ] ? "مشاهده شده" : "مشاهده نشده"; ?>
                         </span>
