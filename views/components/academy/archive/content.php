@@ -30,7 +30,7 @@
 
 
                     <a href="<?php echo $post[ "link" ] ?>"
-                        class="btn btn-link f-20 fw-bold w-100 text-start text-justify text-2-lines"><?php echo $post[ "title" ] ?></a>
+                        class="post-title btn btn-link f-20 fw-bold w-100 text-start text-justify text-2-lines"><?php echo $post[ "title" ] ?></a>
                 </div>
             </div>
 

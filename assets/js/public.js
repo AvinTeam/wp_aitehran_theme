@@ -354,6 +354,18 @@ jQuery(document).ready(function ($) {
     }
 
 
+
+
+     $('a.post-title').hover(
+        function() {
+            $(this).removeClass('text-2-lines');
+        },
+        function() {
+            $(this).addClass('text-2-lines');
+        }
+    );
+
+
     $("form#contact_us_form").submit(function (e) {
         e.preventDefault();
 

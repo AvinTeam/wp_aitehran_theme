@@ -1465,7 +1465,9 @@ header .logo {
 }
 
 
-
+a.post-title {
+    transition: all 0.3s ease; 
+}
 
 @media (min-width: 992px) {
 
