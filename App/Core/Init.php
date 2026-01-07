@@ -61,7 +61,7 @@ class Init {
                     setAlert( false, "مشکلی در هم تیمی پیش آمده لطفا دوباره ارسال کنید." );
                 }
 
-                wp_redirect( home_url( "/panel" ) );
+                wp_redirect( home_url( "/panel/addTeem/" ) );
                 exit;
             }
 

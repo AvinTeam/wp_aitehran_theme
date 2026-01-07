@@ -461,7 +461,7 @@ jQuery(document).ready(function ($) {
     });
 
 
-    $("button#nextLevel").click(function (e) {
+    $("button#saveDashboard").click(function (e) {
         e.preventDefault();
 
         $formDiv = "section#dashboardForm";
@@ -485,11 +485,11 @@ jQuery(document).ready(function ($) {
 
         const parent = $($formDiv + " input#parent").val();
 
-        if (!parent) {
-            setToastDanger("نام پدرِ مسئول گروه را وارد کنید");
-            return;
+        // if (!parent) {
+        //     setToastDanger("نام پدرِ مسئول گروه را وارد کنید");
+        //     return;
 
-        }
+        // }
 
         const nationalCode = $($formDiv + " input#nationalCode").val();
 
@@ -549,54 +549,53 @@ jQuery(document).ready(function ($) {
         }
 
 
-            startLoading();
+        startLoading();
 
-            const data = {
-                action: 'tai_dashboard',
-                wpnonce: $($formDiv + " input#_wpnonce").val(),
-                groupName: groupName,
-                fullName: fullName,
-                parent: parent,
-                nationalCode: nationalCode,
-                birthday: birthday,
-                edu: edu,
-                address: address,
-                province: province,
-                city: city,
-                area: area,
-            }
+        const data = {
+            action: 'tai_dashboard',
+            wpnonce: $($formDiv + " input#_wpnonce").val(),
+            groupName: groupName,
+            fullName: fullName,
+            parent: parent,
+            nationalCode: nationalCode,
+            birthday: birthday,
+            edu: edu,
+            address: address,
+            province: province,
+            city: city,
+            area: area,
+        }
 
-            $.ajax({
-                url: tai_js.ajaxurl,
-                method: 'POST',
-                data: data,
-                dataType: 'json',
-                success: function (result) {
-                    console.log(result);
+        $.ajax({
+            url: tai_js.ajaxurl,
+            method: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (result) {
+                console.log(result);
 
-                    if (result.success) {
-                        window.location.href = result.data;
-                    } else {
-                        setToastDanger(result.data);
-                        endLoading();
-
-                    }
-
+                if (result.success) {
+                    window.location.href = result.data;
+                } else {
+                    setToastDanger(result.data);
                     endLoading();
-
-                },
-                error: function (e) {
-                    console.log(e);
-
-                    setToastDanger("ثبت اطلاعات شما به خطا خورده است دوباره تلاش  کنید");
-
-                    console.error("به خطا خورده");
-
-                    endLoading();
-
-
                 }
-            });
+
+                endLoading();
+
+            },
+            error: function (e) {
+                console.log(e);
+
+                setToastDanger("ثبت اطلاعات شما به خطا خورده است دوباره تلاش  کنید");
+
+                console.error("به خطا خورده");
+
+                endLoading();
+
+
+            }
+        });
 
     });
 
@@ -619,10 +618,10 @@ jQuery(document).ready(function ($) {
         }
 
         const parent = $($formDiv + " input#parent").val();
-        if (parent == "") {
-            setToastDanger("نام پدرِ را وارد کنید");
-            return;
-        }
+        // if (parent == "") {
+        //     setToastDanger("نام پدرِ را وارد کنید");
+        //     return;
+        // }
 
         const nationalCode = $($formDiv + " input#nationalCode").val();
 

@@ -26,6 +26,9 @@ if ( is_user_logged_in() ) {
         case 'art-info':
             $array = $controller->artInfo();
             break;
+        case 'logout':
+            $array = $controller->logout();
+            break;
 
         default:
             wp_redirect( home_url( "/404" ) );

@@ -46,6 +46,14 @@ class PanelController extends Controller {
         return $this->services->artInfo();
     }
 
+    public function logout() {
+
+
+        dd();
+
+
+    }
+
     public function sendArtInfo( $request, $file ) {
 
         try {

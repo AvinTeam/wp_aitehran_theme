@@ -18,6 +18,11 @@ class PanelServices extends Service {
 
     public function dashboard() {
 
+        $groupName    = get_user_meta( get_current_user_id(), "groupName", true );
+        $fullName     = get_user_meta( get_current_user_id(), "fullName", true );
+        $nationalCode = get_user_meta( get_current_user_id(), "nationalCode", true );
+        $birthday     = get_user_meta( get_current_user_id(), "birthday", true );
+
         $user_province = 0;
         $user_city     = 0;
         $user_area     = 0;
@@ -37,21 +42,33 @@ class PanelServices extends Service {
             $cities = Iran::all()->where( "province_id", "=", $user_province )->orderBy( "name" )->toArray();
         }
 
+        if (
+
+            ! empty( $groupName ) &&
+            ! empty( $fullName ) &&
+            ! empty( $nationalCode ) &&
+            ! empty( $birthday ) &&
+            absint( $user_province ) &&
+            absint( $user_city ) &&
+            absint( $user_area )
+        ) {
+            $btn_continue = "";
+        }
 
         return array(
-            'groupName'     => get_user_meta( get_current_user_id(), "groupName", true ),
-            'fullName'      => get_user_meta( get_current_user_id(), "fullName", true ),
+            'groupName'     => $groupName,
+            'fullName'      => $fullName,
             'parent'        => get_user_meta( get_current_user_id(), "parent", true ),
-            'nationalCode'  => get_user_meta( get_current_user_id(), "nationalCode", true ),
-            'birthday'      => get_user_meta( get_current_user_id(), "birthday", true ),
+            'nationalCode'  => $nationalCode,
+            'birthday'      => $birthday,
             'edu'           => get_user_meta( get_current_user_id(), "edu", true ),
             'address'       => get_user_meta( get_current_user_id(), "address", true ),
-            'teems'         => $user_data ?? array(),
             'provinces'     => $provinces ?? array(),
             'user_province' => $user_province,
             'cities'        => $cities ?? array(),
             'user_city'     => $user_city,
             'user_area'     => $user_area,
+            "btn_continue"  => $btn_continue ?? "d-none",
 
         );
     }
@@ -120,7 +137,6 @@ class PanelServices extends Service {
             ) );
         }
 
-
         update_user_meta( get_current_user_id(), 'nickname', $fullName );
 
         wp_update_user( array(
@@ -164,6 +180,35 @@ class PanelServices extends Service {
             }
         }
 
+
+
+        $args = array(
+            'meta_key'   => 'user_leader',
+            'meta_value' => get_current_user_id(),
+        );
+
+        $user_query = new WP_User_Query( $args );
+
+        $users = $user_query->get_results();
+
+        if ( ! empty( $users ) ) {
+            foreach ( $users as $user ) {
+                $teems[  ] = array(
+                    'username'     => $user->user_login,
+                    'name'         => get_user_meta( $user->ID, "fullName", true ),
+                    'nationalCode' => get_user_meta( $user->ID, "nationalCode", true ),
+                );
+            }
+        }
+
+
+
+
+
+
+
+
+
         return array(
 
             'fullName'     => get_user_meta( $user_id, "fullName", true ),
@@ -171,6 +216,7 @@ class PanelServices extends Service {
             'nationalCode' => get_user_meta( $user_id, "nationalCode", true ),
             'birthday'     => get_user_meta( $user_id, "birthday", true ),
             'edu'          => get_user_meta( $user_id, "edu", true ),
+            'teems'        => $teems ?? array(),
 
         );
     }

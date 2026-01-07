@@ -7,7 +7,7 @@
 
 
                     <div class="rounded-32 w-100 text-white text-center p-16 mb-4 f-32 fw-bold">
-                        آموزش‌های کاربردی
+                       ورود و ثبت نام
                     </div>
 
                     <div>

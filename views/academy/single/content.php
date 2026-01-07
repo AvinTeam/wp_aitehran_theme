@@ -1,7 +1,7 @@
 <section class="w-100 bg-gray rounded-65 pt-100 px-40 pb-40 ">
 
 
-    <? if($video):?>
+    <?php  if(!empty($video[ 'link' ])):?>
 
     <video class="w-100 rounded" style="height: 300px !important; cursor: pointer;"
         poster="<?php echo $video[ 'poster' ] ?>" controls="" preload="none" muted
@@ -12,11 +12,11 @@
         مرورگر شما از تگ video پشتیبانی نمی‌کند.
     </video>
 
-    <?  else :?>
+    <?php  else :?>
     <img src="<?php echo post_image_url() ?>" alt="<?php the_title(); ?>" class="w-100 object-fit-cover"
         style="max-height: 480px;">
 
-    <?  endif; ?>
+    <?php  endif; ?>
 
 
     <h1 class="f-52 text-justify text-primary my-2"><?php the_title(); ?></h1>

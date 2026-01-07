@@ -20,6 +20,22 @@
             <div class="col-12 col-lg-8 px-2 ">
                 <?php getAlert(); ?>
 
+                <div class="w-100 d-flex flex-row justify-content-between align-items-center mb-32">
+
+                    <a href="<?php echo home_url( "/panel/logout" ) ?>"
+                        class="btn btn-danger rounded-32 px-24 py-2 f-24 fw-bold">
+                        خروج
+                    </a>
+
+                    <a href="<?php echo home_url( "/panel/addTeem" ) ?>" class="btn btn-warning rounded-32 px-24 py-2 f-24 fw-bold
+                        <?php echo $btn_continue ?> ">
+                        مرحله بعد
+                    </a>
+
+                </div>
+
+
+
                 <section id="dashboardForm" class="d-flex flex-column row-gap-3 w-100 bg-gray rounded-65 py-40 px-100 ">
 
                     <?php wp_nonce_field( config( 'app.key' ) . '_dashboardForm_' . get_current_user_id() ); ?>
@@ -51,7 +67,7 @@
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="parent" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام
-                                پدرِ مسئول گروه<span class="text-danger">*</span> :
+                                پدرِ مسئول گروه :
                             </label>
                         </div>
                         <div class="w-100">
@@ -71,6 +87,7 @@
                                 maxlength="10" inputmode="numeric" pattern="\d*">
                         </div>
                     </div>
+
                     <div class=" d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="birthday" class="col-form-label text-nowrap p-2 f-24 fw-bold">تاریخ تولد مسئول
@@ -139,8 +156,6 @@
                         </div>
                     </div>
 
-
-                    <!-- tehrn 331 -->
                     <div id="areasDiv"
                         class="<?php echo 331 == $user_city ? "d-flex" : "d-none" ?>  flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
@@ -161,8 +176,6 @@
                         </div>
                     </div>
 
-
-
                     <div class="d-flex flex-column justify-content-between align-items-start w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="address" class="col-form-label text-nowrap p-2 f-24 fw-bold">محل
@@ -175,63 +188,27 @@
                         </div>
                     </div>
 
-                    <?php
-                        $m = 1;
 
-                    if ( $teems ): ?>
+                    <div class="d-flex flex-row align-items-center justify-content-center gap-24 ">
+                        <button type="button" id="saveDashboard"
+                            class="btn btn-warning rounded-32 w-100 p-2 f-24 fw-bold mt ">
+                            ثبت تغییرات
+                        </button>
+                    </div>
 
 
-                    <h2>لیست اعضا</h2>
-                    <table class="table table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">نام خانوادگی</th>
-                                <th scope="col">کد ملی</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
 
-                            <?php
 
-                            foreach ( $teems as $teem ): ?>
-                            <tr>
-                                <th scope="row"><?php echo $m ?></th>
-                                <td><?php echo $teem[ 'name' ] ?></td>
-                                <td><?php echo $teem[ 'nationalCode' ] ?></td>
-                                <td>
-                                    <a href="<?php echo home_url( '/panel/addTeem/?teem=' . $teem[ 'username' ] ) ?>"
-                                        class="btn btn-info">ویرایش</a>
-                                    <button type="button" id="delTeem" data-username="<?php echo $teem[ 'username' ] ?>"
-                                        class="btn btn-danger">حذف</button>
-                                </td>
-                            </tr>
-
-                            <?php ++$m;endforeach; ?>
-                        </tbody>
-                    </table>
-                    <?php endif; ?>
-
-                    <?php
-
-                    if ( $m <= 4 ): ?>
-                    <a href="<?php echo home_url( "/panel/addTeem" ) ?>"
-                        class="btn btn-secondary rounded-32 w-100 p-2 f-24 fw-bold border border-1 border-black">
-                        افزودن عضو جدید (+)
-                    </a>
-                    <?php endif; ?>
 
                 </section>
 
-                <div class="w-100 d-flex flex-row justify-content-center align-items-center mt-32">
-                    <button type="button" id="nextLevel" class="btn btn-warning rounded-32 w-75 p-2 f-24 fw-bold mt ">
-                        ثبت تغییرات
-                    </button>
-                    <a href="<?= home_url("/panel/addTeem") ?> ?>" id="nextLevel" class="btn btn-warning rounded-32 w-75 p-2 f-24 fw-bold mt ">
+                <!-- <div class="w-100 d-flex flex-row justify-content-between align-items-center mt-32">
+
+                    <a href="<?php echo home_url( "/panel/addTeem" ) ?> ?>" id="nextLevel"
+                        class="btn btn-warning rounded-32 w-75 p-2 f-24 fw-bold mt ">
                         مرحله بعد
                     </a>
-                </div>
+                </div> -->
 
 
 
@@ -239,24 +216,3 @@
         </div>
     </div>
 </section>
-
-
-
-
-<div class="modal fade" id="modalDelTeem" tabindex="-1" aria-labelledby="modalDelTeemLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="modalDelTeemLabel">حذف هم تیمی</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                آیا مطمئن هستید که میخواهید هم تیمی خود را حذف کنید؟
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خیر</button>
-                <a href="" class="btn btn-primary" id="hasDelTeem">بله</a>
-            </div>
-        </div>
-    </div>
-</div>

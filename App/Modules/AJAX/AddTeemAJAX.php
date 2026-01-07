@@ -34,7 +34,7 @@ class AddTeemAJAX extends AJAX {
         }
         
         if ( $create[ 'success' ] ) {
-            wp_send_json_success( home_url( '/panel' ) );
+            wp_send_json_success( home_url( '/panel/addTeem' ) );
         }
 
         wp_send_json_error( $create[ 'massage' ] );
