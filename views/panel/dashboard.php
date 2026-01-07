@@ -226,8 +226,11 @@
 
                 <div class="w-100 d-flex flex-row justify-content-center align-items-center mt-32">
                     <button type="button" id="nextLevel" class="btn btn-warning rounded-32 w-75 p-2 f-24 fw-bold mt ">
-                        مرحله بعد
+                        ثبت تغییرات
                     </button>
+                    <a href="<?= home_url("/panel/addTeem") ?> ?>" id="nextLevel" class="btn btn-warning rounded-32 w-75 p-2 f-24 fw-bold mt ">
+                        مرحله بعد
+                    </a>
                 </div>
 
 

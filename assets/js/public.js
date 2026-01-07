@@ -521,7 +521,7 @@ jQuery(document).ready(function ($) {
         //     setToastDanger("مدرک تحصیلی مسئول گروه را وارد کنید");
         // }
 
-        const address = $($formDiv + " input#address").val();
+        const address = $($formDiv + " textarea#address").val();
 
         // if (!address && is_true) {
         //     is_true = false;
@@ -549,10 +549,6 @@ jQuery(document).ready(function ($) {
         }
 
 
-
-
-        if (false) {
-
             startLoading();
 
             const data = {
@@ -566,9 +562,10 @@ jQuery(document).ready(function ($) {
                 edu: edu,
                 address: address,
                 province: province,
-                city: cites,
+                city: city,
                 area: area,
             }
+
             $.ajax({
                 url: tai_js.ajaxurl,
                 method: 'POST',
@@ -578,10 +575,7 @@ jQuery(document).ready(function ($) {
                     console.log(result);
 
                     if (result.success) {
-
                         window.location.href = result.data;
-
-
                     } else {
                         setToastDanger(result.data);
                         endLoading();
@@ -603,9 +597,6 @@ jQuery(document).ready(function ($) {
 
                 }
             });
-
-
-        }
 
     });
 
@@ -783,9 +774,6 @@ jQuery(document).ready(function ($) {
 
         let city_id = $(this).val()
 
-        console.log(city_id);
-
-
         $($areasDiv).addClass("d-none");
         $($areasDiv).removeClass("d-flex");
 
@@ -794,16 +782,6 @@ jQuery(document).ready(function ($) {
             $($areasDiv).addClass("d-flex");
             $($areasDiv).removeClass("d-none");
         }
-
-
-
-
-        console.log($(this).val());
-        // const provinceId = $(this).val();
-        // loadCities(provinceId);
     });
-
-
-    // /panel/?delTeem='
 
 });

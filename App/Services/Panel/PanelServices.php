@@ -3,6 +3,7 @@ namespace TAI\App\Services\Panel;
 
 use Exception;
 use TAI\App\Core\SendSMS;
+use TAI\App\Models\Groups;
 use TAI\App\Models\Iran;
 use TAI\App\Services\Service;
 use WP_Query;
@@ -17,16 +18,27 @@ class PanelServices extends Service {
 
     public function dashboard() {
 
-        $provinces = Iran::all()->where( "province_id", "=", 0 )->orderBy( "name" )->toArray();
+        $user_province = 0;
+        $user_city     = 0;
+        $user_area     = 0;
 
-        $user_province = absint( get_user_meta( get_current_user_id(), "provinceId", true ) );
+        $group = Groups::all()->where( "user_id", get_current_user_id() );
+
+        if ( $group->count() ) {
+            $user_info     = ( $group->toArray() )[ 0 ];
+            $user_province = absint( $user_info[ "province_id" ] );
+            $user_city     = absint( $user_info[ "city_id" ] );
+            $user_area     = absint( $user_info[ "area_id" ] );
+        }
+
+        $provinces = Iran::all()->where( "province_id", "=", 0 )->orderBy( "name" )->toArray();
 
         if ( $user_province ) {
             $cities = Iran::all()->where( "province_id", "=", $user_province )->orderBy( "name" )->toArray();
         }
 
-        return array(
 
+        return array(
             'groupName'     => get_user_meta( get_current_user_id(), "groupName", true ),
             'fullName'      => get_user_meta( get_current_user_id(), "fullName", true ),
             'parent'        => get_user_meta( get_current_user_id(), "parent", true ),
@@ -38,8 +50,8 @@ class PanelServices extends Service {
             'provinces'     => $provinces ?? array(),
             'user_province' => $user_province,
             'cities'        => $cities ?? array(),
-            'user_city'     => get_user_meta( get_current_user_id(), "cityId", true ),
-            'user_area'     => get_user_meta( get_current_user_id(), "areaId", true ),
+            'user_city'     => $user_city,
+            'user_area'     => $user_area,
 
         );
     }
@@ -88,7 +100,26 @@ class PanelServices extends Service {
         update_user_meta( get_current_user_id(), "edu", sanitize_text_field( $request[ 'edu' ] ) );
         update_user_meta( get_current_user_id(), "address", sanitize_text_field( $request[ 'address' ] ) );
 
-        //    $full_name = $first_name . ' ' . $last_name;
+        $group = Groups::all()->where( "user_id", get_current_user_id() );
+
+        if ( $group->count() ) {
+            $id = ( $group->toArray() )[ 0 ][ "id" ];
+
+            Groups::find( $id )->update( array(
+                "province_id" => absint( $request[ 'province' ] ),
+                "city_id"     => absint( $request[ 'city' ] ),
+                "area_id"     => absint( $request[ 'area' ] ),
+            ) );
+        } else {
+            Groups::create( array(
+                "user_id"     => get_current_user_id(),
+                "province_id" => absint( $request[ 'province' ] ),
+                "city_id"     => absint( $request[ 'city' ] ),
+                "area_id"     => absint( $request[ 'area' ] ),
+
+            ) );
+        }
+
 
         update_user_meta( get_current_user_id(), 'nickname', $fullName );
 

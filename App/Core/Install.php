@@ -178,8 +178,8 @@ class Install {
                     `id` bigint unsigned NOT NULL AUTO_INCREMENT,
                     `user_id` bigint unsigned NOT NULL,
                     `province_id` int NOT NULL,
-                    `city_id ` int NOT NULL,
-                    `area_id ` int NOT NULL,
+                    `city_id` int NOT NULL,
+                    `area_id` int NOT NULL,
                     PRIMARY KEY (`id`),
                     FOREIGN KEY (`user_id`) REFERENCES `$users_table`(`id`) ON DELETE CASCADE
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE={$this->collate}";
