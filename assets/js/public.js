@@ -722,52 +722,17 @@ jQuery(document).ready(function ($) {
                 data: data,
                 dataType: 'json',
                 success: function (result) {
-
+                    let optionCites = `<option value="0"> انتخاب شهر</option>`;
                     if (result.success) {
-
-
-let result
-
-
-let ranks = ['A', 'B', 'C'];
-ranks.forEach(function (e) {
-    console.log(e);
-});
- 
-
-
-            const newRow = `<div class="atlas-teacher-row row mb-2" >
-                                <div class="col-10"><input class=" form-control " name="atlas[teacher][]" value=""></div>
-                                <button type="button" class="btn btn-danger atlas-teacher-remove col-2">حذف</button>
-                              </div>`;
-
-            $('.provinces').append(newRow);
-
-
-
-
-                        setToastDanger(result.data, result.success);
+                        let cites = result.data;
+                        cites.forEach(function (e) {
+                            optionCites += `<option value="${e.id}">${e.name}</option>`;
+                        });
+                        $('#cites').append(optionCites);
                     } else {
-
-
                         setToastDanger("دریافت شهر به خطا خورده دوباره تلاش کنید")
-
-
                     }
-
                     endLoading();
-
-
-
-
-
-
-                    console.error("به خطا خورده");
-
-                    endLoading();
-                    console.log(result);
-
-
                 },
                 error: function () {
 
