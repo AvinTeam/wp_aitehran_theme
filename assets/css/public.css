@@ -1163,6 +1163,10 @@ a.btn-outline-light:hover {
   width: 48px !important;
 }
 
+.w-60 {
+  width: 60px !important;
+}
+
 .w-90 {
   width: 90px !important;
 }
@@ -1212,6 +1216,11 @@ a.btn-outline-light:hover {
 .h-48 {
   height: 48px !important;
 }
+
+.h-60 {
+  height: 60px !important;
+}
+
 
 .h-90 {
   height: 90px !important;

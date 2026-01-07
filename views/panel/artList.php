@@ -53,14 +53,80 @@
                         <?php
 
                             if ( count( $items ) == 0 ) {
-                                echo '<p class="w-100  text-center ">شما اثری ثبت نکرده اید</p>';
-                            }
+                                echo '<div class="alert alert-light text-center w-100" role="alert"> شما اثری ثبت نکرده اید</div>';
+                            } else {}
 
-                            $m = 1;
+                        ?>
 
-                        foreach ( $items as $item ): ?>
 
-                        <a href="<?php echo $item[ 'link' ] ?>"
+
+
+
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">عنوان</th>
+                                    <th scope="col">قالب اثر</th>
+                                    <th scope="col">کد رهگیری</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php
+                                    $m = 1;
+
+                                foreach ( $items as $item ): ?>
+                                <tr>
+                                    <th scope="row">
+                                        <span class="d-flex align-items-center h-60">
+                                            <?php echo $m ?>
+                                    </th>
+                                    </span>
+                                    <td>
+                                        <span class="d-flex align-items-center h-60">
+                                            <?php echo $item[ 'title' ] ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="d-flex align-items-center h-60">
+                                            <?php echo $item[ 'format' ] ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="d-flex align-items-center h-60">
+                                            <?php echo $item[ 'tracking_code' ] ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                         <span class="d-flex gap-3 align-items-center h-60">
+                                        <a href="<?php echo $item[ 'link' ] ?>" class="btn btn-info">ویرایش</a>
+                                        <button type="button" id="delTeem"
+                                            data-username="<?php echo $teem[ 'username' ] ?>"
+                                            class="btn btn-danger">حذف</button>
+                                            
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <?php ++$m;endforeach; ?>
+                            </tbody>
+                        </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <!-- <a href="<?php echo $item[ 'link' ] ?>"
                             class="col-form-label text-nowrap p-2 fw-bold f-32 text-primary w-100 d-flex flex-row align-items-center justify-content-between">
                             <div>
                                 <span class="text-secondary me-2"><?php echo $m ?>-</span><?php echo $item[ 'title' ] ?>
@@ -75,11 +141,8 @@
 
                         </a>
 
-                        <hr class="w-100">
+                        <hr class="w-100"> -->
 
-
-
-                        <?php ++$m;endforeach?>
 
 
 

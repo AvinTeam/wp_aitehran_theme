@@ -302,21 +302,14 @@ class PanelServices extends Service {
     }
 
     public function artList() {
-        $page     = $params[ 'paged' ] ?? 1;
-        $per_page = $params[ 'per_page' ] ?? 20;
-
         $args = array(
             'post_type'      => 'matart',
             'post_status'    => 'publish',
-            'posts_per_page' => $per_page,
-            'paged'          => $page,
+            'posts_per_page' => -1,
             'orderby'        => 'date',
             'order'          => 'DESC',
+            'author'         => get_current_user_id(),
         );
-
-        if ( ! current_user_can( 'administrator' ) ) {
-            $args[ 'author' ] = get_current_user_id();
-        }
 
         $query = new WP_Query( $args );
 
@@ -332,6 +325,7 @@ class PanelServices extends Service {
                     "title"  => get_the_title(),
                     "link"   => home_url( '/panel/art-info/?tracking_code=' . ( $tracking_code ?? 0 ) ),
                     "format" => ( $format_art[ 0 ]->name ?? "نا مشخص" ),
+                    "tracking_code" => $tracking_code ?? 0,
                 );
             }
         }
@@ -340,12 +334,8 @@ class PanelServices extends Service {
             'sidebarItems' => $this->sidebar(),
             'items'        => $items ?? array(),
             'pagination'   => array(
-                'current_page' => absint( $page ),
-                'per_page'     => absint( $per_page ),
                 'total_posts'  => absint( $query->found_posts ),
                 'total_pages'  => absint( $query->max_num_pages ),
-                'has_next'     => absint( $page ) < absint( $query->max_num_pages ),
-                'has_prev'     => absint( $page ) > 1,
             ),
         );
     }
@@ -504,7 +494,6 @@ class PanelServices extends Service {
         $this->uploadArtFile( $file[ 'art_file' ] ?? null, $art_id );
 
         $this->uploadDocumentation( $file, $art_id, $request );
-        
 
         if ( "create" == $action ) {
             wp_update_post( array(
