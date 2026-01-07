@@ -99,12 +99,16 @@
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="provinces" class="col-form-label text-nowrap p-2 f-24 fw-bold">استان مسئول گروه<span class="text-danger">*</span> : </label>
+                            <label for="provinces" class="col-form-label text-nowrap p-2 f-24 fw-bold">استان مسئول
+                                گروه<span class="text-danger">*</span> : </label>
                         </div>
                         <div class="w-100">
-                            <select class="form-select form-select w-100 border border-1 border-black rounded-32" id="provinces" name="provinces">
+                            <select class="form-select form-select w-100 border border-1 border-black rounded-32"
+                                id="provinces" name="provinces">
                                 <option value="0"> انتخاب استان</option>
-                                <?php foreach ( $provinces ?? array(  ) as $province ): ?>
+                                <?php
+
+                                foreach ( $provinces ?? array() as $province ): ?>
                                 <option value="<?php echo $province[ 'id' ] ?>"
                                     <?php echo selected( $province[ 'id' ], $user_province ) ?>>
                                     <?php echo $province[ 'name' ] ?></option>
@@ -114,15 +118,19 @@
                         </div>
                     </div>
 
-                    
+
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="cites" class="col-form-label text-nowrap p-2 f-24 fw-bold">شهر مسئول گروه<span class="text-danger">*</span> : </label>
+                            <label for="cites" class="col-form-label text-nowrap p-2 f-24 fw-bold">شهر مسئول گروه<span
+                                    class="text-danger">*</span> : </label>
                         </div>
                         <div class="w-100">
-                            <select class="form-select form-select w-100 border border-1 border-black rounded-32" id="cites" name="cites">
+                            <select class="form-select form-select w-100 border border-1 border-black rounded-32"
+                                id="cites" name="cites">
                                 <option value="0"> انتخاب شهر</option>
-                                <?php foreach ( $cities ?? array(  ) as $city ): ?>
+                                <?php
+
+                                foreach ( $cities ?? array() as $city ): ?>
                                 <option value="<?php echo $city[ 'id' ] ?>"
                                     <?php echo selected( $city[ 'id' ], $user_city ) ?>>
                                     <?php echo $city[ 'name' ] ?></option>
@@ -133,32 +141,37 @@
 
 
                     <!-- tehrn 331 -->
-                    <div id="areasDiv" class="d-none flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                    <div id="areasDiv"
+                        class="<?php echo 331 == $user_city ? "d-flex" : "d-none" ?>  flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="areas" class="col-form-label text-nowrap p-2 f-24 fw-bold">منطقه مسئول گروه<span class="text-danger">*</span> : </label>
+                            <label for="areas" class="col-form-label text-nowrap p-2 f-24 fw-bold">منطقه مسئول گروه<span
+                                    class="text-danger">*</span> : </label>
                         </div>
                         <div class="w-100">
-                            <select class="form-select form-select w-100 border border-1 border-black rounded-32" id="areas" name="areas">
+                            <select class="form-select form-select w-100 border border-1 border-black rounded-32"
+                                id="areas" name="areas">
                                 <option value="0"> انتخاب شهر</option>
-                                <?php foreach ( $cities ?? array(  ) as $city ): ?>
-                                <option value="<?php echo $city[ 'id' ] ?>"
-                                    <?php echo selected( $city[ 'id' ], $user_city ) ?>>
-                                    <?php echo $city[ 'name' ] ?></option>
-                                <?php endforeach; ?>
+                                <?php
+
+                                for ( $i = 1; $i < 23; ++$i ): ?>
+                                <option value="<?php echo $i ?>" <?php echo selected( $i, $user_area ) ?>>
+                                    <?php echo sprintf( "منطقه %d", $i ) ?></option>
+                                <?php endfor; ?>
                             </select>
                         </div>
                     </div>
 
 
 
-                    <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                    <div class="d-flex flex-column justify-content-between align-items-start w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="address" class="col-form-label text-nowrap p-2 f-24 fw-bold">محل
                                 سکونت مسئول گروه : </label>
                         </div>
                         <div class="w-100">
-                            <input type="text" id="address" value="<?php echo $address ?>"
-                                class="form-control w-100 border border-1 border-black rounded-32">
+
+                            <textarea rows="5" id="address"
+                                class="form-control w-100 border border-1 border-black rounded-32 p-3"><?php echo $address ?></textarea>
                         </div>
                     </div>
 

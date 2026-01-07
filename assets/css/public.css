@@ -139,6 +139,9 @@ select {
   cursor: pointer !important;
 }
 
+textarea {
+  resize: none;
+}
 
 .text-1-lines {
   display: -webkit-box;
