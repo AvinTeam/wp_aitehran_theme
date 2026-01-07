@@ -48,7 +48,7 @@
                         </div>
                         <div class="w-100">
                             <input type="text" id="groupName" value="<?php echo $groupName ?>"
-                                class="form-control w-100 border border-1 border-black rounded-32">
+                                class="form-control w-100 border border-1 border-black rounded-32 only-fa">
                         </div>
                     </div>
 
@@ -60,7 +60,7 @@
                         </div>
                         <div class="w-100">
                             <input type="text" id="fullName" value="<?php echo $fullName ?>"
-                                class="form-control w-100 border border-1 border-black rounded-32">
+                                class="form-control w-100 border border-1 border-black rounded-32 only-fa">
                         </div>
                     </div>
 
@@ -72,7 +72,7 @@
                         </div>
                         <div class="w-100">
                             <input type="text" id="parent" value="<?php echo $parent ?>"
-                                class="form-control w-100 border border-1 border-black rounded-32">
+                                class="form-control w-100 border border-1 border-black rounded-32 only-fa">
                         </div>
                     </div>
 
@@ -110,7 +110,7 @@
                         </div>
                         <div class="w-100">
                             <input type="text" id="edu" value="<?php echo $edu ?>"
-                                class="form-control w-100 border border-1 border-black rounded-32">
+                                class="form-control w-100 border border-1 border-black rounded-32 only-fa">
                         </div>
                     </div>
 

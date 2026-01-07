@@ -98,7 +98,7 @@ class UserEditForms {
                 $user_query = new WP_User_Query( $args );
 
                 if ( $user_query->get_total() ) {
-                    $this->error( "این کاربر قبلا ثبت نام شده است" );
+                    $this->error( "این کد ملی قبلا ثبت نام شده است" );
                     exit;
                 }
             }

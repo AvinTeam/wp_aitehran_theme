@@ -333,6 +333,11 @@ jQuery(document).ready(function ($) {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
 
+
+    $(document).on("input", ".only-fa", function () {
+    $(this).val($(this).val().replace(/[^\u0600-\u06FF\s]/g, ""));
+});
+
     let alertSuccess = "alert-success";
     let alertDanger = "alert-danger";
 

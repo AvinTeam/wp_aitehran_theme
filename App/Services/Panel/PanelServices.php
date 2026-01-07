@@ -98,7 +98,7 @@ class PanelServices extends Service {
 
             if ( $user_query->get_total() ) {
                 return array(
-                    "massage" => "این کاربر قبلا ثبت نام شده است",
+                    "massage" => "این کد ملی قبلا ثبت نام شده است",
                     "success" => false,
 
                 );
@@ -167,21 +167,6 @@ class PanelServices extends Service {
             }
         }
 
-        if ( ! $user_id ) {
-            $args = array(
-                'meta_key'   => 'user_leader',
-                'meta_value' => get_current_user_id(),
-            );
-
-            $user_query = new WP_User_Query( $args );
-
-            if ( $user_query->get_total() >= 4 ) {
-                wp_redirect( home_url( '/panel' ) );
-            }
-        }
-
-
-
         $args = array(
             'meta_key'   => 'user_leader',
             'meta_value' => get_current_user_id(),
@@ -200,14 +185,6 @@ class PanelServices extends Service {
                 );
             }
         }
-
-
-
-
-
-
-
-
 
         return array(
 
@@ -241,7 +218,7 @@ class PanelServices extends Service {
 
         if ( $user_query->get_total() ) {
             return array(
-                "massage" => "این کاربر قبلا ثبت نام شده است",
+                "massage" => "این کاربر قبلا در تیم دیگر ثبت نام شده است",
                 "success" => false,
 
             );
@@ -527,6 +504,14 @@ class PanelServices extends Service {
         $this->uploadArtFile( $file[ 'art_file' ] ?? null, $art_id );
 
         $this->uploadDocumentation( $file, $art_id, $request );
+        
+
+        if ( "create" == $action ) {
+            wp_update_post( array(
+                'ID'          => $art_id,
+                'post_status' => 'publish',
+            ) );
+        }
 
         return array(
             "massage" => $massage,
@@ -548,7 +533,7 @@ class PanelServices extends Service {
         $post_data = array(
             'post_title'  => sanitize_text_field( $request[ 'art_title' ] ),
             'post_type'   => 'matart',
-            'post_status' => 'publish',
+            'post_status' => 'draft',
             'post_author' => get_current_user_id(),
             'post_date'   => current_time( 'mysql' ),
             'meta_input'  => array(
