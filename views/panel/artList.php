@@ -54,13 +54,8 @@
 
                             if ( count( $items ) == 0 ) {
                                 echo '<div class="alert alert-light text-center w-100" role="alert"> شما اثری ثبت نکرده اید</div>';
-                            } else {}
-
-                        ?>
-
-
-
-
+                            } else {
+                            ?>
 
                         <table class="table table-hover table-striped">
                             <thead>
@@ -77,7 +72,7 @@
                                 <?php
                                     $m = 1;
 
-                                foreach ( $items as $item ): ?>
+                                    foreach ( $items as $item ): ?>
                                 <tr>
                                     <th scope="row">
                                         <span class="d-flex align-items-center h-60">
@@ -100,12 +95,12 @@
                                         </span>
                                     </td>
                                     <td>
-                                         <span class="d-flex gap-3 align-items-center h-60">
-                                        <a href="<?php echo $item[ 'link' ] ?>" class="btn btn-info">ویرایش</a>
-                                        <button type="button" id="delTeem"
-                                            data-username="<?php echo $teem[ 'username' ] ?>"
-                                            class="btn btn-danger">حذف</button>
-                                            
+                                        <span class="d-flex gap-3 align-items-center h-60">
+                                            <a href="<?php echo $item[ 'link' ] ?>" class="btn btn-info">ویرایش</a>
+                                            <button type="button" id="deArt"
+                                                data-tracking-code="<?php echo $item[ 'tracking_code' ] ?>"
+                                                class="btn btn-danger">حذف</button>
+
                                         </span>
                                     </td>
                                 </tr>
@@ -113,48 +108,31 @@
                                 <?php ++$m;endforeach; ?>
                             </tbody>
                         </table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <!-- <a href="<?php echo $item[ 'link' ] ?>"
-                            class="col-form-label text-nowrap p-2 fw-bold f-32 text-primary w-100 d-flex flex-row align-items-center justify-content-between">
-                            <div>
-                                <span class="text-secondary me-2"><?php echo $m ?>-</span><?php echo $item[ 'title' ] ?>
-                            </div>
-                            <span style="color: #5A5A5A; font-size: 14px;">
-                                <?php echo sprintf( "قالب اثر : %s", $item[ 'format' ] ) ?>
-
-                            </span>
-
-
-
-
-                        </a>
-
-                        <hr class="w-100"> -->
-
-
-
-
-
+                        <?php }
+                        ?>
                     </div>
-
-
-
-
-
                 </section>
             </div>
         </div>
     </div>
 </section>
+
+
+
+<div class="modal fade" id="modalDelArt" tabindex="-1" aria-labelledby="modalDelArtLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalDelArtLabel">حذف اثر</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                آیا مطمئن هستید که میخواهید اثر خود را حذف کنید؟
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-primary" id="hasDelTeem">بله</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خیر</button>
+            </div>
+        </div>
+    </div>
+</div>

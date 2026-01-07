@@ -716,6 +716,18 @@ jQuery(document).ready(function ($) {
 
     });
 
+    $("button#deArt").click(function (e) {
+        e.preventDefault();
+
+        let id = $(this).attr("data-tracking-code");
+
+        $("#modalDelArt #hasDelTeem").attr("href", "/panel/?delArt=" + id);
+
+        $("#modalDelArt").modal("show");
+
+
+    });
+
 
     $('#provinces').on('change', function () {
 
