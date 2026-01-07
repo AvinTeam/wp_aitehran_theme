@@ -28,15 +28,14 @@ class PanelController extends Controller {
     public function getTeem() {
         return $this->services->getTeem( $_REQUEST );
     }
-    
+
     public function addTeem( $request ) {
         return $this->services->addTeem( $_REQUEST );
     }
 
-      public function updateTeem( $request ) {
+    public function updateTeem( $request ) {
         return $this->services->updateTeem( $_REQUEST );
     }
-
 
     public function artList() {
         return $this->services->artList( $_REQUEST );
@@ -48,9 +47,9 @@ class PanelController extends Controller {
 
     public function logout() {
 
-
-        dd();
-
+        wp_logout();
+        wp_redirect(home_url("/panel"));
+        exit;
 
     }
 
