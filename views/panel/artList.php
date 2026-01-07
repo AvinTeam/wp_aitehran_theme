@@ -10,7 +10,7 @@
                 <div
                     class="bg-secondary d-flex flex-column justify-content-center align-items-center rounded-65  px-40 py-24 mb-3">
                     <div class="rounded-32 w-100 text-white text-center p-16 mb-4 f-32 fw-bold">
-                       ثبت نام و ارسال اثر
+                        ثبت نام و ارسال اثر
                     </div>
 
                     <div>
@@ -25,7 +25,7 @@
 
                 <div class="w-100 d-flex flex-row justify-content-between align-items-center mb-32">
 
-                    <a href="<?php echo home_url( "/panel" ) ?>"
+                    <a href="<?php echo home_url( "/panel/addTeem/" ) ?>"
                         class="btn btn-dark rounded-32 px-24 py-2 f-24 fw-bold">
                         بازگشت
                     </a>
@@ -43,6 +43,11 @@
                 </div>
                 <?php getAlert(); ?>
                 <section class="d-flex flex-column row-gap-3 w-100 bg-gray rounded-65 py-40 px-100  ">
+
+
+                    <div class="alert alert-primary text-primary text-center" role="alert">
+                        تعداد آثار قابل ثبت در هر قالب حداکثر ۵ اثر و در مجموع؛ حداکثر تعداد آثار قابل ثبت ۱۰ اثر
+                    </div>
                     <div class="d-flex flex-column justify-content-center align-items-center">
 
                         <?php

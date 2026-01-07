@@ -33,15 +33,8 @@
                     </a>
                 </div>
 
-
-
-
-
-
                 <section id="addTeemForm" class="d-flex flex-column row-gap-3 w-100 bg-gray rounded-65 py-40 px-100 ">
-
-
-                    <div class="alert alert-primary text-primary" role="alert">
+                    <div class="alert alert-primary text-primary text-center" role="alert">
                         حداکثر تعداد اعضای تیم 4 تفر می باشد
                     </div>
 
