@@ -9,7 +9,7 @@
     $homeController->heroSection();
     $homeController->format();
     $homeController->news(
-        "اخبار",
+        "اخبار جشنواره ",
         "var(--bs-warning)",
         "news"
     );
