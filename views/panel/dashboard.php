@@ -99,7 +99,7 @@
 
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="provinces" class="col-form-label text-nowrap p-2 f-24 fw-bold">استان مسئول گروه : </label>
+                            <label for="provinces" class="col-form-label text-nowrap p-2 f-24 fw-bold">استان مسئول گروه<span class="text-danger">*</span> : </label>
                         </div>
                         <div class="w-100">
                             <select class="form-select form-select w-100 border border-1 border-black rounded-32" id="provinces" name="provinces">
@@ -117,7 +117,7 @@
                     
                     <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="cites" class="col-form-label text-nowrap p-2 f-24 fw-bold">شهر مسئول گروه : </label>
+                            <label for="cites" class="col-form-label text-nowrap p-2 f-24 fw-bold">شهر مسئول گروه<span class="text-danger">*</span> : </label>
                         </div>
                         <div class="w-100">
                             <select class="form-select form-select w-100 border border-1 border-black rounded-32" id="cites" name="cites">
@@ -132,13 +132,13 @@
                     </div>
 
 
-                    
-                    <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                    <!-- tehrn 331 -->
+                    <div id="areasDiv" class="d-none flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="address" class="col-form-label text-nowrap p-2 f-24 fw-bold">منطقه مسئول گروه : </label>
+                            <label for="areas" class="col-form-label text-nowrap p-2 f-24 fw-bold">منطقه مسئول گروه<span class="text-danger">*</span> : </label>
                         </div>
                         <div class="w-100">
-                            <select class="form-select form-select w-100 border border-1 border-black rounded-32" id="provinces" name="provinces">
+                            <select class="form-select form-select w-100 border border-1 border-black rounded-32" id="areas" name="areas">
                                 <option value="0"> انتخاب شهر</option>
                                 <?php foreach ( $cities ?? array(  ) as $city ): ?>
                                 <option value="<?php echo $city[ 'id' ] ?>"

@@ -466,47 +466,51 @@ jQuery(document).ready(function ($) {
 
         $formDiv = "section#dashboardForm";
 
-        let is_true = true;
-
         const groupName = $($formDiv + " input#groupName").val();
 
-        if (!groupName && is_true) {
-            is_true = false;
+        if (!groupName) {
             setToastDanger("نام گروه را وارد کنید");
+            return;
+
         }
 
         const fullName = $($formDiv + " input#fullName").val();
 
-        if (!fullName && is_true) {
-            is_true = false;
+        if (!fullName) {
             setToastDanger("نام و نام خانوادگی مسئول گروه را وارد کنید");
+            return;
+
         }
 
 
         const parent = $($formDiv + " input#parent").val();
 
-        if (!parent && is_true) {
-            is_true = false;
+        if (!parent) {
             setToastDanger("نام پدرِ مسئول گروه را وارد کنید");
+            return;
+
         }
 
         const nationalCode = $($formDiv + " input#nationalCode").val();
 
-        if (!nationalCode && is_true) {
-            is_true = false;
+        if (!nationalCode) {
             setToastDanger("کد ملی مسئول گروه را وارد کنید");
+            return;
+
         }
 
-        if (!national_code(nationalCode) && is_true) {
-            is_true = false;
+        if (!national_code(nationalCode)) {
             setToastDanger("کد ملی مسئول گروه را به درستی وارد کنید");
+            return;
+
         }
 
         const birthday = $($formDiv + " input#birthday").val();
 
-        if (!birthday && is_true) {
-            is_true = false;
+        if (!birthday) {
             setToastDanger("تاریخ تولد مسئول گروه را وارد کنید");
+            return;
+
         }
 
 
@@ -527,11 +531,27 @@ jQuery(document).ready(function ($) {
 
         const province = $($formDiv + " select#provinces").val();
 
+        if (!Number(province)) {
+            setToastDanger("استان مسئول گروه را وارد کنید");
+            return;
+        }
 
-        console.log(province);
+        const city = $($formDiv + " select#cites").val();
+        if (!Number(city)) {
+            setToastDanger("شهر مسئول گروه را وارد کنید");
+            return;
+        }
+
+        const area = $($formDiv + " select#areas").val();
+        if (!Number(area) && Number(city) == 331) {
+            setToastDanger("منطقه مسئول گروه را وارد کنید");
+            return;
+        }
 
 
-        if (is_true) {
+
+
+        if (false) {
 
             startLoading();
 
@@ -545,6 +565,9 @@ jQuery(document).ready(function ($) {
                 birthday: birthday,
                 edu: edu,
                 address: address,
+                province: province,
+                city: cites,
+                area: area,
             }
             $.ajax({
                 url: tai_js.ajaxurl,
@@ -708,9 +731,6 @@ jQuery(document).ready(function ($) {
 
             startLoading();
 
-
-
-
             const data = {
                 action: 'tai_cities',
                 province_id: Number(province_id),
@@ -722,6 +742,10 @@ jQuery(document).ready(function ($) {
                 data: data,
                 dataType: 'json',
                 success: function (result) {
+
+                    $("#cites").html("");
+
+
                     let optionCites = `<option value="0"> انتخاب شهر</option>`;
                     if (result.success) {
                         let cites = result.data;
@@ -751,7 +775,25 @@ jQuery(document).ready(function ($) {
 
 
         }
+    });
 
+    $('#cites').on('change', function () {
+
+        $areasDiv = "#areasDiv";
+
+        let city_id = $(this).val()
+
+        console.log(city_id);
+
+
+        $($areasDiv).addClass("d-none");
+        $($areasDiv).removeClass("d-flex");
+
+
+        if (Number(city_id) == 331) {
+            $($areasDiv).addClass("d-flex");
+            $($areasDiv).removeClass("d-none");
+        }
 
 
 
