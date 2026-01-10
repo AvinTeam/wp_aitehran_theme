@@ -13,8 +13,7 @@
                                 <img src="<?php echo $item[ "image" ] ?>" alt="<?php echo $item[ "title" ] ?>"
                                     class="w-100 object-fit-cover">
                             </a>
-                            <div class="d-flex flex-column justify-content-center align-items-center row-gap-3 w-100 px-24 position-absolute bottom-0 opacity-75"
-                                style="background-color: #2E3092; height: 105px;">
+                            <div class="d-flex flex-column justify-content-center align-items-center row-gap-3 w-100 px-24 position-absolute bottom-0 opacity-75 sliderTitle" >
                                 <a href="<?php echo $item[ "link" ] ?>"
                                     class="btn btn-link f-20 fw-bold w-100 text-start text-justify"><?php echo $item[ "title" ] ?></a>
                             </div>

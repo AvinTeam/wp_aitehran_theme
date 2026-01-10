@@ -4,7 +4,6 @@ use TAI\App\Controllers\Blog\BlogController;
 
 $controller = new BlogController(($_GET ?? [  ]));
 
-
     get_header();
 
 ?>

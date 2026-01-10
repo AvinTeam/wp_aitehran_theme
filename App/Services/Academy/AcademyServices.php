@@ -37,15 +37,12 @@ class AcademyServices extends Service {
             wp_reset_postdata();
         endif;
 
-
-
         return array(
-            'items'        => $allPost ?? array(),
+            'items' => $allPost ?? array(),
         );
     }
 
     public function get_video() {
-
         $video = get_post_meta( get_the_ID(), '_academy_video', true );
 
         $image = absint( $video[ 'image' ] ?? 0 );
@@ -64,52 +61,83 @@ class AcademyServices extends Service {
 
     public function archive() {
 
-
-        $args = array(
+        $parent_args = array(
             'taxonomy'   => 'academy_category',
             'hide_empty' => false,
+            'parent'     => 0,
             'orderby'    => 'name',
             'order'      => 'ASC',
         );
 
-        $terms = get_terms( $args );
+        foreach ( get_terms( $parent_args ) ?? array() as $parent_term ) {
+            $child = array();
 
-        $all_post = array();
-
-        foreach ( $terms as $term ) {
-            $posts = array();
-
-            $args = array(
-                'post_type'      => 'academy',
-                'posts_per_page' => -1,
-                'post_status'    => 'publish',
-                'tax_query'      => array(
-                    array(
-                        'taxonomy' => 'academy_category',
-                        'field'    => 'term_id',
-                        'terms'    => $term->term_id,
-                    ),
-                ),
-
+            $child_args = array(
+                'taxonomy'   => 'academy_category',
+                'hide_empty' => false,
+                'parent'     => $parent_term->term_id,
+                'orderby'    => 'name',
+                'order'      => 'ASC',
             );
 
-            foreach ( get_posts( $args ) as $row ) {
-                $video = get_post_meta( get_the_ID(), '_academy_video', true );
-
-                $posts[  ] = array(
-                    "title"  => get_the_title( $row->ID ),
-                    "image"  => post_image_url( $row->ID ),
-                    "link"   => get_permalink( $row->ID ),
-                    "time"   => ( isset( $video[ 'time' ] ) && ! empty( $video[ 'time' ] ) ) ? $video[ 'time' ] : "00:00",
+            foreach ( get_terms( $child_args ) ?? array() as $child_term ) {
+                $child[  ] = array(
+                    "id"   => $child_term->term_id,
+                    "name" => $child_term->name,
+                    "link" => get_category_link( $child_term->term_id ),
                 );
             }
 
-            $all_post[  ] = array(
-                'title' => $term->name,
-                "posts" => $posts,
+            $items[  ] = array(
+                "id"    => $parent_term->term_id,
+                "name"  => $parent_term->name,
+                "link"  => get_category_link( $parent_term->term_id ),
+                "child" => $child,
             );
         }
 
-        return $all_post ?? array();
+        return array(
+            "items" => $items ?? array(),
+        );
+    }
+
+    public function taxonomy() {
+
+        $current_category_id = get_queried_object_id();
+
+
+        $posts = array();
+
+        $args = array(
+
+            'post_type'      => 'academy',
+            'posts_per_page' => -1,
+            'post_status'    => 'publish',
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => 'academy_category',
+                    'field'    => 'term_id',
+                    'terms'    => $current_category_id,
+                ),
+
+            ),
+
+        );
+
+        foreach ( get_posts( $args ) as $row ) {
+            $video = get_post_meta( get_the_ID(), '_academy_video', true );
+
+            $posts[  ] = array(
+
+                "title" => get_the_title( $row->ID ),
+                "image" => post_image_url( $row->ID ),
+                "link"  => get_permalink( $row->ID ),
+                "time"  => ( isset( $video[ 'time' ] ) && ! empty( $video[ 'time' ] ) ) ? $video[ 'time' ] : "00:00",
+            );
+        }
+        return array(
+            'title' => get_the_archive_title() ,
+            "posts" => $posts ?? array(  ),
+        );
     }
 }

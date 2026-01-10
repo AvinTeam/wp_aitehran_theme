@@ -31,8 +31,11 @@ class AcademyController extends Controller {
 
     }
     public function archive() {
-        view( 'academy/archive/content',
-            array( "items" => $this->services->archive() ) );
+        view( 'academy/archive/content', $this->services->archive() );
+
+    }
+    public function taxonomy() {
+        view( 'academy/archive/content', $this->services->taxonomy() );
 
     }
 
