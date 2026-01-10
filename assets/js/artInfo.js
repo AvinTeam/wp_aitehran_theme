@@ -73,6 +73,16 @@ jQuery(document).ready(function ($) {
 
         }
 
+        const subject_other_art = $($formDiv + " input[name=subject_other_art]").val();
+
+        if (Number(subject_art) == 9 && subject_other_art == "") {
+            setToastDanger("موضوع خود را وار د کنید");
+            return;
+
+        }
+
+
+
         const year = $($formDiv + " select[name=year]").val();
 
         if (!Number(year)) {
@@ -121,14 +131,29 @@ jQuery(document).ready(function ($) {
         documentation.each(function () {
             if (this.files.length === 0) {
                 isValid = false;
-           
+
                 return false;
             }
         });
 
-        if (!isValid || documentation.length < 1) {
-             setToastDanger('مستندات تولید باید وارد شود.');
-            return;  
+        if (documentation.length < 1) {
+            isValid = false;
+
+
+        }
+
+        let documentationFile = document.querySelectorAll('a.documentationFile').length;
+
+        if (documentationFile) {
+            isValid = true;
+
+        }
+
+
+
+        if (!isValid) {
+            setToastDanger('مستندات تولید باید وارد شود.');
+            return;
         }
 
 
@@ -187,6 +212,23 @@ jQuery(document).ready(function ($) {
             imageIds.push($(this).data('id'));
         });
         $('#tai-document').val(imageIds.join(','));
+    });
+
+
+    $('#subject_art').on('change', function () {
+
+        $otherDiv = "#otherDiv";
+
+        let subject_id = $(this).val()
+
+        $($otherDiv).addClass("d-none");
+        $($otherDiv).removeClass("d-flex");
+
+
+        if (Number(subject_id) == 9) {
+            $($otherDiv).addClass("d-flex");
+            $($otherDiv).removeClass("d-none");
+        }
     });
 
 

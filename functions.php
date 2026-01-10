@@ -5,7 +5,6 @@ use TAI\App\Core\FunctionAutoloader;
 use TAI\App\Core\Init;
 use TAI\App\Core\Install;
 use TAI\App\Core\Renders;
-use TAI\App\Core\SendSMS;
 use TAI\App\Core\Styles;
 use TAI\App\EditColumn\UserEditColumn;
 use TAI\App\EditForms\CategoryTaxonomyEditForms;
@@ -16,7 +15,7 @@ use TAI\App\EditForms\UserEditForms;
 // header( 'Content-Type: text/html; charset=utf-8' );
 date_default_timezone_set( 'Asia/Tehran' );
 
-define( 'TAI_VERSION', '2.0.44' );
+define( 'TAI_VERSION', '2.1.0' );
 
 define( 'TAI_PATH', get_template_directory() . "/" );
 define( 'TAI_INCLUDES', TAI_PATH . 'includes/' );
@@ -66,6 +65,6 @@ if ( is_admin() ) {
 
 if ( isset( $_GET[ "test" ] ) ) {
 
-    dd(SendSMS::otp( sanitize_phone( "09113078966") ));
+    dd(formats_art(100));
     exit;
 }

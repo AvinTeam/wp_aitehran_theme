@@ -80,14 +80,10 @@
                                 <option value="0">--</option>
                                 <?php
 
-                                    foreach ( $formats_art as $key => $item ):
-
-                                        if ( "selected" == $key ) {continue;}
-
-                                    ?>
-                                <option value="<?php echo $item->term_id ?>"
-                                    <?php echo selected( $item->term_id, $formats_art[ "selected" ] ?? 'format_art' ) ?>>
-                                    <?php echo $item->name ?></option>
+                                foreach ( formats_art() as $key => $item ): ?>
+                                <option value="<?php echo $key ?>"
+                                    <?php echo selected( $key, $formats_art ?? 0 ) ?>>
+                                    <?php echo $item ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -114,21 +110,23 @@
                                 انتخاب موضوع<span class="text-danger">*</span>
                             </label>
 
-                            <select class="form-select form-select-lg fw-bold f-32 text-primary" name="subject_art">
+                            <select id="subject_art" class="form-select form-select-lg fw-bold f-32 text-primary" name="subject_art">
                                 <option value="0">--</option>
                                 <?php
 
-                                    foreach ( $subjects_art as $key => $item ):
-
-                                        if ( "selected" == $key ) {continue;}
-
-                                    ?>
-                                <option value="<?php echo $item->term_id ?>"
-                                    <?php echo selected( $item->term_id, $subjects_art[ "selected" ] ?? 'subject_art' ) ?>>
-                                    <?php echo $item->name ?></option>
+                                foreach ( subjects_art() as $key => $item ): ?>
+                                <option value="<?php echo $key ?>" <?php echo selected( $key, $subjects_art ?? 0 ) ?>>
+                                    <?php echo $item ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
+
+                        <div id="otherDiv"
+                            class="px-2 <?php echo 9 == $subjects_art ? "d-flex" : "d-none" ?>  flex-column flex-lg-row justify-content-between  align-items-start  align-items-lg-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
+                            <input type="text" name="subject_other_art" value="<?php echo $subject_other_art ?>"
+                                class="form-control text-primary w-100 fw-bold f-32 only-fa" placeholder="موضوع را وارد کنید">
+                        </div>
+
 
                         <!--'year' -->
                         <div
@@ -153,7 +151,8 @@
                         <!--'teems' -->
                         <div
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
-                            <label class="col-form-label text-nowrap px-0 px-lg-2 py-2 fw-bold f-32 text-primary w-100 text-start">
+                            <label
+                                class="col-form-label text-nowrap px-0 px-lg-2 py-2 fw-bold f-32 text-primary w-100 text-start">
                                 <span class="text-secondary me-2">5-</span>
                                 نام و نام خانوادگی عوامل تولید
                             </label>
@@ -184,7 +183,8 @@
                         <!--'ownership' -->
                         <div
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
-                            <label class="col-form-label text-nowrap px-0 px-lg-2 py-2 fw-bold f-32 text-primary w-100 text-start">
+                            <label
+                                class="col-form-label text-nowrap px-0 px-lg-2 py-2 fw-bold f-32 text-primary w-100 text-start">
                                 <span class="text-secondary me-2">6-</span>
                                 وضعیت مالکیت اثر<span class="text-danger">*</span>
                             </label>
@@ -223,7 +223,8 @@
                                 class="col-form-label text-nowrap px-0 px-lg-2 py-2 fw-bold f-32 text-primary w-100 d-flex flex-column flex-lg-row align-items-start align-items-lg-center justify-content-between">
                                 <div> <span class="text-secondary me-2">7-</span>مستندات تولید<span
                                         class="text-danger">*</span></div>
-                                <span class="w-100 f-14 text-wrap" style="color: #5A5A5A;">(پرامپت‌ها و مستندات تولید در قالب فایل
+                                <span class="w-100 f-14 text-wrap" style="color: #5A5A5A;">(پرامپت‌ها و مستندات تولید در
+                                    قالب فایل
                                     zip ارسال شود.)</span>
                             </label>
 
@@ -246,7 +247,7 @@
                                     class="w-100 d-flex flex-row justify-content-between align-items-center my-2 gap-2 image-document">
 
                                     <a href="<?php echo esc_url( $file_url ) ?>" type="button"
-                                        class="btn btn-warning rounded-32 w-100 p-2 f-24 fw-bold">
+                                        class="btn btn-warning rounded-32 w-100 p-2 f-24 fw-bold documentationFile">
                                         <?php echo basename( $file_url ) ?>
                                     </a>
 

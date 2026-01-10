@@ -52,10 +52,7 @@ class PanelServices extends Service {
             absint( $user_city ) &&
             absint( $user_area )
         ) {
-
-
-            wp_redirect(home_url("/panel/addTeem"));
-
+            wp_redirect( home_url( "/panel/addTeem" ) );
         }
 
         return array(
@@ -322,14 +319,19 @@ class PanelServices extends Service {
 
                 $tracking_code = get_post_meta( get_the_ID(), "_tracking_code", true );
 
-                $format_art = wp_get_object_terms( get_the_ID(), 'format_art' );
-                $subject_art = wp_get_object_terms( get_the_ID(), 'subject_art' );
+                $formats_art = absint( get_post_meta( get_the_ID(), "_art_format", true ) );
+
+                $subject_art = absint( get_post_meta( get_the_ID(), "_art_subject", true ) );
+
+                $subject_other_art = get_post_meta( get_the_ID(), "_art_subject_other", true );
+
+                $subject = ( 9 == $subject_art ) ? sprintf( "%s (%s)", subjects_art( $subject_art ), $subject_other_art ) : subjects_art( $subject_art );
 
                 $items[  ] = array(
-                    "title"  => get_the_title(),
-                    "link"   => home_url( '/panel/art-info/?tracking_code=' . ( $tracking_code ?? 0 ) ),
-                    "format" => ( $format_art[ 0 ]->name ?? "نا مشخص" ),
-                    "subject" => ( $subject_art[ 0 ]->name ?? "نا مشخص" ),
+                    "title"         => get_the_title(),
+                    "link"          => home_url( '/panel/art-info/?tracking_code=' . ( $tracking_code ?? 0 ) ),
+                    "format"        => formats_art( $formats_art ),
+                    "subject"       => $subject,
                     "tracking_code" => $tracking_code ?? 0,
                 );
             }
@@ -339,8 +341,8 @@ class PanelServices extends Service {
             'sidebarItems' => $this->sidebar(),
             'items'        => $items ?? array(),
             'pagination'   => array(
-                'total_posts'  => absint( $query->found_posts ),
-                'total_pages'  => absint( $query->max_num_pages ),
+                'total_posts' => absint( $query->found_posts ),
+                'total_pages' => absint( $query->max_num_pages ),
             ),
         );
     }
@@ -348,20 +350,6 @@ class PanelServices extends Service {
     public function artInfo() {
 
         $is_administrator = current_user_can( 'administrator' );
-
-        $formats_art = get_terms( array(
-            'taxonomy'   => 'format_art',
-            'hide_empty' => false,
-            'orderby'    => 'name',
-            'order'      => 'ASC',
-        ) );
-
-        $subjects_art = get_terms( array(
-            'taxonomy'   => 'subject_art',
-            'hide_empty' => false,
-            'orderby'    => 'name',
-            'order'      => 'ASC',
-        ) );
 
         if ( isset( $_GET[ 'tracking_code' ] ) && ! empty( $_GET[ 'tracking_code' ] ) ) {
             $art_id = absint( substr( $_GET[ 'tracking_code' ], 8 ) );
@@ -386,13 +374,11 @@ class PanelServices extends Service {
 
             $art_title = get_the_title( $art_id );
 
-            $format_art_select = wp_get_object_terms( $art_id, 'format_art', array( "fields" => "ids" ) );
+            $formats_art = absint( get_post_meta( $art_id, "_art_format", true ) );
 
-            $formats_art[ "selected" ] = $format_art_select[ 0 ];
+            $subject_art = absint( get_post_meta( $art_id, "_art_subject", true ) );
 
-            $subject_art_select = wp_get_object_terms( $art_id, 'subject_art', array( "fields" => "ids" ) );
-
-            $subjects_art[ "selected" ] = $subject_art_select[ 0 ];
+            $subject_other_art = get_post_meta( $art_id, "_art_subject_other", true );
 
             $year = get_post_meta( $art_id, "_art_year", true );
 
@@ -444,17 +430,18 @@ class PanelServices extends Service {
 
         return array(
 
-            'sidebarItems'   => $this->sidebar(),
-            'formats_art'    => $formats_art,
-            'art_title'      => $art_title ?? "",
-            'subjects_art'   => $subjects_art,
-            'year'           => $year ?? "",
-            'ownership'      => $ownership ?? "genuine",
-            'ownership_name' => $ownership_name ?? null,
-            'documentation'  => $documentation ?? "",
-            'art_file'       => $file_url ?? "",
-            'teems'          => $teem ?? array(),
-            'show_first'     => $show_first ?? 1,
+            'sidebarItems'      => $this->sidebar(),
+            'formats_art'       => $formats_art ?? 0,
+            'art_title'         => $art_title ?? "",
+            'subjects_art'      => $subject_art ?? 0,
+            'subject_other_art' => $subject_other_art ?? "",
+            'year'              => $year ?? "",
+            'ownership'         => $ownership ?? "genuine",
+            'ownership_name'    => $ownership_name ?? null,
+            'documentation'     => $documentation ?? "",
+            'art_file'          => $file_url ?? "",
+            'teems'             => $teem ?? array(),
+            'show_first'        => $show_first ?? 1,
 
         );
     }
@@ -586,29 +573,37 @@ class PanelServices extends Service {
 
     public function setTaxonomy( $request, $art_id ) {
 
-        $term = get_term( absint( $request[ 'format_art' ] ), 'format_art' );
 
-        if ( ! $term || is_wp_error( $term ) ) {
+        if ( ! formats_art( absint( $request[ 'format_art' ] ) ) ) {
             throw new \Exception( 'قالب انتخاب شده وجود ندارد' );
         }
 
-        $set = wp_set_object_terms( $art_id, array( absint( $request[ 'format_art' ] ) ), 'format_art', false );
+        $set = update_post_meta( $art_id, "_art_format", absint( $request[ 'format_art' ] ) );
 
         if ( is_wp_error( $set ) ) {
             throw new \Exception( "ثبت قالب به مشکل خورده است دوباره تلاش کنید" );
         }
 
-        $term = get_term( absint( $request[ 'subject_art' ] ), 'subject_art' );
-
-        if ( ! $term || is_wp_error( $term ) ) {
+        if ( ! subjects_art( absint( $request[ 'subject_art' ] ) ) ) {
             throw new \Exception( 'موضوع انتخاب شده وجود ندارد' );
         }
 
-        $set = wp_set_object_terms( $art_id, array( absint( $request[ 'subject_art' ] ) ), 'subject_art', false );
+        $set = update_post_meta( $art_id, "_art_subject", absint( $request[ 'subject_art' ] ) );
 
         if ( is_wp_error( $set ) ) {
             throw new \Exception( "ثبت موضوع به مشکل خورده است دوباره تلاش کنید" );
         }
+
+        if ( absint( $request[ 'subject_art' ] ) == 9 && empty( $request[ 'subject_other_art' ] ) ) {
+            throw new \Exception( "موضوع مدنظر خود را وارد نکرده اید" );
+        }
+
+        $set = update_post_meta( $art_id, "_art_subject_other", sanitize_text_field( $request[ 'subject_other_art' ] ) );
+
+        if ( is_wp_error( $set ) ) {
+            throw new \Exception( "ثبت موضوع به مشکل خورده است دوباره تلاش کنید" );
+        }
+
     }
 
     public function checkTaxonomy( $request ) {
@@ -616,17 +611,19 @@ class PanelServices extends Service {
         $args = array(
             'post_type'      => 'matart',
             'author'         => get_current_user_id(),
-            'post_status'    => "any",
+            'post_status'    => "publish",
             'posts_per_page' => -1,
             'fields'         => 'ids',
-            'tax_query'      => array(
+            'meta_query'     => array(
                 array(
-                    'taxonomy' => 'format_art',
-                    'field'    => 'term_id',
-                    'terms'    => absint( $request[ 'format_art' ] ),
+                    'key'     => '_art_format',
+                    'value'   => absint( $request[ 'format_art' ] ),
+                    'compare' => '=',
                 ),
             ),
+
         );
+
         $query = new WP_Query( $args );
         $count = $query->found_posts;
 

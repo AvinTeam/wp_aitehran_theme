@@ -26,10 +26,12 @@ class ARTMetaBoxes extends MetaBoxes {
 
     public function callback( $post ) {
 
-        $this->art_file( $post );
         $this->art_teem( $post );
+        $this->format( $post );
+        $this->subject( $post );
         $this->art_year( $post );
         $this->art_ownership( $post );
+        $this->art_file( $post );
         $this->art_documentation( $post );
     }
 
@@ -49,12 +51,41 @@ class ARTMetaBoxes extends MetaBoxes {
         }
     }
 
+    public function format( $post ) {
+
+        $formats_art = absint( get_post_meta( $post->ID, "_art_format", true ) );
+
+        if ( $formats_art ) {
+            view( 'metaBoxes/art/format',
+                array(
+                    'format' => formats_art( $formats_art ),
+
+                ) );
+        }
+    }
+
+    public function subject( $post ) {
+
+        $subject_art = absint( get_post_meta( $post->ID, "_art_subject", true ) );
+
+        $subject_other_art = get_post_meta( $post->ID, "_art_subject_other", true );
+
+        $subject = ( 9 == $subject_art ) ? sprintf( "%s (%s)", subjects_art( $subject_art ), $subject_other_art ) : subjects_art( $subject_art );
+
+        if ( $subject_art ) {
+            view( 'metaBoxes/art/subject',
+                array(
+                    'subject' => $subject,
+
+                ) );
+        }
+    }
+
     public function art_teem( $post ) {
 
         $teem_list = get_post_meta( $post->ID, "_art_teem", true );
 
-
-            $teem_list = is_array( $teem_list ) ? $teem_list : array();
+        $teem_list = is_array( $teem_list ) ? $teem_list : array();
 
         view( 'metaBoxes/art/teem',
             array(
@@ -69,12 +100,11 @@ class ARTMetaBoxes extends MetaBoxes {
 
         $art_ownership = get_post_meta( $post->ID, "_art_ownership", true );
 
-            if ( "genuine" != $art_ownership && ! empty( $art_ownership ) ) {
-                        $ownership =  "حقوقی  (  $art_ownership  )";
-
-            } else {
-                $ownership = "حقیقی" ;
-            }
+        if ( "genuine" != $art_ownership && ! empty( $art_ownership ) ) {
+            $ownership = "حقوقی  (  $art_ownership  )";
+        } else {
+            $ownership = "حقیقی";
+        }
 
         if ( isset( $ownership ) ) {
             view( 'metaBoxes/art/ownership',
@@ -84,8 +114,6 @@ class ARTMetaBoxes extends MetaBoxes {
                 ) );
         }
     }
-
-
 
     public function art_year( $post ) {
 
@@ -104,23 +132,15 @@ class ARTMetaBoxes extends MetaBoxes {
 
         $documentation = get_post_meta( $post->ID, "_art_documentation", true );
 
+        if ( ! empty( $documentation ) ) {
+            foreach ( explode( ",", $documentation ) as $document ) {
+                $file_url = wp_get_attachment_url( $document );
 
+                if ( ! $file_url ) {continue;}
 
-
-            
-
-                                    if ( ! empty( $documentation ) ) {
-                                        foreach ( explode( ",", $documentation ) as $document ){
-
-                                            $file_url = wp_get_attachment_url( $document );
-
-                                            if ( ! $file_url ) {continue;}
-
-                                            $document_list[] = $file_url;
-}
-}
-                                        
-
+                $document_list[  ] = $file_url;
+            }
+        }
 
         if ( $documentation ) {
             view( 'metaBoxes/art/documentation',

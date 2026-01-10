@@ -8,7 +8,7 @@ use TAI\App\Core\Taxonomies;
 class FormatArtTaxonomies extends Taxonomies {
 
     public function __construct() {
-        add_action( 'init', array( $this, 'register' ) );
+        // add_action( 'init', array( $this, 'register' ) );
     }
 
     public function register() {
