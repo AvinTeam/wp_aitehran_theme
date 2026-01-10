@@ -5,7 +5,7 @@
 
 <section class="px-2 px-lg-0 mb-100  ">
     <div class=" mt-40 container">
-        <div class="d-flex flex-column-reverse flex-lg-row justify-content-between row-gap-4 row-gap-lg-0">
+        <div class="d-flex flex-column flex-lg-row justify-content-between row-gap-4 row-gap-lg-0">
             <div class="col-12 col-lg-4 d-flex flex-column position-relative px-2">
                 <div
                     class="bg-secondary d-flex flex-column justify-content-center align-items-center rounded-65  px-40 py-24 mb-3">
@@ -55,60 +55,53 @@
                             if ( count( $items ) == 0 ) {
                                 echo '<div class="alert alert-light text-center w-100" role="alert"> شما اثری ثبت نکرده اید</div>';
                             } else {
-                            ?>
 
-                        <table class="table table-hover table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">عنوان</th>
-                                    <th scope="col">قالب اثر</th>
-                                    <th scope="col">کد رهگیری</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                                $m = 1;
 
-                                <?php
-                                    $m = 1;
+                            foreach ( $items as $item ): ?>
 
-                                    foreach ( $items as $item ): ?>
-                                <tr>
-                                    <th scope="row">
-                                        <span class="d-flex align-items-center h-60">
-                                            <?php echo $m ?>
-                                    </th>
-                                    </span>
-                                    <td>
-                                        <span class="d-flex align-items-center h-60">
-                                            <?php echo $item[ 'title' ] ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="d-flex align-items-center h-60">
-                                            <?php echo $item[ 'format' ] ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="d-flex align-items-center h-60">
-                                            <?php echo $item[ 'tracking_code' ] ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="d-flex gap-3 align-items-center h-60">
-                                            <a href="<?php echo $item[ 'link' ] ?>" class="btn btn-info">ویرایش</a>
-                                            <button type="button" id="deArt"
-                                                data-tracking-code="<?php echo $item[ 'tracking_code' ] ?>"
-                                                class="btn btn-danger">حذف</button>
 
-                                        </span>
-                                    </td>
-                                </tr>
 
-                                <?php ++$m;endforeach; ?>
-                            </tbody>
-                        </table>
+                        <div id="alert" class="alert alert-light my-0 w-100" role="alert">
+                            <div class="d-flex flex-wrap justify-content-between align-items-center row-gap-2">
+                                <div class="d-flex flex-column row-gap-2">
+
+                                    <div class="fw-bold">
+                                        <span class="text-secondary"><?php echo $m ?>-</span>
+                                        <span class=""><?php echo $item[ 'title' ] ?></span>
+                                    </div>
+
+                                        <span class=""><?php echo sprintf( "قالب:  %s", $item[ 'format' ] ) ?></span>
+                                        <span class=""><?php echo sprintf( "موضوع:  %s", $item[ 'subject' ] ) ?></span>
+                                </div>
+
+                                <div class="d-flex flex-column justify-content-center align-items-center row-gap-2 ">
+
+
+                                    <span
+                                        class=""><?php echo sprintf( "کد رهگیری: %s", $item[ 'tracking_code' ] ) ?></span>
+
+                                    <div>
+                                        <a href="<?php echo $item[ 'link' ] ?>" class="btn btn-info">ویرایش</a>
+                                        <button type="button" id="deArt"
+                                            data-tracking-code="<?php echo $item[ 'tracking_code' ] ?>"
+                                            class="btn btn-danger">حذف</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+
+                        <?php ++$m;endforeach; ?>
+
                         <?php }
+
                         ?>
                     </div>
                 </section>

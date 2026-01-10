@@ -25,7 +25,7 @@
 
         <div class="container d-flex justify-content-between align-items-center align-items-lg-start gap-3 gap-lg-1">
             <div class="d-flex flex-column justify-content-center align-items-start my-4 w-100">
-                <a href="<?php echo home_url( "/" )?>" class="logo">
+                <a href="<?php echo home_url( "/" ) ?>" class="logo">
                     <img class="w-100" src="<?php echo get_the_image_url( 'logo.png' ) ?>"
                         alt="<?php echo bloginfo( 'name' ) ?>">
 
@@ -70,12 +70,33 @@
                         <input type="text" name="s" id="search-header-input"
                             class="form-control w-100 rounded-circle bg-primary border border-1 border-secondary text-white"
                             aria-label="Search" value="<?php echo get_search_query(); ?>" placeholder="جستجو">
-                        <button  type="submit" class="btn  position-absolute"  style="left: 0px; top: 3px;"><i class="bi bi-search text-secondary"></i></button>
+                        <button type="submit" class="btn  position-absolute" style="left: 0px; top: 3px;"><i
+                                class="bi bi-search text-secondary"></i></button>
                     </form>
                 </div>
 
                 <div class="bg-secondary h-120  px-4 pb-3 d-flex align-items-end">
-                    <a class="btn btn-link fw-bold f-20 text-nowrap" href="<?php echo home_url( "/panel" )  ?>">ثبت نام</a>
+
+                    <?php
+
+                if ( is_user_logged_in() ) {?>
+
+                    <a class="btn btn-link fw-bold f-20 text-nowrap"
+                        href="<?php echo home_url( "/panel/logout" ) ?>">خروج</a>
+                    <?php } else {?>
+
+                    <a class="btn btn-link fw-bold f-20 text-nowrap" href="<?php echo home_url( "/panel" ) ?>">ثبت
+                        نام</a>
+
+                    <?php }
+                  ?>
+
+
+
+
+
+
+
                 </div>
 
             </div>

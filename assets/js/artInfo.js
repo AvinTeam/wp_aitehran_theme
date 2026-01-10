@@ -83,11 +83,11 @@ jQuery(document).ready(function ($) {
 
         const inputs = $('#teem-list input[name="teem[]"]');
 
-        if (inputs.length < 1) {
-            setToastDanger('حداقل یک عامل تولید باید وارد شود.');
-            return;
+        // if (inputs.length < 1) {
+        //     setToastDanger('حداقل یک عامل تولید باید وارد شود.');
+        //     return;
 
-        }
+        // }
 
         let hasEmpty = false;
 

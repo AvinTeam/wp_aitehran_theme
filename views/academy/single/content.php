@@ -13,8 +13,8 @@
     </video>
 
     <?php  else :?>
-    <img src="<?php echo post_image_url() ?>" alt="<?php the_title(); ?>" class="w-100 object-fit-cover"
-        style="max-height: 480px;">
+    <!-- <img src="<?php echo post_image_url() ?>" alt="<?php the_title(); ?>" class="w-100 object-fit-cover"
+        style="max-height: 480px;"> -->
 
     <?php  endif; ?>
 

@@ -494,7 +494,7 @@ jQuery(document).ready(function ($) {
         const fullName = $($formDiv + " input#fullName").val();
 
         if (!fullName) {
-            setToastDanger("نام و نام خانوادگی مسئول گروه را وارد کنید");
+            setToastDanger("نام و نام خانوادگی را وارد کنید");
             return;
 
         }
@@ -503,7 +503,7 @@ jQuery(document).ready(function ($) {
         const parent = $($formDiv + " input#parent").val();
 
         // if (!parent) {
-        //     setToastDanger("نام پدرِ مسئول گروه را وارد کنید");
+        //     setToastDanger("نام پدر را وارد کنید");
         //     return;
 
         // }
@@ -511,13 +511,13 @@ jQuery(document).ready(function ($) {
         const nationalCode = $($formDiv + " input#nationalCode").val();
 
         if (!nationalCode) {
-            setToastDanger("کد ملی مسئول گروه را وارد کنید");
+            setToastDanger("کد ملی را وارد کنید");
             return;
 
         }
 
         if (!national_code(nationalCode)) {
-            setToastDanger("کد ملی مسئول گروه را به درستی وارد کنید");
+            setToastDanger("کد ملی را به درستی وارد کنید");
             return;
 
         }
@@ -525,7 +525,7 @@ jQuery(document).ready(function ($) {
         const birthday = $($formDiv + " input#birthday").val();
 
         if (!birthday) {
-            setToastDanger("تاریخ تولد مسئول گروه را وارد کنید");
+            setToastDanger("تاریخ تولد را وارد کنید");
             return;
 
         }
@@ -535,33 +535,33 @@ jQuery(document).ready(function ($) {
 
         // if (!edu && is_true) {
         //     is_true = false;
-        //     setToastDanger("مدرک تحصیلی مسئول گروه را وارد کنید");
+        //     setToastDanger("مدرک تحصیلی را وارد کنید");
         // }
 
         const address = $($formDiv + " textarea#address").val();
 
         // if (!address && is_true) {
         //     is_true = false;
-        //     setToastDanger("محل سکونت مسئول گروه را وارد کنید");
+        //     setToastDanger("محل سکونت را وارد کنید");
         // }
 
 
         const province = $($formDiv + " select#provinces").val();
 
         if (!Number(province)) {
-            setToastDanger("استان مسئول گروه را وارد کنید");
+            setToastDanger("استان را وارد کنید");
             return;
         }
 
         const city = $($formDiv + " select#cites").val();
         if (!Number(city)) {
-            setToastDanger("شهر مسئول گروه را وارد کنید");
+            setToastDanger("شهر را وارد کنید");
             return;
         }
 
         const area = $($formDiv + " select#areas").val();
         if (!Number(area) && Number(city) == 331) {
-            setToastDanger("منطقه مسئول گروه را وارد کنید");
+            setToastDanger("منطقه را وارد کنید");
             return;
         }
 
@@ -636,7 +636,7 @@ jQuery(document).ready(function ($) {
 
         const parent = $($formDiv + " input#parent").val();
         // if (parent == "") {
-        //     setToastDanger("نام پدرِ را وارد کنید");
+        //     setToastDanger("نام پدر را وارد کنید");
         //     return;
         // }
 
@@ -663,7 +663,7 @@ jQuery(document).ready(function ($) {
         const edu = $($formDiv + " input#edu").val();
 
         // if (edu=="") {
-        //     setToastDanger("مدرک تحصیلی مسئول گروه را وارد کنید");
+        //     setToastDanger("مدرک تحصیلی را وارد کنید");
         // return;
         // }
 

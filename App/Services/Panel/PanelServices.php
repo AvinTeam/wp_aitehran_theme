@@ -52,7 +52,10 @@ class PanelServices extends Service {
             absint( $user_city ) &&
             absint( $user_area )
         ) {
-            $btn_continue = "";
+
+
+            wp_redirect(home_url("/panel/addTeem"));
+
         }
 
         return array(
@@ -320,11 +323,13 @@ class PanelServices extends Service {
                 $tracking_code = get_post_meta( get_the_ID(), "_tracking_code", true );
 
                 $format_art = wp_get_object_terms( get_the_ID(), 'format_art' );
+                $subject_art = wp_get_object_terms( get_the_ID(), 'subject_art' );
 
                 $items[  ] = array(
                     "title"  => get_the_title(),
                     "link"   => home_url( '/panel/art-info/?tracking_code=' . ( $tracking_code ?? 0 ) ),
                     "format" => ( $format_art[ 0 ]->name ?? "نا مشخص" ),
+                    "subject" => ( $subject_art[ 0 ]->name ?? "نا مشخص" ),
                     "tracking_code" => $tracking_code ?? 0,
                 );
             }

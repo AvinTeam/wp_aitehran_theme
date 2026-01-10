@@ -37,7 +37,7 @@
 
 <section class="px-2 px-lg-0 mb-100  ">
     <div class=" mt-40 container">
-        <div class="d-flex flex-column-reverse flex-lg-row justify-content-between row-gap-4 row-gap-lg-0">
+        <div class="d-flex flex-column flex-lg-row justify-content-between row-gap-4 row-gap-lg-0">
             <div class="col-12 col-lg-4 d-flex flex-column position-relative px-2">
                 <div
                     class="bg-secondary d-flex flex-column justify-content-center align-items-center rounded-65  px-40 py-24 mb-3">
@@ -70,7 +70,7 @@
 
                         <!--'formats_art' -->
                         <div
-                            class="px-2 d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
+                            class="px-2 d-flex flex-column flex-lg-row justify-content-between  align-items-start  align-items-lg-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
                             <label class="col-form-label text-nowrap p-2 f-24 fw-bold f-32 text-primary">
                                 <span class="text-secondary me-2">1-</span>
                                 انتخاب قالب اثر<span class="text-danger">*</span>
@@ -94,7 +94,7 @@
 
                         <!--'art_title' -->
                         <div
-                            class="px-2 d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
+                            class="px-2 d-flex flex-column flex-lg-row justify-content-between  align-items-start  align-items-lg-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
 
                             <label class="col-form-label text-nowrap p-2 f-24 fw-bold f-32 text-primary">
                                 <span class="text-secondary me-2">2-</span>
@@ -107,7 +107,7 @@
 
                         <!--'subjects_art' -->
                         <div
-                            class="px-2 d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
+                            class="px-2 d-flex flex-column flex-lg-row justify-content-between  align-items-start  align-items-lg-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
 
                             <label class="col-form-label text-nowrap p-2 f-24 fw-bold f-32 text-primary">
                                 <span class="text-secondary me-2">3-</span>
@@ -132,7 +132,7 @@
 
                         <!--'year' -->
                         <div
-                            class="px-2 d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
+                            class="px-2 d-flex flex-column flex-lg-row justify-content-between  align-items-start  align-items-lg-center w-100 flex-nowrap bg-white border-1 border-black rounded-32 overflow-hidden">
                             <label class="col-form-label text-nowrap p-2 f-24 fw-bold f-32 text-primary">
                                 <span class="text-secondary me-2">4-</span>
                                 سال تولید اثر<span class="text-danger">*</span>
@@ -153,9 +153,9 @@
                         <!--'teems' -->
                         <div
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
-                            <label class="col-form-label text-nowrap p-2 fw-bold f-32 text-primary w-100 text-start">
+                            <label class="col-form-label text-nowrap px-0 px-lg-2 py-2 fw-bold f-32 text-primary w-100 text-start">
                                 <span class="text-secondary me-2">5-</span>
-                                نام و نام خانوادگی عوامل تولید<span class="text-danger">*</span>
+                                نام و نام خانوادگی عوامل تولید
                             </label>
 
 
@@ -184,7 +184,7 @@
                         <!--'ownership' -->
                         <div
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
-                            <label class="col-form-label text-nowrap p-2 fw-bold f-32 text-primary w-100 text-start">
+                            <label class="col-form-label text-nowrap px-0 px-lg-2 py-2 fw-bold f-32 text-primary w-100 text-start">
                                 <span class="text-secondary me-2">6-</span>
                                 وضعیت مالکیت اثر<span class="text-danger">*</span>
                             </label>
@@ -220,10 +220,10 @@
                         <div
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
                             <label
-                                class="col-form-label text-nowrap p-2 fw-bold f-32 text-primary w-100 d-flex flex-row align-items-center justify-content-between">
+                                class="col-form-label text-nowrap px-0 px-lg-2 py-2 fw-bold f-32 text-primary w-100 d-flex flex-column flex-lg-row align-items-start align-items-lg-center justify-content-between">
                                 <div> <span class="text-secondary me-2">7-</span>مستندات تولید<span
                                         class="text-danger">*</span></div>
-                                <span style="color: #5A5A5A; font-size: 14px;">(پرامپت‌ها و مستندات تولید در قالب فایل
+                                <span class="w-100 f-14 text-wrap" style="color: #5A5A5A;">(پرامپت‌ها و مستندات تولید در قالب فایل
                                     zip ارسال شود.)</span>
                             </label>
 
@@ -262,7 +262,7 @@
 
                             <button type="button" id="add_document"
                                 class="btn btn-secondary rounded-32 w-100 p-2 my-2 f-24 fw-bold border border-1 border-black">
-                                آپلود مستندات تولید(+) <span style="font-size: 14px;">(حداکثر ۷۰۰ مگابایت )</span>
+                                بارگذاری مستندات تولید(+) <span style="font-size: 14px;">(حداکثر ۷۰۰ مگابایت )</span>
                             </button>
                         </div>
 
@@ -270,7 +270,7 @@
                         <div
                             class="px-2 d-flex flex-column justify-content-between align-items-center w-100 flex-nowrap">
                             <label
-                                class="col-form-label text-nowrap p-2 fw-bold f-32 text-primary w-100 d-flex flex-row align-items-center justify-content-between">
+                                class="col-form-label text-nowrap px-0 px-lg-2 py-2 fw-bold f-32 text-primary w-100 d-flex flex-row align-items-center justify-content-between">
                                 <div> <span class="text-secondary me-2">8-</span> بارگذاری اثر<span
                                         class="text-danger">*</span></div>
                                 <span style="color: #5A5A5A; font-size: 14px;">(حداکثر ۷۰۰ مگابایت)</span>
@@ -292,7 +292,7 @@
 
                             <button type="button" onclick="document.getElementById('fileInput').click();"
                                 class="btn btn-secondary rounded-32 w-100 p-2 f-24 fw-bold border border-1 border-black">
-                                آپلود فایل اثر
+                                بارگذاری فایل اثر
                             </button>
 
                             <input type="file" id="fileInput" style="display: none;" name="art_file"

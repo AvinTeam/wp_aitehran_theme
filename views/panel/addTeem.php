@@ -1,6 +1,6 @@
 <section class="px-2 px-lg-0 mb-100  ">
     <div class=" mt-40 container">
-        <div class="d-flex flex-column-reverse flex-lg-row justify-content-between row-gap-4 row-gap-lg-0">
+        <div class="d-flex flex-column flex-lg-row justify-content-between row-gap-4 row-gap-lg-0">
             <div class="col-12 col-lg-4 d-flex flex-column position-relative px-2">
                 <div
                     class="bg-secondary d-flex flex-column justify-content-center align-items-center rounded-65  px-40 py-24">
@@ -20,12 +20,12 @@
             <div class="col-12 col-lg-8 px-2 ">
                 <?php getAlert(); ?>
 
-                <div class="w-100 d-flex flex-row justify-content-between align-items-center mb-32">
+                <div class="w-100 d-flex flex-row justify-content-end align-items-center mb-32">
 
-                    <a href="<?php echo home_url( "/panel" ) ?>"
+                    <!-- <a href="<?php echo home_url( "/panel" ) ?>"
                         class="btn btn-dark rounded-32 px-24 py-2 f-24 fw-bold">
                         بازگشت
-                    </a>
+                    </a> -->
 
                     <a href="<?php echo home_url( "/panel/artList" ) ?>" class="btn btn-warning rounded-32 px-24 py-2 f-24 fw-bold
                         <?php echo $btn_continue ?> ">
@@ -43,37 +43,29 @@
 
                     if ( $teems ): ?>
 
-
                     <h2>لیست اعضا</h2>
-                    <table class="table table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">نام خانوادگی</th>
-                                <th scope="col">کد ملی</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <?php
 
-                            <?php
+                    foreach ( $teems as $teem ): ?>
 
-                            foreach ( $teems as $teem ): ?>
-                            <tr>
-                                <th scope="row"><?php echo $m ?></th>
-                                <td><?php echo $teem[ 'name' ] ?></td>
-                                <td><?php echo $teem[ 'nationalCode' ] ?></td>
-                                <td>
-                                    <a href="<?php echo home_url( '/panel/addTeem/?teem=' . $teem[ 'username' ] ) ?>"
-                                        class="btn btn-info">ویرایش</a>
-                                    <button type="button" id="delTeem" data-username="<?php echo $teem[ 'username' ] ?>"
-                                        class="btn btn-danger">حذف</button>
-                                </td>
-                            </tr>
+                    <div id="alert" class="alert alert-light my-0" role="alert">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center row-gap-2">
+                            <div>
+                                <span class="text-secondary"><?php echo $m ?>-</span>
+                                <span class=""><?php echo $teem[ 'name' ] ?></span>
+                            </div>
+                            <span class=""><?php echo $teem[ 'nationalCode' ] ?></span>
+                            <div>
+                                <a href="<?php echo home_url( '/panel/addTeem/?teem=' . $teem[ 'username' ] ) ?>"
+                                    class="btn btn-info">ویرایش</a>
+                                <button type="button" id="delTeem" data-username="<?php echo $teem[ 'username' ] ?>"
+                                    class="btn btn-danger">حذف</button>
+                            </div>
+                        </div>
 
-                            <?php ++$m;endforeach; ?>
-                        </tbody>
-                    </table>
+                    </div>
+                    <?php ++$m;endforeach; ?>
+
                     <?php endif; ?>
 
                     <?php
@@ -83,7 +75,8 @@
 
                     <?php wp_nonce_field( config( 'app.key' ) . '_addTeemForm_' . get_current_user_id() ); ?>
 
-                    <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                    <div
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="fullName" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام
                                 خانوادگی<span class="text-danger">*</span> :
@@ -95,7 +88,8 @@
                         </div>
                     </div>
 
-                    <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                    <div
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="parent" class="col-form-label text-nowrap p-2 f-24 fw-bold only-fa">نام
                                 پدر :
@@ -107,7 +101,8 @@
                         </div>
                     </div>
 
-                    <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                    <div
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="nationalCode" class="col-form-label text-nowrap p-2 f-24 fw-bold">کد ملی<span
                                     class="text-danger">*</span> :
@@ -120,7 +115,8 @@
 
                         </div>
                     </div>
-                    <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                    <div
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="birthday" class="col-form-label text-nowrap p-2 f-24 fw-bold">تاریخ تولد<span
                                     class="text-danger">*</span> :
@@ -134,7 +130,8 @@
                         </div>
                     </div>
 
-                    <div class="d-flex flex-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                    <div
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="edu" class="col-form-label text-nowrap p-2 f-24 fw-bold">مدرک
                                 تحصیلی :
@@ -154,34 +151,10 @@
 
 
                     <?php endif; ?>
-
-
-
                 </section>
+                <?php
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <?php if ( $m <= 4 || ( isset( $_GET[ 'teem' ] ) && ! empty( $_GET[ 'teem' ] ) ) ): ?>
+                if ( $m <= 4 || ( isset( $_GET[ 'teem' ] ) && ! empty( $_GET[ 'teem' ] ) ) ): ?>
 
                 <div class="w-100 d-flex flex-row justify-content-center align-items-center mt-32">
                     <button type="button" id="btnAddTeem" class="btn btn-warning rounded-32 w-75 p-2 f-24 fw-bold mt ">
