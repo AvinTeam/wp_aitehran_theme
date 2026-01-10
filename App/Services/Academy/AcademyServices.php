@@ -45,16 +45,6 @@ class AcademyServices extends Service {
     }
 
     public function get_video() {
-        if ( is_user_logged_in() ) {
-            $user_meta = get_user_meta( get_current_user_id(), "academy_see", true );
-
-            $user_meta = is_array( $user_meta ) ? $user_meta : array();
-
-            if ( ! in_array( get_the_ID(), $user_meta ) ) {
-                $user_meta[  ] = get_the_ID();
-                update_user_meta( get_current_user_id(), "academy_see", $user_meta );
-            }
-        }
 
         $video = get_post_meta( get_the_ID(), '_academy_video', true );
 
@@ -74,13 +64,6 @@ class AcademyServices extends Service {
 
     public function archive() {
 
-        $user_see = array();
-
-        if ( is_user_logged_in() ) {
-            $user_meta = get_user_meta( get_current_user_id(), "academy_see", true );
-
-            $user_see = is_array( $user_meta ) ? $user_meta : array();
-        }
 
         $args = array(
             'taxonomy'   => 'academy_category',
@@ -118,7 +101,6 @@ class AcademyServices extends Service {
                     "image"  => post_image_url( $row->ID ),
                     "link"   => get_permalink( $row->ID ),
                     "time"   => ( isset( $video[ 'time' ] ) && ! empty( $video[ 'time' ] ) ) ? $video[ 'time' ] : "00:00",
-                    "is_see" => in_array( $row->ID, $user_see ),
                 );
             }
 

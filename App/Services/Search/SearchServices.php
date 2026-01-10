@@ -70,16 +70,6 @@ class SearchServices extends Service
     }
 
     public function get_video() {
-        if ( is_user_logged_in() ) {
-            $user_meta = get_user_meta( get_current_user_id(), "post_see", true );
-
-            $user_meta = is_array( $user_meta ) ? $user_meta : array();
-
-            if ( ! in_array( get_the_ID(), $user_meta ) ) {
-                $user_meta[  ] = get_the_ID();
-                update_user_meta( get_current_user_id(), "post_see", $user_meta );
-            }
-        }
 
         $video = get_post_meta( get_the_ID(), '_post_video', true );
 
@@ -98,14 +88,6 @@ class SearchServices extends Service
     }
 
     public function archive() {
-
-        $user_see = array();
-
-        if ( is_user_logged_in() ) {
-            $user_meta = get_user_meta( get_current_user_id(), "post_see", true );
-
-            $user_see = is_array( $user_meta ) ? $user_meta : array();
-        }
 
         $args = array(
             'post_type'      => 'post',
@@ -134,7 +116,6 @@ class SearchServices extends Service
                     "image"  => post_image_url( $id ),
                     "link"   => get_permalink( $id ),
                     "time"   => ( isset( $video[ 'time' ] ) && ! empty( $video[ 'time' ] ) ) ? $video[ 'time' ] : "00:00",
-                    "is_see" => in_array( $id, $user_see ),
                 );
             }
         }

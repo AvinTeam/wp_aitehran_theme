@@ -14,7 +14,13 @@
             </div>
 
             <div class="col-12 col-lg-8 px-2 ">
-                <?php $controller->content(); ?>
+                <?php
+                    if ( is_user_logged_in() ) {
+                        $controller->content();
+                    } else {
+                        components( 'login' );
+                    }
+                ?>
             </div>
         </div>
     </div>

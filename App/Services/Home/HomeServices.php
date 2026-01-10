@@ -96,9 +96,8 @@ class HomeServices extends Service {
 
     public function videos() {
         $args = array(
-            'post_type'      => 'post',
-            'category_name'  => "videos",
-            'posts_per_page' => 1,
+            'post_type'      => 'academy',
+            'posts_per_page' => 10,
             'post_status'    => 'publish',
 
         );

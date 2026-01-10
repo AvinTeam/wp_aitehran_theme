@@ -84,7 +84,7 @@ class Styles {
             );
         }
 
-        if ( get_query_var( "panel" ) == "dashboard" && ! is_user_logged_in() ) {
+        if ( ! is_user_logged_in() ) {
             wp_enqueue_script(
                 'tai_login_js',
                 TAI_JS . 'login.js',
