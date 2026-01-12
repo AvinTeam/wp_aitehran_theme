@@ -1,29 +1,3 @@
 <section class="w-100 bg-gray rounded-65 pt-100 px-40 pb-40 ">
-
-    <section class="w-100  d-flex flex-column justify-content-center align-items-center mb-2">
-
-        <div class="bg-secondary rounded-32 text-white text-center p-16 mb-4 fw-bold f-24" style="width: 390px;">
-            <?php echo $title ?>
-        </div>
-
-        <div class="row row-cols-lg-3 row-cols-1 w-100 row-gap-1">
-            <?php
-            foreach ( $posts as $post ): ?>
-            <div class="p-1">
-                <div class="d-flex flex-column justify-content-center align-items-center bg-primary ">
-                    <a href="<?php echo $post[ "link" ] ?>">
-                        <img src="<?php echo $post[ "image" ] ?>" alt="<?php echo $post[ "title" ] ?>"
-                            class="w-100 h-150 object-fit-cover">
-                    </a>
-                    <div class="d-flex flex-column justify-content-center align-items-start row-gap-3 w-100 px-2 pb-24">
-                        <a href="<?php echo $post[ "link" ] ?>"
-                            class="post-title btn btn-link f-20 fw-bold w-100 text-start text-justify text-2-lines"><?php echo $post[ "title" ] ?></a>
-                    </div>
-                </div>
-
-            </div>
-            <?php endforeach; ?>
-
-        </div>
-    </section>
+ <?php  foreach($items as $item) {components("academy/archive/all_content", $item);}  ?>
 </section>

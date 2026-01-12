@@ -1,7 +1,7 @@
 <section class="w-100  d-flex flex-column justify-content-center align-items-center mb-2">
 
 
-    <div class="bg-secondary rounded-32 text-white text-center p-16 mb-4 fw-bold f-24" style="width: 390px;">
+    <div class="bg-secondary rounded-32 text-white text-center p-16 mb-4 fw-bold f-24 w-100">
         <?php echo $title ?>
     </div>
     <div class="row row-cols-lg-3 row-cols-1  w-100">
@@ -23,14 +23,6 @@
             </div>
 
         </div>
-
-
-
-
-
         <?php endforeach; ?>
-
-
-
     </div>
 </section>

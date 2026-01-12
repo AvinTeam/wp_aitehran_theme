@@ -2,7 +2,7 @@
 
 
     <a href="<?php echo esc_url( $link ) ?>"
-        class="btn btn-secondary rounded-32 text-center p-16 mb-4 fw-bold f-24" style="width: 390px;">
+        class="btn btn-secondary rounded-32 text-center p-16 mb-4 fw-bold f-24 w-100">
         <?php echo $name ?>
     </a>
     <div class="row row-cols-lg-3 row-cols-1 w-100 row-gap-1">

@@ -30,12 +30,14 @@ class AcademyController extends Controller {
             $this->services->sidebar() );
 
     }
+
     public function archive() {
         view( 'academy/archive/content', $this->services->archive() );
 
     }
+    
     public function taxonomy() {
-        view( 'academy/archive/content', $this->services->taxonomy() );
+        view( 'academy/archive/taxonomy', $this->services->taxonomy() );
 
     }
 

@@ -10,7 +10,7 @@
     <div class="container">
 
         <div
-            class="bg-secondary rounded-70 d-flex flex-column-reverse flex-lg-row justify-content-center align-items-center m-40 p-40 row-gap-3">
+            class="bg-secondary rounded-70 d-flex flex-column flex-lg-row justify-content-center align-items-center m-40 p-40 row-gap-3">
 
             <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-center">
                 <img class="w-280" src="<?php echo get_the_image_url( 'success.png' ) ?>" alt="success">

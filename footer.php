@@ -24,7 +24,7 @@
 
     <div class="container">
 
-        <div class="d-flex flex-column-reverse flex-lg-row gap-3 justify-content-center gap-5 text{#000}">
+        <div class="d-flex flex-column flex-lg-row gap-3 justify-content-center gap-5 text{#000}">
 
             <div class="col-12 col-lg-6 d-flex flex-column ">
                 <div>
@@ -35,38 +35,33 @@
 
                         <?php wp_nonce_field( config( 'app.key' ) . '_contact_us' ); ?>
 
-                        <div class="row mb-32">
-                            <div class="col">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 mb-32">
                                 <input type="text" name="first_name"
                                     class="form-control form-control-lg bg-black text-white" placeholder="نام" required>
                             </div>
 
-                            <div class="col">
+                            <div class="col-12 col-lg-6 mb-32">
                                 <input type="text" name="last_name"
                                     class="form-control form-control-lg bg-black text-white" placeholder="نام خانوادگی">
                             </div>
                         </div>
-                        <div class="row mb-32">
-                            <div class="col">
+                        <div class="row">
+                            <div class="col-12 col-lg-6  mb-32">
                                 <input type="text" name="mobile" inputmode="numeric" pattern="\d*" placeholder="تلفن تماس"
                                     class="form-control form-control-lg bg-black text-white onlyNumbersInput"  required>
                             </div>
-                            <div class="col position-relative">
+                            <div class="col-12 col-lg-6 position-relative  mb-32">
                                 <input type="text" name="captcha" class="form-control form-control-lg bg-black text-white"
                                     placeholder="کد امنیتی" value="<?php echo $captchaArray[ 'word' ] ?? "" ?>" required>
                                     <img src="<?php echo $captchaArray[ 'url' ] ?>"
-                                    class="h-32 d-none d-md-block position-absolute translate-middle-y"
+                                    class="h-32 d-block position-absolute translate-middle-y"
                                     style="left: 20px; top: 50%;">
                             </div>
                         </div>
-                        <div class="row mb-32  d-md-none d-block">
-                             <div class="col">
-                                <img src="<?php echo $captchaArray[ 'url' ] ?>" class="w-50 h-48">
-                            </div>
-                        </div>
 
-                        <div class="row mb-32">
-                            <div class="col">
+                        <div class="row">
+                            <div class="col mb-32">
                                 <textarea class="form-control form-control-lg bg-black text-white border-0" name="description"
                                     placeholder="متن پیام" rows="5" required></textarea>
                             </div>
