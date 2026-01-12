@@ -111,7 +111,7 @@ class HomeServices extends Service {
                     "title"   => get_the_title(),
                     "image"   => post_image_url(),
                     "link"    => get_permalink(),
-                    "content" => get_the_content( null, false, get_the_ID() ),
+                    "content" => get_the_excerpt(),
                 );
             endwhile;
 

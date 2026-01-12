@@ -368,7 +368,53 @@ jQuery(document).ready(function ($) {
 
 
 
+    $('#gallery-images-list').sortable({
+        update: function () {
+            updateGalleryInput();
+        }
+    });
 
+    $('#upload-gallery-images').click(function (e) {
+        e.preventDefault();
+        var frame = wp.media({
+            title: 'انتخاب عکس‌های گالری',
+            multiple: true,
+            library: { type: 'image' },
+            button: { text: 'استفاده از عکس‌ها' }
+        });
+
+        frame.on('select', function () {
+            var attachments = frame.state().get('selection').toJSON();
+            attachments.forEach(function (attachment) {
+
+                $('#gallery-images-list').append(`
+                        <li class="image-item" data-id="${attachment.id}">
+                            <img src="${attachment.url}" />
+                            <a href="#" class="remove-image">حذف</a>
+                        </li>
+                    `);
+            });
+            updateGalleryInput();
+        });
+
+        frame.open();
+    });
+
+    // حذف عکس
+    $(document).on('click', '.remove-image', function (e) {
+        e.preventDefault();
+        $(this).parent().remove();
+        updateGalleryInput();
+    });
+
+    // به‌روزرسانی فیلد مخفی
+    function updateGalleryInput() {
+        var imageIds = [];
+        $('#gallery-images-list .image-item').each(function () {
+            imageIds.push($(this).data('id'));
+        });
+        $('#tai_galleries').val(imageIds.join(','));
+    }
 
 });
 

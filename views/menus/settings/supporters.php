@@ -23,7 +23,7 @@
             </ul>
 
             <button id="upload-gallery-images" class="button">
-                افزودن عکس‌ها
+                افزودن تصاویر حامبان
             </button>
 
 

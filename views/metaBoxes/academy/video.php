@@ -1,9 +1,9 @@
 <div id="video_list">
-    <div class="zba-row-meta-box w-100  parent-row">
+    <div class="tai-row-meta-box w-100  parent-row">
         <div class="w-100 d-flex flex-row justify-content-between align-items-center">
 
 
-            <div class="w-100 zba-row-meta-box d-flex flex-row justify-content-start align-items-center gap-2">
+            <div class="w-100 tai-row-meta-box d-flex flex-row justify-content-start align-items-center gap-2">
                 <div class="d-flex flex-column">
                     <span>لینک</span>
                     <input name="academy[video]" value="<?php echo $video ?>" id="link" class="regular-text d-ltr"

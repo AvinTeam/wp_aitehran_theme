@@ -8,6 +8,11 @@
     $captcha = new Captcha();
 
     $captchaArray = $captcha->create_image();
+
+    $supportersImages = array_map( function ( $id ) {
+
+        return wp_get_attachment_url( $id );
+    }, explode( ',', get_option( "supporters-gallery", '' ) ) );
 ?>
 
 <footer class="container-fluid d-flex flex-column align-items-center justify-content-center pb-100">
@@ -115,6 +120,22 @@
                 <div class="googleMap">
                     <?php echo wp_unslash( ( $general[ 'googleMap' ] ?? '' ) ) ?>
                 </div>
+            <?php if ( count( $supportersImages ) ): ?>
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                           <div class="swiper supportersSwiper w-100">
+                        <div class="swiper-wrapper">
+                            <?php
+
+                            foreach ( sanitize_no_item($supportersImages) ?? array() as $image ): ?>
+                            <div class="swiper-slide">
+                                <img loading="lazy" src="<?php echo $image ?>" class="card-img-top rounded-24 bg-white object-fit-cover " style="width: 100px !important; height: 100px;">
+                            </div>
+                            <?php endforeach?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             </div>
 
 

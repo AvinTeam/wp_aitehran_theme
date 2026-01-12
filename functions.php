@@ -15,7 +15,7 @@ use TAI\App\EditForms\UserEditForms;
 // header( 'Content-Type: text/html; charset=utf-8' );
 date_default_timezone_set( 'Asia/Tehran' );
 
-define( 'TAI_VERSION', '2.2.1' );
+define( 'TAI_VERSION', '2.2.5' );
 
 define( 'TAI_PATH', get_template_directory() . "/" );
 define( 'TAI_INCLUDES', TAI_PATH . 'includes/' );

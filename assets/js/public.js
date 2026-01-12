@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+
     new Swiper(".gallerySwiper", {
         spaceBetween: 10,
         freeMode: false,
@@ -126,52 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    //    swiperWinner = new Swiper(".gallerySwiper", {
-    //     spaceBetween: 10,
-    //     freeMode: true,
-    //     grabCursor: true,
-    //     loop: true,
-    //     pagination: true,
-    //     paginationClickable: true,
-    //     autoplay: {
-    //         delay: 3000,
-    //         disableOnInteraction: false,
-    //     },
-    //     breakpoints: {
-    //         0: {
-    //             slidesPerView: 2,
-    //             spaceBetween: 10,
-    //             slidesPerGroup: 2,
-    //         },
-    //         576: {
-    //             slidesPerView: 2,
-    //             spaceBetween: 10,
-    //             slidesPerGroup: 2,
-    //         },
-    //         768: {
-    //             slidesPerView: 3,
-    //             spaceBetween: 10,
-    //             slidesPerGroup: 3,
-    //         },
-    //         1280: {
-    //             slidesPerView: 4,
-    //             spaceBetween: 10,
-    //             slidesPerGroup: 4,
-    //         },
-    //     },
-    //     pagination: {
-    //         el: ".swiper-pagination",
-    //         clickable: true,
-    //     },
-    // });
-
-
-
-
-
-
-
-
     new Swiper(".videoSwiper", {
         spaceBetween: 10,
         freeMode: false,
@@ -205,6 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+
     new Swiper(".sliderSwiper", {
         spaceBetween: 10,
         freeMode: false,
@@ -238,6 +194,37 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+
+    new Swiper(".supportersSwiper", {
+        spaceBetween: 10,
+        freeMode: false,
+        grabCursor: true,
+        loopFillGroupWithBlank: false,
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        breakpoints: {
+            0: {
+                slidesPerView: 2.5,
+                spaceBetween: 10,
+            },
+            576: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+            },
+            768: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+            },
+            1280: {
+                slidesPerView: 5,
+                spaceBetween: 10,
+            },
+        },
+    });
+
 
 });
 
