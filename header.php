@@ -23,14 +23,14 @@
 
     <header class="container-fluid bg-primary">
 
-        <div class="container d-flex justify-content-between align-items-center align-items-lg-start gap-3 gap-lg-1">
+        <div class="container d-flex justify-content-between align-items-center align-items-xl-start gap-3 gap-lg-1">
             <div class="d-flex flex-column justify-content-center align-items-start my-4 w-100">
                 <a href="<?php echo home_url( "/" ) ?>" class="logo">
                     <img class="w-100" src="<?php echo get_the_image_url( 'logo.png' ) ?>"
                         alt="<?php echo bloginfo( 'name' ) ?>">
 
                 </a>
-                <nav class="navbar navbar-expand-lg d-none d-lg-block">
+                <nav class="navbar navbar-expand-lg d-none d-xl-block">
                     <?php
                         wp_nav_menu( array(
                             'theme_location' => 'main-menu',
@@ -46,7 +46,7 @@
             </div>
 
 
-            <div class="d-none d-lg-flex flex-row justify-content-end gap-2">
+            <div class="d-none d-xl-flex flex-row justify-content-end gap-2">
 
                 <div class="d-flex flex-column justify-content-end align-items-center row-gap-2">
                     <div
@@ -77,9 +77,7 @@
 
                 <div class="bg-secondary h-120  px-4 pb-3 d-flex align-items-end">
 
-                    <?php
-
-                if ( is_user_logged_in() ) {?>
+                    <?php if ( is_user_logged_in() ) {?>
 
                     <a class="btn btn-link fw-bold f-20 text-nowrap"
                         href="<?php echo home_url( "/panel/logout" ) ?>">خروج</a>
@@ -101,7 +99,7 @@
 
             </div>
 
-            <button class="btn btn-outline-secondary rounded-circle p-8 border-0 d-lg-none " type="button"
+            <button class="btn btn-outline-secondary rounded-circle p-8 border-0 d-xl-none " type="button"
                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
                 <i class="bi bi-list f-24 p-0 m-0 d-block w-30 h-30"></i>
             </button>
@@ -134,7 +132,7 @@
                     wp_nav_menu( array(
                         'theme_location' => 'main-menu',
                         'container'      => false,
-                        'menu_class'     => 'navbar-nav me-auto mb-2 mb-lg-0 row-gap-2 w-100',
+                        'menu_class'     => 'navbar-nav me-auto mb-2 mb-lg-0 row-gap-2 w-100  flex-column',
                         'fallback_cb'    => '__return_false',
                         'items_wrap'     => '<ul class="%2$s">%3$s</ul>',
                         'depth'          => 2,
