@@ -94,13 +94,6 @@
 
                     <?php }
                   ?>
-
-
-
-
-
-
-
                 </div>
 
             </div>
@@ -124,13 +117,35 @@
 
 
         <div class="offcanvas-body d-flex flex-column row-gap-3 justify-content-start align-items-center">
+
+
+                <div class="d-flex flex-row align-items-center justify-content-around  w-100 ">
+
+                    <?php if ( is_user_logged_in() ) {?>
+
+                    <div class="d-flex flex-row justify-content-between align-items-center w-100">
+                        <a class="btn btn-secondary btn-lg fw-bold f-20 text-nowrap px-5 py-3"
+                        href="<?php echo home_url( "/panel" ) ?>">ارسال اثر</a>
+
+
+                        <a class="btn btn-danger btn-lg fw-bold f-20 text-nowrap px-5 py-3"
+                        href="<?php echo home_url( "/panel/logout" ) ?>">خروج</a>
+                    </div>
+                    <?php } else {?>
+
+                    <a class="btn btn-secondary btn-lg fw-bold f-20 text-nowrap w-100 py-3" href="<?php echo home_url( "/panel" ) ?>">ثبت
+                        نام</a>
+
+                    <?php }
+                  ?>
+                </div>
+
             <form id="search-header" class="w-100 position-relative">
                 <input type="text" name="search" id="search-header-input"
                     class="form-control w-100 rounded-circle bg-primary border border-1 border-secondary text-white"
                     aria-label="Search" value="" placeholder="جستجو">
                 <i class="bi bi-search text-secondary position-absolute" style="left: 12px; top: 25%;"></i>
             </form>
-
 
 
             <nav class="navbar navbar-expand-lg w-100">
