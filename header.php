@@ -79,8 +79,14 @@
 
                     <?php if ( is_user_logged_in() ) {?>
 
-                    <a class="btn btn-link fw-bold f-20 text-nowrap"
+                    <div class="d-flex flex-column justify-content-center align-items-center ">
+                        <a class="btn btn-primary fw-bold f-20 text-nowrap"
+                        href="<?php echo home_url( "/panel" ) ?>">ارسال اثر</a>
+
+
+                        <a class="btn btn-link fw-bold f-20 text-nowrap"
                         href="<?php echo home_url( "/panel/logout" ) ?>">خروج</a>
+                    </div>
                     <?php } else {?>
 
                     <a class="btn btn-link fw-bold f-20 text-nowrap" href="<?php echo home_url( "/panel" ) ?>">ثبت

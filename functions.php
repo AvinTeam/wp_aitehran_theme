@@ -15,7 +15,7 @@ use TAI\App\EditForms\UserEditForms;
 // header( 'Content-Type: text/html; charset=utf-8' );
 date_default_timezone_set( 'Asia/Tehran' );
 
-define( 'TAI_VERSION', '2.2.5' );
+define( 'TAI_VERSION', '2.2.7' );
 
 define( 'TAI_PATH', get_template_directory() . "/" );
 define( 'TAI_INCLUDES', TAI_PATH . 'includes/' );
@@ -34,7 +34,7 @@ define( 'TAI_IMAGE', TAI_ASSETS . 'image/' );
 define( 'TAI_VIDEO', TAI_ASSETS . 'video/' );
 define( 'TAI_VENDOR', TAI_ASSETS . 'vendor/' );
 
-define( 'TAI_SMS_TIMER', 1 );
+define( 'TAI_SMS_TIMER', 5);
 define( 'TAI_TIME_SET_COOKIE', 30 );
 define( 'TAI_CAPTCHA_LEN', 5 );
 define( 'TAI_OTP_COUNT', 4 );

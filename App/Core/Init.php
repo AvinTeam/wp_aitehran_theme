@@ -39,7 +39,9 @@ class Init {
                     }
                 }
 
-                setAlert( $result->success, $result->massage );
+                if ( "/panel/artList" == $redirect ) {
+                    setAlert( $result->success, $result->massage );
+                }
 
                 wp_redirect( home_url( $redirect ) );
                 exit;
@@ -66,8 +68,7 @@ class Init {
         }
 
         if ( isset( $_GET[ "delArt" ] ) && ! empty( $_GET[ 'delArt' ] ) ) {
-
-            $back_url =home_url( "/panel/artList/" ) ;
+            $back_url = home_url( "/panel/artList/" );
 
             $art_id = absint( substr( $_GET[ 'delArt' ], 8 ) );
 
@@ -85,18 +86,17 @@ class Init {
             $post_author_id = get_post_field( 'post_author', $art_id );
 
             if ( ! ( $post_author_id && get_current_user_id() == $post_author_id ) ) {
-                wp_redirect(  $back_url );
+                wp_redirect( $back_url );
                 exit;
             }
 
             $delete = wp_delete_post( $art_id, false );
 
-            if($delete){
+            if ( $delete ) {
                 setAlert( "success", "اثر شما حذف شد" );
             }
 
-
-            wp_redirect(  $back_url );
+            wp_redirect( $back_url );
 
             exit;
 

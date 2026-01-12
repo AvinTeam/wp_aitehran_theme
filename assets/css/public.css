@@ -1480,7 +1480,7 @@ a.post-title {
 .userProfile::before {
     left: auto;
     right: auto;
-    content: 'مشخصات مسئول گروه';
+    content: 'مشخصات مسئول گروه ';
     position: absolute;
     color: var(--primary-color);
     font-size: 24px;
@@ -1488,8 +1488,9 @@ a.post-title {
     overflow: hidden;
     background: #DDDDDD;
     bottom: -18px;
-    width: 40%;
+    /* width: 40%; */
     text-align: center;
+    padding-left: 10px;
 }
 
 

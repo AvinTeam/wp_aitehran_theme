@@ -41,7 +41,7 @@
                     <?php wp_nonce_field( config( 'app.key' ) . '_dashboardForm_' . get_current_user_id() ); ?>
 
                     <div
-                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2 ">
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center w-100 flex-nowrap gap-2 ">
                         <div class="">
                             <label for="groupName" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام گروه<span
                                     class="text-danger">*</span> :
@@ -52,24 +52,11 @@
                                 class="form-control w-100 border border-1 border-black rounded-32 only-fa">
                         </div>
                     </div>
-
                     
-                    <div class="userProfile">
-
-                    </div>
-
-                    <!-- <div class="w-100">
-
-                        <h2 class="text-primary">
-                            مشخصات مسئول گروه
-                        </h2>
-
-                    </div>
- -->
-
+                    <div class="userProfile"></div>
 
                     <div
-                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="fullName" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام
                                 و نام خانوادگی<span class="text-danger">*</span> :
@@ -82,7 +69,7 @@
                     </div>
 
                     <div
-                        class="d-flex  flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        class="d-flex  flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center  w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="parent" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام
                                 پدر :
@@ -95,7 +82,7 @@
                     </div>
 
                     <div
-                        class="d-flex  flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        class="d-flex  flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center  w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="nationalCode" class="col-form-label text-nowrap p-2 f-24 fw-bold">کد ملی
                                 <span class="text-danger">*</span> :</label>
@@ -108,7 +95,7 @@
                     </div>
 
                     <div
-                        class=" d-flex  flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        class=" d-flex  flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center  w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="birthday" class="col-form-label text-nowrap p-2 f-24 fw-bold">تاریخ تولد مسئول
                                 گروه<span class="text-danger">*</span> :</label>
@@ -123,7 +110,7 @@
                     </div>
 
                     <div
-                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center  w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="edu" class="col-form-label text-nowrap p-2 f-24 fw-bold">مدرک
                                 تحصیلی :
@@ -136,7 +123,7 @@
                     </div>
 
                     <div
-                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center  w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="provinces" class="col-form-label text-nowrap p-2 f-24 fw-bold">استان مسئول
                                 گروه<span class="text-danger">*</span> : </label>
@@ -159,7 +146,7 @@
 
 
                     <div
-                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center  w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="cites" class="col-form-label text-nowrap p-2 f-24 fw-bold">شهر<span
                                     class="text-danger">*</span> : </label>
@@ -180,7 +167,7 @@
                     </div>
 
                     <div id="areasDiv"
-                        class="<?php echo 331 == $user_city ? "d-flex" : "d-none" ?>  flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        class="<?php echo 331 == $user_city ? "d-flex" : "d-none" ?>  flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center  w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="areas" class="col-form-label text-nowrap p-2 f-24 fw-bold">منطقه<span
                                     class="text-danger">*</span> : </label>

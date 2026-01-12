@@ -49,7 +49,7 @@
                     foreach ( $teems as $teem ): ?>
 
                     <div id="alert" class="alert alert-light my-0" role="alert">
-                        <div class="d-flex flex-wrap justify-content-between align-items-center row-gap-2">
+                        <div class="d-flex flex-wrap justify-content-between align-items-start align-items-lg-center  row-gap-2">
                             <div>
                                 <span class="text-secondary"><?php echo $m ?>-</span>
                                 <span class=""><?php echo $teem[ 'name' ] ?></span>
@@ -76,10 +76,9 @@
                     <?php wp_nonce_field( config( 'app.key' ) . '_addTeemForm_' . get_current_user_id() ); ?>
 
                     <div
-                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center  w-100 flex-nowrap gap-2">
                         <div class="">
-                            <label for="fullName" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام
-                                خانوادگی<span class="text-danger">*</span> :
+                            <label for="fullName" class="col-form-label text-nowrap p-2 f-24 fw-bold">نام و نام خانوادگی<span class="text-danger">*</span> :
                             </label>
                         </div>
                         <div class="w-100">
@@ -89,7 +88,7 @@
                     </div>
 
                     <div
-                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center  w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="parent" class="col-form-label text-nowrap p-2 f-24 fw-bold only-fa">نام
                                 پدر :
@@ -102,7 +101,7 @@
                     </div>
 
                     <div
-                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center  w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="nationalCode" class="col-form-label text-nowrap p-2 f-24 fw-bold">کد ملی<span
                                     class="text-danger">*</span> :
@@ -116,7 +115,7 @@
                         </div>
                     </div>
                     <div
-                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center  w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="birthday" class="col-form-label text-nowrap p-2 f-24 fw-bold">تاریخ تولد<span
                                     class="text-danger">*</span> :
@@ -131,7 +130,7 @@
                     </div>
 
                     <div
-                        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 flex-nowrap gap-2">
+                        class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center  w-100 flex-nowrap gap-2">
                         <div class="">
                             <label for="edu" class="col-form-label text-nowrap p-2 f-24 fw-bold">مدرک
                                 تحصیلی :

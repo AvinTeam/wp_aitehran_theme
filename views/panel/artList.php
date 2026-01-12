@@ -63,7 +63,7 @@
 
 
                         <div id="alert" class="alert alert-light my-0 w-100" role="alert">
-                            <div class="d-flex flex-wrap justify-content-between align-items-center row-gap-2">
+                            <div class="d-flex flex-row justify-content-between align-items-center row-gap-2">
                                 <div class="d-flex flex-column row-gap-2">
 
                                     <div class="fw-bold">
@@ -71,15 +71,15 @@
                                         <span class=""><?php echo $item[ 'title' ] ?></span>
                                     </div>
 
-                                        <span class=""><?php echo sprintf( "قالب:  %s", $item[ 'format' ] ) ?></span>
-                                        <span class=""><?php echo sprintf( "موضوع:  %s", $item[ 'subject' ] ) ?></span>
+                                        <span class=""><?php echo sprintf( "<b>قالب:</b>  %s", $item[ 'format' ] ) ?></span>
+                                        <span class=""><?php echo sprintf( "<b>موضوع:</b> <br class='d-lg-none'>  %s", $item[ 'subject' ] ) ?></span>
                                 </div>
 
                                 <div class="d-flex flex-column justify-content-center align-items-center row-gap-2 ">
 
 
                                     <span
-                                        class=""><?php echo sprintf( "کد رهگیری: %s", $item[ 'tracking_code' ] ) ?></span>
+                                        class="text-center"><?php echo sprintf( "<b>کد رهگیری:</b> <br> %s", $item[ 'tracking_code' ] ) ?></span>
 
                                     <div>
                                         <a href="<?php echo $item[ 'link' ] ?>" class="btn btn-info">ویرایش</a>
