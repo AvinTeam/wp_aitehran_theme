@@ -38,7 +38,6 @@
                                         'category_name'  => "news",
                                         'posts_per_page' => 4,
                                         'post_status'    => 'publish',
-                                        'post__not_in'   => array( get_the_ID() ),
                                         'orderby'        => 'rand',
 
                                     );
@@ -50,8 +49,11 @@
                                 while ( $query->have_posts() ): $query->the_post(); ?>
                         <div
                             class="w-100 d-flex flex-column justify-content-center align-items-center row-gap-3 bg-primary p-10">
-                            <a href="<?php echo get_permalink()?>"> <img src="<?php echo post_image_url() ?>"
-                                    alt="<?php echo  get_the_title() ?>" class="w-100 h-120 object-fit-cover"> </a>
+                                      <?php
+                                 if ( post_image_url() ) {?>
+                            <a href="<?php echo get_permalink() ?>"> <img src="<?php echo post_image_url() ?>"
+                                    alt="<?php echo get_the_title() ?>" class="w-100 h-120 object-fit-cover"> </a>
+                            <?php }    ?>
                             <a href="<?php echo get_permalink() ?>"
                                 class="btn btn-link f-20 fw-bold "><?php echo  get_the_title()?></a>
 
