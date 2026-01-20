@@ -13,6 +13,14 @@
             <tbody>
 
                 <tr>
+                    <th scope="row"><label for="descriptionEdu">توضیحات بخش آموزش ها</label></th>
+                    <td>
+                        <textarea rows="5" name="setting[descriptionEdu]" id="descriptionEdu"
+                            class="w-100"><?php echo wp_unslash( ( $descriptionEdu ?? '' ) ) ?></textarea>
+                    </td>
+                </tr>
+
+                <tr>
                     <th scope="row"><label for="address">آدرس</label></th>
                     <td><input name="setting[address]" type="text" id="address" value="<?php echo $address ?? '' ?>"
                             class="regular-text"></td>
@@ -39,6 +47,7 @@
                     </td>
                 </tr>
 
+
                 <tr>
                     <th scope="row"><label for="socials">شبکه های اجنماعی</label></th>
 
@@ -48,11 +57,12 @@
                                 <?php
                                     $m = 1;
 
-                                foreach ( typeLinkArray( ( $socials ?? array(  ) ) ) as $type => $social ): ?>
+                                foreach ( typeLinkArray( ( $socials ?? array() ) ) as $type => $social ): ?>
                                 <li>
                                     <select name="setting[socials][<?php echo $m ?>][type]">
                                         <?php
-                                        foreach ( config( 'app.socials', array(  ) ) as $key => $name ): ?>
+
+                                        foreach ( config( 'app.socials', array() ) as $key => $name ): ?>
                                         <option<?php selected( $key, $type )?> value="<?php echo $key ?>">
                                             <?php echo $name ?></option>
                                             <?php endforeach; ?>

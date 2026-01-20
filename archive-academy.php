@@ -1,6 +1,9 @@
 <?php
 
     use TAI\App\Controllers\Academy\AcademyController;
+    use TAI\App\Options\GeneralSetting;
+
+    $general = GeneralSetting::get();
 
     get_header();
     $controller = new AcademyController();
@@ -15,8 +18,9 @@
             <div class="col-12 col-lg-8 px-2 ">
 
                 <?php components( 'description',
-                    array( "description" =>" get_the_archive_description()" ) ); ?>
+                    array( "description" => $general[ 'descriptionEdu' ] ) ); ?>
                 <?php
+
                     if ( is_user_logged_in() ) {
                         $controller->archive();
                     } else {
