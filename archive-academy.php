@@ -13,8 +13,10 @@
             </div>
 
             <div class="col-12 col-lg-8 px-2 ">
-                <?php
 
+                <?php components( 'description',
+                    array( "description" =>" get_the_archive_description()" ) ); ?>
+                <?php
                     if ( is_user_logged_in() ) {
                         $controller->archive();
                     } else {

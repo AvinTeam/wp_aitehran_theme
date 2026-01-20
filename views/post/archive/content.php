@@ -1,4 +1,4 @@
-<section class="w-100  d-flex flex-column justify-content-center align-items-center mb-2">
+<section class="w-100 d-flex flex-column justify-content-center align-items-center mb-2">
 
     <div class="row row-cols-lg-3 row-cols-1 w-100">
 

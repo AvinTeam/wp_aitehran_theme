@@ -28,7 +28,7 @@ class BlogServices extends Service {
         generatePagination( $url, $this->par_page, $this->total_items, $this->paged );
     }
 
-    public function sidebar($sidebarTitle) {
+    public function sidebar( $sidebarTitle ) {
 
         $args = array(
             'post_type'      => 'post',
@@ -56,13 +56,11 @@ class BlogServices extends Service {
 
         return array(
             "sidebar_title" => $sidebarTitle ?? "آرشیو اخبار",
-            'items' => $allPost ?? array(),
+            'items'         => $allPost ?? array(),
         );
     }
 
     public function get_video() {
-
-
         $video = get_post_meta( get_the_ID(), '_post_video', true );
 
         $image = absint( $video[ 'image' ] ?? 0 );
@@ -88,10 +86,9 @@ class BlogServices extends Service {
             'fields'         => 'ids',
         );
 
-        
-        if($term = get_queried_object()){
-            $args["category_name"] =  $term->slug;
-        };
+        if ( $term = get_queried_object() ) {
+            $args[ "category_name" ] = $term->slug;
+        }
 
         $query = new WP_Query( $args );
 
@@ -100,7 +97,6 @@ class BlogServices extends Service {
 
         if ( $query->have_posts() ) {
             while ( $query->have_posts() ) {
-                
                 $query->the_post();
 
                 $id = get_the_ID();
@@ -108,10 +104,10 @@ class BlogServices extends Service {
                 $video = get_post_meta( get_the_ID(), '_post_video', true );
 
                 $posts[  ] = array(
-                    "title"  => get_the_title( $id ),
-                    "image"  => post_image_url( $id ),
-                    "link"   => get_permalink( $id ),
-                    "time"   => ( isset( $video[ 'time' ] ) && ! empty( $video[ 'time' ] ) ) ? $video[ 'time' ] : "00:00",
+                    "title" => get_the_title( $id ),
+                    "image" => post_image_url( $id ),
+                    "link"  => get_permalink( $id ),
+                    "time"  => ( isset( $video[ 'time' ] ) && ! empty( $video[ 'time' ] ) ) ? $video[ 'time' ] : "00:00",
                 );
             }
         }

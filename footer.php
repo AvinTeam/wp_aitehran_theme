@@ -11,7 +11,7 @@
 
     $supportersImages = array_map( function ( $id ) {
 
-        return wp_get_attachment_url( $id );
+    return wp_get_attachment_url( $id );
     }, explode( ',', get_option( "supporters-gallery", '' ) ) );
 ?>
 
@@ -115,20 +115,20 @@
                 <div class="googleMap">
                     <?php echo wp_unslash( ( $general[ 'googleMap' ] ?? '' ) ) ?>
                 </div>
-            <?php if ( count( $supportersImages ) ): ?>
-                <div class="d-flex flex-column justify-content-center align-items-center">
-                           <div class="swiper supportersSwiper w-100">
-                        <div class="swiper-wrapper">
-                            <?php
+            <?php
 
-                            foreach ( sanitize_no_item($supportersImages) ?? array() as $image ): ?>
-                            <div class="swiper-slide">
-                                <img loading="lazy" src="<?php echo $image ?>" class="card-img-top rounded-24 bg-white object-fit-cover " style="width: 100px !important; height: 100px;">
+            if ( count( $supportersImages ) ): ?>
+                    <div  class="pt-24 d-flex justify-content-between align-items-center align-content-center gap-2 align-self-stretch flex-wrap">
+                     <?php
+
+                    foreach ( sanitize_no_item( $supportersImages ) ?? array() as $image ): ?>
+                            <div class=" d-flex justify-content-center align-items-center gap-12 p-12">
+                                <img loading="lazy" src="<?php echo $image ?>" class="card-img-top object-fit-cover w-60 h-60 ">
                             </div>
-                            <?php endforeach?>
-                        </div>
+                    <?php endforeach?>
+
                     </div>
-                </div>
+
             <?php endif; ?>
 
             </div>
